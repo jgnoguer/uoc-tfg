@@ -24,11 +24,6 @@ patches:
                           operator: In
                           values:
                             - flux
-            tolerations:
-              - effect: NoSchedule
-                key: role
-                operator: Equal
-                value: flux      
     target:
       kind: Deployment
       labelSelector: app.kubernetes.io/part-of=flux
