@@ -45,3 +45,6 @@ https://github.com/knative/func/releases
 
 ## Registry
 
+## ScyllaDB
+
+https://operator.docs.scylladb.com/stable/index.html
