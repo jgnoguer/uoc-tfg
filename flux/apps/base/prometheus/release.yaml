@@ -11,3 +11,4 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: prometheus
+      interval: 50m
