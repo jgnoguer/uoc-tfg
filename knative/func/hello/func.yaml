@@ -1,0 +1,13 @@
+# $schema: https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
+specVersion: 0.36.0
+name: hello
+runtime: go
+registry: registry.digitalocean.com/jgnoguer
+namespace: default
+created: 2025-04-27T12:45:18.224067647+02:00
+build:
+  builder: pack
+deploy:
+  namespace: default
+  image: registry.digitalocean.com/jgnoguer/hello@sha256:c61907628cc2c20be1fef85f4053eab774725425a940f81fa2ee7e822982c385
