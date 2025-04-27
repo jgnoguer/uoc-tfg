@@ -1,14 +1,37 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: prometheus
-  namespace: prometheus
+  name: kube-prometheus-stack
 spec:
-  releaseName: prometheus
-  chart:
-    spec:
-      chart: prometheus-community/kube-prometheus-stack
-      sourceRef:
-        kind: HelmRepository
-        name: prometheus
-  interval: 50m
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: kube-prometheus-stack
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
+  driftDetection:
+    mode: enabled
+    ignore:
+      # Ignore "validated" annotation which is not inserted during install
+      - paths: [ "/metadata/annotations/prometheus-operator-validated" ]
+        target:
+          kind: PrometheusRule
+  values:
+    alertmanager:
+      enabled: false
+    prometheus:
+      prometheusSpec:
+        retention: 24h
+        resources:
+          requests:
+            cpu: 200m
+            memory: 200Mi
+        podMonitorNamespaceSelector: { }
+        podMonitorSelector:
+          matchLabels:
+            app.kubernetes.io/component: monitoring
+    grafana:
+      defaultDashboardsEnabled: false
+      adminPassword: flux
