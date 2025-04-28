@@ -340,4 +340,3 @@ spec:
           storageClassName: scylladb-local-xfs
 
 ---
-

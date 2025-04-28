@@ -8,4 +8,4 @@ resources:
   - 10_provisioner_clusterrole.yaml
   - 20_provisioner_clusterrolebinding.yaml
   - 50_daemonset.yaml
-  - scylladb-manager.yaml
+  - manager-dev.yaml
