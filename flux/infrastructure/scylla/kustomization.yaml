@@ -12,5 +12,5 @@ resources:
   - 50_daemonset.yaml
 #  - node_config_alpha.yaml
   - scylladb_operator.yaml
-#  - manager_dev.yaml
+  - manager_dev.yaml
   
