@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 #  - node_config_alpha.yaml
 #  - scylladb_operator.yaml
+  - ./disk-setup
   - 00_namespace.yaml
   - 00_scylladb-local-xfs.storageclass.yaml
   - 10_csidriver.yaml
