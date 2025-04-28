@@ -10,7 +10,7 @@ resources:
   - 10_clusterrole.yaml
   - 20_clusterrolebinding.yaml
   - 50_daemonset.yaml
-  - node_config_alpha.yaml
+#  - node_config_alpha.yaml
   - scylladb_operator.yaml
 #  - manager_dev.yaml
   
