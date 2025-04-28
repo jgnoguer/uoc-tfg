@@ -1,8 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-#  - node_config_alpha.yaml
-#  - scylladb_operator.yaml
   - ./disk-setup/00_namespace.yaml
   - ./disk-setup/50_daemonset.yaml
   - 00_namespace.yaml
@@ -12,5 +10,7 @@ resources:
   - 10_clusterrole.yaml
   - 20_clusterrolebinding.yaml
   - 50_daemonset.yaml
+  - node_config_alpha.yaml
+  - scylladb_operator.yaml
 #  - manager_dev.yaml
   
