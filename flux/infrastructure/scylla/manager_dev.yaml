@@ -342,4 +342,5 @@ spec:
         storage:
           capacity: 5Gi
           storageClassName: scylladb-local-xfs
+
 ---
