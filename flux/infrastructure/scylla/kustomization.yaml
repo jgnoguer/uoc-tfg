@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - 00_namespace.yaml
   - 00_scylladb_operator.yaml
-  - 00_node_config_alpha.yaml
+#  - 00_node_config_alpha.yaml
   - 10_csidriver.yaml
   - 10_driver_serviceaccount.yaml
   - 10_provisioner_clusterrole.yaml
