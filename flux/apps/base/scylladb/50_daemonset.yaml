@@ -16,6 +16,7 @@ spec:
     spec:
       nodeSelector:
         kubernetes.io/os: linux
+        scylla.scylladb.com/node-type: scylla
       serviceAccountName: local-csi-driver
       tolerations:
       - operator: Exists
