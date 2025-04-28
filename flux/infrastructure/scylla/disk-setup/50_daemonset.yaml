@@ -16,6 +16,9 @@ spec:
     spec:
       tolerations:
       - operator: Exists
+      nodeSelector:
+        kubernetes.io/os: linux
+        scylla.scylladb.com/node-type: scylla
       containers:
       - name: xfs-disk-setup
         image: docker.io/scylladb/local-csi-driver:latest
