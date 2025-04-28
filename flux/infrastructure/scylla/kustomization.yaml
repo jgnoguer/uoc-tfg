@@ -1,14 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - node_config_alpha.yaml
+  - cylladb_operator.yaml
   - 00_namespace.yaml
-  - 00_scylladb_operator.yaml
-#  - 00_node_config_alpha.yaml
+  - 00_scylladb-local-xfs.storageclass.yaml
   - 10_csidriver.yaml
-  - 10_driver_serviceaccount.yaml
-  - 10_provisioner_clusterrole.yaml
-  - 20_provisioner_clusterrolebinding.yaml
+  - 10_serviceaccount.yaml
+  - 10_clusterrole.yaml
+  - 20_clusterrolebinding.yaml
   - 50_daemonset.yaml
-  - 60_storage_class.yaml
-#  - 70_manager_dev.yaml
+  - manager_dev.yaml
   
