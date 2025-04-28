@@ -13,7 +13,7 @@ spec:
       type: xfs
     mounts:
     - device: /dev/loops/persistent-volumes
-      mountPoint: /var/lib/persistent-volumes
+      mountPoint: /mnt/persistent-volumes
       unsupportedOptions:
       - prjquota
   placement:
