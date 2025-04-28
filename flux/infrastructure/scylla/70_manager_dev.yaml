@@ -268,6 +268,8 @@ spec:
         app.kubernetes.io/instance: scylla-manager
     spec:
       serviceAccountName: scylla-manager
+      nodeSelector:
+        scylla.scylladb.com/node-type: scylla
       containers:
       - name: scylla-manager
         image: docker.io/scylladb/scylla-manager:latest
@@ -338,5 +340,4 @@ spec:
         storage:
           capacity: 5Gi
           storageClassName: scylladb-local-xfs
-
 ---
