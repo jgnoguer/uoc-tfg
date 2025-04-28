@@ -46747,6 +46747,8 @@ spec:
         app.kubernetes.io/instance: scylla-operator
     spec:
       serviceAccountName: scylla-operator
+      nodeSelector:
+        scylla.scylladb.com/node-type: scylla
       containers:
       - name: scylla-operator
         image: docker.io/scylladb/scylla-operator:latest
