@@ -13,7 +13,7 @@ data:
 apiVersion: scylla.scylladb.com/v1
 kind: ScyllaCluster
 metadata:
-  name: scylladb
+  name: scylladb-uoc
   namespace: scylla
 spec:
   repository: docker.io/scylladb/scylla
