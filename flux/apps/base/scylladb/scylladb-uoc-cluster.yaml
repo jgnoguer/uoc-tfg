@@ -1,0 +1,53 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scylladb-config
+data:
+  scylla.yaml: |
+    authenticator: PasswordAuthenticator
+    authorizer: CassandraAuthorizer
+    # Other options
+---
+apiVersion: scylla.scylladb.com/v1
+kind: ScyllaCluster
+metadata:
+  name: scylladb
+spec:
+  repository: docker.io/scylladb/scylla
+  version: 6.2.0
+  agentVersion: 3.4.0
+  developerMode: false
+  automaticOrphanedNodeCleanup: true
+  sysctls:
+  - fs.aio-max-nr=30000000
+  datacenter:
+    name: uoc-animals
+    racks:
+    - name: uoc-animals-db-rack
+      members: 1
+      scyllaConfig: scylladb-config
+      storage:
+        capacity: 100Gi
+        storageClassName: scylladb-local-xfs
+      resources:
+        requests:
+          cpu: 1
+          memory: 8Gi
+        limits:
+          cpu: 1
+          memory: 8Gi
+      placement:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: scylla.scylladb.com/node-type
+                operator: In
+                values:
+                - scylla
+        tolerations:
+        - key: scylla-operator.scylladb.com/dedicated
+          operator: Equal
+          value: scyllaclusters
+          effect: NoSchedule

@@ -10,3 +10,4 @@ resources:
   - 50_daemonset.yaml
   - storage-class.yaml
   - manager-dev.yaml
+  - scylladb-cluster.yaml
