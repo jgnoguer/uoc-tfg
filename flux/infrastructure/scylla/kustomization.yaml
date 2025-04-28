@@ -10,5 +10,5 @@ resources:
   - 20_provisioner_clusterrolebinding.yaml
   - 50_daemonset.yaml
   - 60_storage_class.yaml
-  - 70_manager_dev.yaml
+#  - 70_manager_dev.yaml
   
