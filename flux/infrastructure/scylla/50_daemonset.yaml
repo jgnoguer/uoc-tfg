@@ -121,5 +121,5 @@ spec:
           type: Directory
       - name: volumes-dir
         hostPath:
-          path: /var/lib/persistent-volumes
+          path: /mnt/persistent-volumes
           type: Directory
