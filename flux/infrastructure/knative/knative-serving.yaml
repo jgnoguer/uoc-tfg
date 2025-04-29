@@ -10,7 +10,7 @@ metadata:
   namespace: knative-serving
 spec:
   workloads:
-  - name: gateway
+  - name: kourier-gateway
     nodeSelector:
       disktype: hdd
   # ...
