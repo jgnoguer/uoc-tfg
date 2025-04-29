@@ -19,7 +19,7 @@ spec:
   repository: docker.io/scylladb/scylla
   version: 6.2.0
   agentVersion: 3.4.0
-  developerMode: false
+  developerMode: true
   automaticOrphanedNodeCleanup: true
   sysctls:
   - fs.aio-max-nr=232323
@@ -28,7 +28,7 @@ spec:
     racks:
     - name: db-rack
       members: 1
-      scyllaConfig: scylladb-config
+ #     scyllaConfig: scylladb-config
       storage:
         capacity: 10Gi
         storageClassName: scylladb-local-xfs
