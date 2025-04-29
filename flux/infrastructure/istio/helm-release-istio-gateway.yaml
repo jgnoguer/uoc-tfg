@@ -18,4 +18,5 @@ spec:
         name: istio
         namespace: istio-system
       interval: 1m
-      image: thegrandpkizzle/envoy:1.26.1
+      nodeSelector:
+        istio-gateway: true

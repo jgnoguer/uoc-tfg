@@ -20,3 +20,4 @@ kubectl label nodes uoc-zero2-02 role=flux
 kubectl label nodes uoc-zero2-03 role=flux
 kubectl label nodes uoc-rock3a-01 role=flux
 
+kubectl label nodes uoc-neo2core-01 istio-gateway=true
