@@ -22,6 +22,10 @@ spec:
   values:
     alertmanager:
       enabled: false
+    ## Deploy node exporter as a daemonset to all nodes
+    ##
+    nodeExporter:
+      enabled: false
     prometheus:
       prometheusSpec:
         retention: 24h
