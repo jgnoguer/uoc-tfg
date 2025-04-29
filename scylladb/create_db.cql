@@ -1,0 +1,1 @@
+CREATE KEYSPACE uoc_animals WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
