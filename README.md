@@ -25,8 +25,7 @@ https://longhorn.io/kb/tip-only-use-storage-on-a-set-of-nodes/
    47  journalctl -u k3s-agent
    48  journalctl -u k3s-agent > logs.txt
    49  more logs.txt 
-   50  curl -sfL https://get.k3s.io | K3S_URL=https://rock-3a:6443 K3S_TOKEN=theks3token INSTALL_K3S_EXEC=agent --snapshotter=native  sh -
-   51  curl -sfL https://get.k3s.io | K3S_URL=https://rock-3a:6443 K3S_TOKEN=theks3token INSTALL_K3S_EXEC="agent --snapshotter=native"  sh -
+
    52  df -h
 
 On nanopi core
