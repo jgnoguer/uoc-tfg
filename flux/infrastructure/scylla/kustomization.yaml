@@ -8,7 +8,7 @@ resources:
   - 10_serviceaccount.yaml
   - 10_clusterrole.yaml
   - 20_clusterrolebinding.yaml
-  - 50_daemonset.yaml
+#  - 50_daemonset.yaml
 #  - scylladb_operator.yaml
 #  - manager_dev.yaml
   
