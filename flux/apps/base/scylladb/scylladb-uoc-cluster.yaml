@@ -30,7 +30,7 @@ spec:
       members: 1
       scyllaConfig: scylladb-config
       storage:
-        capacity: 100Gi
+        capacity: 10Gi
         storageClassName: scylladb-local-xfs
       resources:
         requests:
