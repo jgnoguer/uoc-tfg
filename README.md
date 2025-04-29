@@ -9,7 +9,7 @@ https://longhorn.io/kb/tip-only-use-storage-on-a-set-of-nodes/
 ## k3s install
 
 
-   34  curl -sfL https://get.k3s.io | K3S_URL=https://uoc-cubie:6443 K3S_TOKEN=token sh -
+   34  curl -sfL https://get.k3s.io | K3S_URL=https://uoc-cubie:6443 K3S_TOKEN=K10d9cc042ab3b1e1237b1276ceaabee4ac8db5a3d1a40fccba8cfe23b3ab3ddfa8::server:46c0fc61f0cf38b91022d32e2cb79e16 sh -
    35  ps -aux
    36  reboot
    37  k3s kubectl get nodes
@@ -18,8 +18,7 @@ https://longhorn.io/kb/tip-only-use-storage-on-a-set-of-nodes/
    40  k3s agent --server rock-3a --token theks3token
    41  cat /var/log/k3s.log
 
-   43  service k3s-agent status
-   44  journalctl -u k3s
+   43  service k3s-agent sta
    45  cat /var/lib/rancher/k3s/agent/containerd/containerd.log
    46  service k3s-agent logs
    47  journalctl -u k3s-agent

@@ -9,14 +9,10 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
-  workloads:
-  - name: kourier-gateway
-    nodeSelector:
-      disktype: hdd
   # ...
-  ingress:
-    kourier:
-      enabled: true
   config:
-    network:
-      ingress-class: "kourier.ingress.networking.knative.dev"
+    istio:
+      local-gateways: |
+        - name: knative-local-gateway
+          namespace: knative-serving
+          service: knative-local-gateway.istio-system.svc.cluster.local
