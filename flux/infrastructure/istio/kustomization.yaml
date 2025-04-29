@@ -4,5 +4,6 @@ resources:
   - namespace.yaml
   - repository.yaml
   - helm-release-istio-base.yaml
+  - helm-release-istiod.yaml
   
 
