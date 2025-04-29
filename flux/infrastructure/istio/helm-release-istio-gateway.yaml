@@ -20,4 +20,4 @@ spec:
       interval: 1m
   values:
     nodeSelector:
-      istio-gateway: true
+      istio-gateway: "true"
