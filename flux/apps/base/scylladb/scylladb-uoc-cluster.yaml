@@ -1,14 +1,14 @@
-# ---
-# apiVersion: v1
-# kind: ConfigMap
-# metadata:
-#   name: scylladb-config
-#   namespace: scylla
-# data:
-#   scylla.yaml: |
-#     authenticator: PasswordAuthenticator
-#     authorizer: CassandraAuthorizer
-#     # Other options
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scylladb-config
+  namespace: scylla
+data:
+  scylla.yaml: |
+    authenticator: PasswordAuthenticator
+    authorizer: CassandraAuthorizer
+    # Other options
 ---
 apiVersion: scylla.scylladb.com/v1
 kind: ScyllaCluster
@@ -28,7 +28,7 @@ spec:
     racks:
     - name: db-rack
       members: 1
- #     scyllaConfig: scylladb-config
+      scyllaConfig: scylladb-config
       storage:
         capacity: 10Gi
         storageClassName: scylladb-local-xfs
