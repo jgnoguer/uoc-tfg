@@ -9,7 +9,7 @@ https://longhorn.io/kb/tip-only-use-storage-on-a-set-of-nodes/
 ## k3s install
 
 
-   34  curl -sfL https://get.k3s.io | K3S_URL=https://uoc-cubie:6443 K3S_TOKEN=theks3token sh -
+   34  curl -sfL https://get.k3s.io | K3S_URL=https://uoc-cubie:6443 K3S_TOKEN=K10d9cc042ab3b1e1237b1276ceaabee4ac8db5a3d1a40fccba8cfe23b3ab3ddfa8::server:46c0fc61f0cf38b91022d32e2cb79e16 sh -
    35  ps -aux
    36  reboot
    37  k3s kubectl get nodes
