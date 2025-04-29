@@ -637,4 +637,3 @@ webhooks:
         app.kubernetes.io/name: knative-serving
         app.kubernetes.io/component: net-istio
 
----
