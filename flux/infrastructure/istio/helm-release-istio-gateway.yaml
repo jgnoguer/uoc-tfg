@@ -18,6 +18,12 @@ spec:
         name: istio
         namespace: istio-system
       interval: 1m
+  install:
+    remediation:
+      retries: 300
+  upgrade:
+    remediation:
+      retries: 300
   values:
     nodeSelector:
       istio-gateway: true    
