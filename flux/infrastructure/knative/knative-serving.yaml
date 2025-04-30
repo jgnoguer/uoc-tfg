@@ -6,7 +6,7 @@ metadata:
 spec:
   config:
     istio:
-      local-gateways: |
-        - name: knative-local-gateway
+      external-gateways: |
+        - name: knative-ingress-gateway
           namespace: knative-serving
-          service: knative-local-gateway.istio-system.svc.cluster.local  
+          service: istio-gateway.istio-system.svc.cluster.local
