@@ -500,7 +500,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: istiogateway
+              - key: envoyLib
                 operator: In
                 values:
                   - compatible
