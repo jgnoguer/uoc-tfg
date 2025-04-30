@@ -8,6 +8,9 @@ https://longhorn.io/kb/tip-only-use-storage-on-a-set-of-nodes/
 
 ## k3s install
 
+### Server
+
+--disable traefik
 
    34  curl -sfL https://get.k3s.io | K3S_URL=https://uoc-cubie:6443 K3S_TOKEN=token sh -
    35  ps -aux
