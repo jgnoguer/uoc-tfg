@@ -15,7 +15,7 @@ spec:
       chart: gateway
       sourceRef:
         kind: HelmRepository
-        name: istio
+        name: istio-ingressgateway
         namespace: istio-system
       interval: 1m
       version: 1.26.0-beta.0
