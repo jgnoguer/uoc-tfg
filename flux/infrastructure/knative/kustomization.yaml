@@ -10,3 +10,4 @@ resources:
 #  - net-istio.yaml
 #  - knative-eventing.yaml
   - serving-default-domain.yaml
+  - serving-hpa.yaml
