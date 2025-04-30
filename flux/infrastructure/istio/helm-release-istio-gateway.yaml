@@ -24,3 +24,7 @@ spec:
       operator: Equal
       value: compatible
       effect: NoSchedule
+    - key: memorytype
+      operator: Equal
+      value: low
+      effect: NoSchedule
