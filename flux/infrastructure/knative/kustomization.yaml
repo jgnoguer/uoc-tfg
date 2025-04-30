@@ -11,3 +11,4 @@ resources:
 #  - knative-eventing.yaml
   - serving-default-domain.yaml
   - serving-hpa.yaml
+  - eventing-core.yaml
