@@ -18,7 +18,6 @@ spec:
         name: istio-ingressgateway
         namespace: istio-system
       interval: 1m
-      version: 1.26.0-beta.0
   values:
     nodeSelector:
       istio-gateway: true    
