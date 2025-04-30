@@ -33,24 +33,6 @@ spec:
         sidecar.istio.io/inject: "false"
     spec:
       serviceAccountName: controller
-      tolerations:
-      - key: memorytype
-        operator: Equal
-        value: low
-        effect: NoSchedule
-      - key: memorytype
-        operator: Equal
-        value: low
-        effect: NoExecute
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: envoyLib
-                operator: In
-                values:
-                  - compatible
       containers:
         - name: default-domain
           # This is the Go import path for the binary that is containerized
