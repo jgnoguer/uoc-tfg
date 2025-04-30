@@ -25,6 +25,3 @@ kubectl label nodes uoc-zero2-01 istiogatewaylb=compatible
 kubectl label nodes uoc-zero2-02 istiogatewaylb=compatible
 kubectl label nodes uoc-zero2-03 istiogatewaylb=compatible
 
-kubectl label nodes uoc-cubie traefikports=compatible
-kubectl label nodes uoc-r2splus-01 traefikports=compatible
-kubectl label nodes uoc-r2splus-02 traefikports=compatible
