@@ -7,3 +7,4 @@ spec:
   valuesContent: |-
     nodeSelector:
       traefikports: compatible
+    deployment.replicas: 2
