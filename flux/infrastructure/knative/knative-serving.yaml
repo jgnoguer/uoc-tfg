@@ -3,10 +3,3 @@ kind: KnativeServing
 metadata:
   name: knative-serving
   namespace: knative-serving
-spec:
-  config:
-    istio:
-      external-gateways: |
-        - name: knative-ingress-gateway
-          namespace: knative-serving
-          service: istio-gateway.istio-system.svc.cluster.local
