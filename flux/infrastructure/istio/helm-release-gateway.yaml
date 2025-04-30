@@ -21,12 +21,3 @@ spec:
   values:
     nodeSelector:
       istio-gateway: true    
-    tolerations:
-    - key: istio-ingress
-      operator: Equal
-      value: compatible
-      effect: NoSchedule
-    - key: memorytype
-      operator: Equal
-      value: low
-      effect: NoSchedule
