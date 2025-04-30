@@ -30,10 +30,10 @@ spec:
       effect: NoExecute
     affinity:
       nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: istiogateway
-            operator: In
-            values:
-              - compatible
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: istiogateway
+              operator: In
+              values:
+                - compatible

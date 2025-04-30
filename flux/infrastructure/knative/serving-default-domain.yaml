@@ -44,13 +44,13 @@ spec:
         effect: NoExecute
       affinity:
         nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: istiogateway
-              operator: In
-              values:
-                - compatible
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: istiogateway
+                operator: In
+                values:
+                  - compatible
       containers:
         - name: default-domain
           # This is the Go import path for the binary that is containerized
