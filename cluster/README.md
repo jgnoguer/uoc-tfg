@@ -7,13 +7,20 @@ kubectl taint nodes uoc-neo2core-02 memorytype=low:NoExecute
 kubectl taint nodes uoc-neo2core-03 memorytype=low:NoSchedule
 kubectl taint nodes uoc-neo2core-03 memorytype=low:NoExecute
 
-kubectl taint nodes uoc-neo2core-01 istio-ingress=compatible:NoSchedule
-kubectl taint nodes uoc-neo2core-01 istio-ingress=compatible:NoExecute
-kubectl taint nodes uoc-neo2core-02 istio-ingress=compatible:NoSchedule
-kubectl taint nodes uoc-neo2core-02 istio-ingress=compatible:NoExecute
-kubectl taint nodes uoc-neo2core-03 istio-ingress=compatible:NoSchedule
-kubectl taint nodes uoc-neo2core-03 istio-ingress=compatible:NoExecute
+kubectl taint nodes uoc-neo2core-01 istiogateway=compatible:NoSchedule
+kubectl taint nodes uoc-neo2core-02 istiogateway=compatible:NoSchedule
+kubectl taint nodes uoc-neo2core-03 istiogateway=compatible:NoSchedule
+
+
 
 # Labels
 
 scylla.scylladb.com/node-type=scylla
+
+kubectl label nodes uoc-neo2core-01 istiogateway=compatible
+kubectl label nodes uoc-neo2core-02 istiogateway=compatible
+kubectl label nodes uoc-neo2core-03 istiogateway=compatible
+
+kubectl label nodes uoc-zero2-01 traefikports=compatible
+kubectl label nodes uoc-zero2-02 traefikports=compatible
+kubectl label nodes uoc-zero2-03 traefikports=compatible

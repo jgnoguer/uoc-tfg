@@ -5,4 +5,5 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
-    nodeSelector: {}
+    nodeSelector:
+      traefikports: compatible

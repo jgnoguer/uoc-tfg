@@ -20,7 +20,7 @@ spec:
       interval: 1m
   values:
     nodeSelector:
-      istio-gateway: true    
+      istiogateway: true    
     tolerations:
     - key: istio-ingress
       operator: Equal
