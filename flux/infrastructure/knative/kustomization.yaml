@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 #  - serving-crds.yaml
   - serving-core.yaml
+  - kourier.yaml
 #  - operator.yaml
 #  - namespace.yaml
 #  - knative-serving.yaml
