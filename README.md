@@ -30,6 +30,16 @@ https://longhorn.io/kb/tip-only-use-storage-on-a-set-of-nodes/
 
    52  df -h
 
+https://docs.k3s.io/quick-start
+
+K3S_TOKEN=
+check /var/lib/rancher/k3s/server/node-token
+
+Kubeconfig
+
+ /etc/rancher/k3s/k3s.yaml
+
+
 On nanopi core
 curl -sfL https://get.k3s.io | K3S_URL=https://uoc-cubie:6443 K3S_TOKEN=theks3token INSTALL_K3S_EXEC="agent --snapshotter=native" sh -
 

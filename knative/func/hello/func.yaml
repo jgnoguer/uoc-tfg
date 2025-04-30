@@ -10,4 +10,4 @@ build:
   builder: pack
 deploy:
   namespace: default
-  image: registry.digitalocean.com/jgnoguer/hello@sha256:c61907628cc2c20be1fef85f4053eab774725425a940f81fa2ee7e822982c385
+  image: registry.digitalocean.com/jgnoguer/hello@sha256:bc2d132681f7eed5a1f58570e565a331291dccbfd6fbb8f94874377b7f432eea
