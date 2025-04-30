@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: istio-ingress
-  namespace: istio-ingress
+  namespace: istio-system
 spec:
   interval: 5m
   dependsOn:
