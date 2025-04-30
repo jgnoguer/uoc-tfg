@@ -5,5 +5,4 @@ resources:
   - namespace.yaml
   - knative-serving.yaml
   - net-istio.yaml
-
-# missing
+  - serving-default-domain.yaml
