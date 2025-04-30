@@ -18,6 +18,4 @@ spec:
         name: istio
         namespace: istio-system
       interval: 1m
-  values:
-    nodeSelector:
-      istio-gateway: true    
+  
