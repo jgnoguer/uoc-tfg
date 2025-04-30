@@ -12,10 +12,10 @@ spec:
       namespace: istio-system
   chart:
     spec:
-      chart: gateway
+      chart: istio-ingressgateway
       sourceRef:
         kind: HelmRepository
-        name: istio-ingressgateway
+        name: istio
         namespace: istio-system
       interval: 1m
   values:
