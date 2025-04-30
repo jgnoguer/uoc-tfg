@@ -19,14 +19,21 @@ spec:
         namespace: istio-system
       interval: 1m
   values:
-    nodeSelector:
-      istiogateway: true    
     tolerations:
-    - key: istio-ingress
-      operator: Equal
-      value: compatible
-      effect: NoSchedule
     - key: memorytype
       operator: Equal
       value: low
       effect: NoSchedule
+    - key: memorytype
+      operator: Equal
+      value: low
+      effect: NoExecute
+    affinity:
+      nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: istiogateway
+            operator: In
+            values:
+              - compatible
