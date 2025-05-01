@@ -6,4 +6,10 @@ runtime: go
 registry: docker.io/jgnoguer
 created: 2025-05-01T18:08:29.744503063+02:00
 build:
-  builder: pack
+  git:
+    url: https://github.com/my-repo/my-function.git   # required, git repository with the function source code
+    revision: main                                    # optional, git revision to be used (branch, tag, commit)
+    contextDir: knative/func/mediastore               # optional, needed only if the function is not located in the repository root folder
+  buildpacks: []
+  builder: ""
+  buildEnvs: []
