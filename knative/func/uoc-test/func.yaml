@@ -1,0 +1,13 @@
+# $schema: https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
+specVersion: 0.36.0
+name: uoc-test
+runtime: go
+registry: docker.io/jgnoguer
+namespace: default
+created: 2025-05-01T01:43:57.165036343+02:00
+build:
+  builder: pack
+deploy:
+  namespace: default
+  image: index.docker.io/jgnoguer/uoc-test@sha256:81babf3a008ba10acf8294e128e4beeac7f5e3830dce6c3f6735f586b713ad33
