@@ -3,11 +3,4 @@
 specVersion: 0.36.0
 name: hello
 runtime: go
-registry: registry.digitalocean.com/jgnoguer
-namespace: default
-created: 2025-04-27T12:45:18.224067647+02:00
-build:
-  builder: pack
-deploy:
-  namespace: default
-  image: registry.digitalocean.com/jgnoguer/hello@sha256:bc2d132681f7eed5a1f58570e565a331291dccbfd6fbb8f94874377b7f432eea
+created: 2025-05-01T18:44:55.218752193+02:00

@@ -10,6 +10,8 @@ https://longhorn.io/kb/tip-only-use-storage-on-a-set-of-nodes/
 
 ### Server
 
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik" sh -
+
 --disable traefik
 
    34  curl -sfL https://get.k3s.io | K3S_URL=https://uoc-cubie:6443 K3S_TOKEN=token sh -
@@ -42,6 +44,13 @@ Kubeconfig
 
 On nanopi core
 curl -sfL https://get.k3s.io | K3S_URL=https://uoc-cubie:6443 K3S_TOKEN=theks3token INSTALL_K3S_EXEC="agent --snapshotter=native" sh -
+
+
+jgnoguer@kiwi:~/uocWksp/repo/knative/func/uoc-test$ sudo cp /etc/rancher/k3s/k3s.yaml .
+jgnoguer@kiwi:~/uocWksp/repo/knative/func/uoc-test$ sudo chown jgnoguer:jgnoguer k3s.yaml 
+jgnoguer@kiwi:~/uocWksp/repo/knative/func/uoc-test$ mv k3s.yaml ~
+jgnoguer@kiwi:~/uocWksp/repo/knative/func/uoc-test$ export KUBECONFIG=/home/jgnoguer/k3s.yaml 
+jgnoguer@kiwi:~/uocWksp/repo/knative/func/uoc-test$ kubectl get nodes
 
 
 # Cubie images
