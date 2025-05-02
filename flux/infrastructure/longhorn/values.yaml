@@ -1,6 +1,6 @@
 deletingConfirmationFlag: true
-#defaultSettings:
-#  taintToleration: memorytype=low:NoSchedule;
+defaultSettings:
+  taintToleration: memorytype=low:NoSchedule;
 longhornManager:
   tolerations:
   - key: memorytype
