@@ -47,22 +47,23 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Print(songs)
 	
-	// song := Song{}
+	song := Song{}
+	song.Title= "Tu puta padre"
 	
-	// q := session.Query(
-	// 	`INSERT INTO media_player.playlist (id,title,artist,album,created_at) VALUES (now(),?,?,?,?)`,
-	// 	[]string{":title", ":artist", ":album", ":created_at"}).
-	// 	BindMap(map[string]interface{} {
-	// 		":title":      song.Title,
-	// 		":artist":     song.Artist,
-	// 		":album":      song.Album,
-	// 		":created_at": time.Now(),
-	// 	})
+	q2 := session.Query(
+		`INSERT INTO media_player.playlist (id,title,artist,album,created_at) VALUES (now(),?,?,?,?)`,
+		[]string{":title", ":artist", ":album", ":created_at"}).
+		BindMap(map[string]interface{} {
+			":title":      song.Title,
+			":artist":     song.Artist,
+			":album":      song.Album,
+			":created_at": time.Now(),
+	})
 	
-	// err2 := q.Exec();
-	// if err2 != nil {
-	// 	panic(fmt.Errorf("error in exec query to insert a song in playlist %w", err2))
-	// }
+	err2 := q2.Exec();
+	if err2 != nil {
+	 	panic(fmt.Errorf("error in exec query to insert a song in playlist %w", err2))
+	}
 
 	fmt.Println("HOLA - Received request", session)
 	fmt.Fprintf(w, "%q", "Boooo")

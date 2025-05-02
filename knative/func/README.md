@@ -7,6 +7,8 @@ Getting all the services deployed
 
 kubectl get ksvc -A
 
+kubectl --namespace kourier-system get service kourier
+
 ## Infra reconciliation
 
 flux reconcile kustomization infra-knative
@@ -54,4 +56,10 @@ kubectl patch --namespace knative-serving configmap/config-features \
 
  https://github.com/dewitt/knative-docs/blob/master/serving/samples/rest-api-go/README.md
 
- 
+ ## Check
+
+kubectl --namespace kourier-system get service kourier
+
+ curl -H "Host: mediastore.default.192.168.2.126.sslip.io" http://192.168.2.126:31860 -v
+
+ kubectl get ksvc -A
