@@ -4,5 +4,5 @@ resources:
   - namespace.yaml
   - iscsi-install.yaml
   - nfs-install.yaml
-#  - helmrepo.yaml
-#  - helmrelease.yaml
+  - helmrepo.yaml
+  - helmrelease.yaml
