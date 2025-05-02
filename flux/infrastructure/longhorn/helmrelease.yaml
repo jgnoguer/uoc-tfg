@@ -18,19 +18,19 @@ spec:
     # defaultSettings:
     #   taintToleration: "memorytype=low:NoSchedule"
     longhornManager:
-      tolerations:
-      - key: memorytype
-        operator: Equal
-        value: low
-        effect: NoSchedule
+      # tolerations:
+      # - key: memorytype
+      #   operator: Equal
+      #   value: low
+      #   effect: NoSchedule
       nodeSelector:
         longhorn: compatible
     longhornDriver:
-      tolerations:
-      - key: memorytype
-        operator: Equal
-        value: low
-        effect: NoSchedule
+      # tolerations:
+      # - key: memorytype
+      #   operator: Equal
+      #   value: low
+      #   effect: NoSchedule
       nodeSelector:
         longhorn: compatible
     longhornUI:

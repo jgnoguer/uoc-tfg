@@ -9,7 +9,6 @@ kubectl taint nodes uoc-neo2core-02 istiogateway=compatible:NoSchedule
 kubectl taint nodes uoc-neo2core-03 istiogateway=compatible:NoSchedule
 
 
-
 # Labels
 
 scylla.scylladb.com/node-type=scylla
