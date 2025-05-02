@@ -21,20 +21,12 @@ spec:
           operator: Equal
           value: low
           effect: NoSchedule
-        - key: memorytype
-          operator: Equal
-          value: low
-          effect: NoExecute
     longhornManager:
       tolerations:
       - key: memorytype
         operator: Equal
         value: low
         effect: NoSchedule
-      - key: memorytype
-        operator: Equal
-        value: low
-        effect: NoExecute
       nodeSelector:
         longhorn: compatible
     longhornDriver:
@@ -43,9 +35,5 @@ spec:
         operator: Equal
         value: low
         effect: NoSchedule
-      - key: memorytype
-        operator: Equal
-        value: low
-        effect: NoExecute
       nodeSelector:
         longhorn: compatible

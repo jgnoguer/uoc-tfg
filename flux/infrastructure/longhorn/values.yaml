@@ -1,23 +1,12 @@
-defaultSettings:
-  taintToleration:
-    - key: memorytype
-      operator: Equal
-      value: low
-      effect: NoSchedule
-    - key: memorytype
-      operator: Equal
-      value: low
-      effect: NoExecute
+deletingConfirmationFlag: true
+#defaultSettings:
+#  taintToleration: memorytype=low:NoSchedule;
 longhornManager:
   tolerations:
   - key: memorytype
     operator: Equal
     value: low
     effect: NoSchedule
-  - key: memorytype
-    operator: Equal
-    value: low
-    effect: NoExecute
   nodeSelector:
     longhorn: compatible
 longhornDriver:
@@ -26,9 +15,5 @@ longhornDriver:
     operator: Equal
     value: low
     effect: NoSchedule
-  - key: memorytype
-    operator: Equal
-    value: low
-    effect: NoExecute
   nodeSelector:
     longhorn: compatible

@@ -19,6 +19,9 @@ USER=<USERNAME_HERE>; PASSWORD=<PASSWORD_HERE>; echo "${USER}:$(openssl passwd -
 kubectl -n longhorn-system create secret generic basic-auth --from-file=auth
 
 helm uninstall longhorn-release -n longhorn-system
+helm install -f flux/infrastructure/longhorn/values.yaml longhorn-release longhorn-repo/longhorn -n longhorn-system
 
 flux reconcile kustomization infra-longhorn
 flux get helmrelease longhorn-release -n longhorn-system
+
+kubectl -n longhorn-system edit settings.longhorn.io deleting-confirmation-flag
