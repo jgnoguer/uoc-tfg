@@ -33,11 +33,11 @@ spec:
       containers:
       - name: sleep
         image: registry.k8s.io/pause:3.1
-      tolerations:
-      - key: memorytype
-        operator: Equal
-        value: low
-        effect: NoSchedule
+      # tolerations:
+      # - key: memorytype
+      #   operator: Equal
+      #   value: low
+      #   effect: NoSchedule
       nodeSelector:
         longhorn: compatible
   updateStrategy:
