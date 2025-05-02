@@ -35,4 +35,4 @@ spec:
         longhorn: compatible
     longhornUI:
       nodeSelector:
-        longhorn: compatible
+        longhorn-ui: compatible
