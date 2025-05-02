@@ -15,12 +15,6 @@ spec:
       version: v1.8.1
   interval: 1m0s
   values:
-    defaultSettings:
-      taintToleration:
-        - key: memorytype
-          operator: Equal
-          value: low
-          effect: NoSchedule
     longhornManager:
       tolerations:
       - key: memorytype
@@ -35,5 +29,8 @@ spec:
         operator: Equal
         value: low
         effect: NoSchedule
+      nodeSelector:
+        longhorn: compatible
+    longhornUI:
       nodeSelector:
         longhorn: compatible

@@ -17,3 +17,6 @@ longhornDriver:
     effect: NoSchedule
   nodeSelector:
     longhorn: compatible
+longhornUI:
+  nodeSelector:
+    longhorn: compatible
