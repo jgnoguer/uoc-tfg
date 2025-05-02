@@ -27,3 +27,15 @@ spec:
         effect: NoExecute
       nodeSelector:
         longhorn: compatible
+    longhornDriver:
+      tolerations:
+      - key: memorytype
+        operator: Equal
+        value: low
+        effect: NoSchedule
+      - key: memorytype
+        operator: Equal
+        value: low
+        effect: NoExecute
+      nodeSelector:
+        longhorn: compatible
