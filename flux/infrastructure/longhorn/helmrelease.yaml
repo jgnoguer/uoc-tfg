@@ -15,6 +15,16 @@ spec:
       version: v1.8.1
   interval: 1m0s
   values:
+    defaultSettings:
+      taintToleration:
+        - key: memorytype
+          operator: Equal
+          value: low
+          effect: NoSchedule
+        - key: memorytype
+          operator: Equal
+          value: low
+          effect: NoExecute
     longhornManager:
       tolerations:
       - key: memorytype
