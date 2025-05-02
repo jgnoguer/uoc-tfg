@@ -15,14 +15,15 @@ spec:
       version: v1.8.1
   interval: 1m0s
   values:
-    tolerations:
-    - key: memorytype
-      operator: Equal
-      value: low
-      effect: NoSchedule
-    - key: memorytype
-      operator: Equal
-      value: low
-      effect: NoExecute
-    nodeSelector:
-      longhorn: compatible
+    longhornManager:
+      tolerations:
+      - key: memorytype
+        operator: Equal
+        value: low
+        effect: NoSchedule
+      - key: memorytype
+        operator: Equal
+        value: low
+        effect: NoExecute
+      nodeSelector:
+        longhorn: compatible
