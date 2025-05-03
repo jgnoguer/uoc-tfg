@@ -1,9 +1,0 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-configMapGenerator:
-  - name: config-features
-    namespace: knative-serving # needs to match target ConfigMap from base
-    behavior: merge
-    literals:
-      - kubernetes.podspec-persistent-volume-claim=enabled
-      - kubernetes.podspec-persistent-volume-write=enabled

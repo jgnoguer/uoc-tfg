@@ -12,3 +12,10 @@ resources:
   - serving-default-domain.yaml
   - serving-hpa.yaml
   - eventing-core.yaml
+configMapGenerator:
+  - name: config-features
+    namespace: knative-serving # needs to match target ConfigMap from base
+    behavior: merge
+    literals:
+      - kubernetes.podspec-persistent-volume-claim=enabled
+      - kubernetes.podspec-persistent-volume-write=enabled
