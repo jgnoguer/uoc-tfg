@@ -30,7 +30,7 @@ usercert=${SCYLLADB_CONFIG}/admin.crt
 userkey=${SCYLLADB_CONFIG}/admin.key
 EOF
 
-podman run -it --rm --entrypoint=cqlsh \
+docker run -it --rm --entrypoint=cqlsh \
 -v="${SCYLLADB_CONFIG}:${SCYLLADB_CONFIG}:ro,Z" \
 -v="${SCYLLADB_CONFIG}/cqlshrc:/root/.cassandra/cqlshrc:ro,Z" \
 docker.io/scylladb/scylla:5.4.3
