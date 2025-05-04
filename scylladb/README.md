@@ -10,5 +10,19 @@ Client discovery
 https://operator.docs.scylladb.com/stable/resources/scyllaclusters/clients/discovery.html
 
 
-CREATE KEYSPACE IF NOT EXISTS media_player WITH replication = {'class': 'NetworkTopologyStrategy', 'replication_factor': '3'}  AND durable_writes = true AND TABLETS = {'enabled': false};
-CREATE TABLE IF NOT EXISTS media_player.playlist (id uuid,title text,album text,artist text,created_at timestamp,PRIMARY KEY (id, created_at)) WITH CLUSTERING ORDER BY (created_at DESC);
+
+# Local development
+
+https://opensource.docs.scylladb.com/stable/operating-scylla/procedures/tips/best-practices-scylla-on-docker.html
+
+docker run --name uoc-localscylla -d scylladb/scylla
+docker run --name uoc-localscylla --volume ~/uocWksp/repo/scylladb/local/master_scylla.yaml:/etc/scylla/scylla.yaml -d docker.io/scylladb/scylla
+
+-- docker run --name uoc-localscylla-node2 -d scylladb/scylla --seeds="$(docker inspect --format='{{ .NetworkSettings.IPAddress }}' uoc-localscylla)"
+
+docker inspect --format='{{ .NetworkSettings.IPAddress }}' uoc-localscylla
+docker exec -it uoc-localscylla nodetool status
+
+docker exec -it uoc-localscylla cqlsh
+
+https://opensource.docs.scylladb.com/stable/getting-started/install-scylla/run-in-docker.html

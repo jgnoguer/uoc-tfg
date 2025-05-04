@@ -1,72 +1,254 @@
 package function
 
 import (
+	"encoding/json"
 	"fmt"
-	"time"
+	"function/model"
+	"io"
+	"log/slog"
 	"net/http"
+	"os"
+	"path/filepath"
+	"regexp"
+	"strings"
+	"time"
+
+	"github.com/scylladb/gocqlx/v3/qb"
+
+	"github.com/scylladb/gocqlx/v3/table"
+
 	"github.com/gocql/gocql"
+	"github.com/google/uuid"
+	"github.com/joho/godotenv"
 	"github.com/scylladb/gocqlx/v3"
 )
 
-func (s Song) String() string {
-	return fmt.Sprintf("Id: %s\nTitle: %s\nArtist: %s\nAlbum: %s\nCreated At: %s\n", s.Id, s.Title, s.Artist, s.Album, s.Created_at)
+const ResourcePathRegex = "^/([a-zA-Z0-9-]{36})$"
+const ResourceMetadataPathRegex = "^/([a-zA-Z0-9-]{36})/metadata$"
+
+type ResponseMessage struct {
+	Message string `json:"message"`
 }
 
-type Song struct {
-	Id string
-	Title string
-	Artist string
-	Album string
-	Created_at time.Time
+// metadata specifies table name and columns it must be in sync with schema.
+var mediaMetadata = table.Metadata{
+	Name:    "uoc_animals.media",
+	Columns: []string{"id", "name", "contenttype", "location", "created_at", "status", "size"},
+	PartKey: []string{"id"},
+	SortKey: []string{"id"},
 }
 
 // Handle an HTTP Request.
 func Handle(w http.ResponseWriter, r *http.Request) {
-	/*
-	 * YOUR CODE HERE
-	 *
-	 * Try running `go test`.  Add more test as you code in `handle_test.go`.
-	 */
-	 cluster := gocql.NewCluster("192.168.2.126")
 
-	 cluster.Authenticator = gocql.PasswordAuthenticator{Username: "cassandra", Password: "cassandra"}
- 
+	godotenv.Load()
+	storageFolder := os.Getenv("STORAGE_FOLDER")
+	dbIp := os.Getenv("SCYLLADB_IP")
+	dbUser := os.Getenv("SCYLLA_APPUSER")
+	dbPwd := os.Getenv("SCYLLA_APPPWD")
+
+	slog.Info("Info", "Method", r.Method, "Storage folder", storageFolder)
+
+	slog.Info("Try connection to ", "ip", dbIp)
+	cluster := gocql.NewCluster(dbIp)
+	//
+	cluster.Authenticator = gocql.PasswordAuthenticator{Username: dbUser, Password: dbPwd}
+	//
 	session, err := gocqlx.WrapSession(cluster.CreateSession())
 
 	if err != nil {
-		panic("Connection fail")
+		panic("Database connection failed ")
 	}
 
-	var songs []Song
-
-	q := session.Query("SELECT * FROM media_player.playlist", nil)
-
-	if err := q.Select(&songs); err != nil {
-		panic(fmt.Errorf("error in exec query to list playlists: %w", err))
+	switch r.Method {
+	case "GET":
+		if strings.HasSuffix(r.URL.Path, "/metadata") {
+			getMediaMetadata(w, r, session)
+		} else {
+			getMedia(w, r, session)
+		}
+	case "POST":
+		w.Header().Set("Content-Type", "application/json")
+		addMedia(w, r, session)
+	case "DELETE":
+		w.Header().Set("Content-Type", "application/json")
+		deleteMedia(w, r, session)
+	default:
+		w.WriteHeader(http.StatusBadRequest)
 	}
 
-	fmt.Print(songs)
-	
-	song := Song{}
-	song.Title= "Tu puta padre"
-	
-	q2 := session.Query(
-		`INSERT INTO media_player.playlist (id,title,artist,album,created_at) VALUES (now(),?,?,?,?)`,
-		[]string{":title", ":artist", ":album", ":created_at"}).
-		BindMap(map[string]interface{} {
-			":title":      song.Title,
-			":artist":     song.Artist,
-			":album":      song.Album,
-			":created_at": time.Now(),
-	})
-	
-	err2 := q2.Exec();
-	if err2 != nil {
-	 	panic(fmt.Errorf("error in exec query to insert a song in playlist %w", err2))
-	}
-
-	fmt.Println("HOLA - Received request", session)
-	fmt.Fprintf(w, "%q", "Boooo")
 }
 
+func addMedia(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
+	f, fileHandler, err := r.FormFile("file")
+	if err != nil {
+		slog.Error("Fail to get file from form" + err.Error())
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	defer f.Close()
 
+	if r.URL.Path != "/" {
+		w.WriteHeader(http.StatusBadRequest)
+		errorResponse := ResponseMessage{Message: "Bad url path for adding a file"}
+		json.NewEncoder(w).Encode(errorResponse)
+		return
+	}
+	id := uuid.New()
+
+	slog.Info("file", "name", fileHandler.Filename, "size", fileHandler.Size, "mime", fileHandler.Header.Get("Content-Type"))
+	newDirPath := filepath.Join(os.Getenv("STORAGE_FOLDER"), id.String()[:3], id.String())
+	dbLocation := id.String()[:3] + "/" + id.String()
+	dirError := os.MkdirAll(newDirPath, os.ModePerm)
+	if dirError != nil {
+		slog.Error("Fail to create directory" + dirError.Error())
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	newFilePath := filepath.Join(newDirPath, fileHandler.Filename)
+	newFile, err := os.Create(newFilePath)
+	if err != nil {
+		slog.Error("Fail to create file" + err.Error())
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	defer newFile.Close()
+
+	_, err = io.Copy(newFile, f)
+	if err != nil {
+		slog.Error("Fail to save the file" + err.Error())
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	p := model.Media{Id: id.String(), Name: fileHandler.Filename,
+		ContentType: fileHandler.Header.Get("Content-Type"),
+		Location:    dbLocation, CreatedAt: time.Now(), Status: 0, Size: fileHandler.Size}
+
+	json.NewEncoder(w).Encode(p)
+
+	var mediaTable = table.New(mediaMetadata)
+	q := session.Query(mediaTable.Insert()).BindStruct(p)
+	if err := q.ExecRelease(); err != nil {
+		panic(fmt.Errorf("error in exec query to insert media %w", err))
+	}
+
+}
+
+func getMediaMetadata(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
+	slog.Info("Finding media metadata", "id", r.URL.Path)
+
+	mediaId := resolveMediaId(r.URL.Path, ResourceMetadataPathRegex)
+
+	if mediaId == "" {
+		w.WriteHeader(http.StatusBadRequest)
+		errorResponse := ResponseMessage{Message: "Please specify a valid media id."}
+		json.NewEncoder(w).Encode(errorResponse)
+	} else {
+		var medias = findMediaById(mediaId, session)
+		if len(medias) == 0 {
+			w.WriteHeader(http.StatusNotFound)
+		} else {
+			json.NewEncoder(w).Encode(medias[0])
+		}
+	}
+
+}
+
+func getMedia(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
+	slog.Info("Finding media", "id", r.URL.Path)
+
+	mediaId := resolveMediaId(r.URL.Path, ResourcePathRegex)
+
+	if mediaId == "" {
+		w.WriteHeader(http.StatusBadRequest)
+		errorResponse := ResponseMessage{Message: "Please specify a valid media id."}
+		json.NewEncoder(w).Encode(errorResponse)
+	} else {
+		var medias = findMediaById(mediaId, session)
+		if len(medias) == 0 {
+			w.WriteHeader(http.StatusNotFound)
+		} else {
+			foundMedia := medias[0]
+			var location = resolveStorageFile(foundMedia)
+			f, err := os.Open(location)
+			if err != nil {
+				panic(fmt.Errorf("error while reading file %w", err))
+			}
+			w.Header().Set("Content-Type", foundMedia.ContentType)
+			http.ServeContent(w, r, foundMedia.Name, time.Now(), f)
+		}
+	}
+
+}
+
+func findMediaById(mediaId string, session gocqlx.Session) []model.Media {
+	var medias []model.Media
+	var mediaTable = table.New(mediaMetadata)
+	q := session.Query(mediaTable.Select()).BindMap(qb.M{"id": mediaId})
+	if err := q.SelectRelease(&medias); err != nil {
+		panic(fmt.Errorf("error in exec query to get media: %w", err))
+	}
+	return medias
+}
+
+func deleteMedia(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
+	slog.Info("Deleting media", "id", r.URL.Path)
+	mediaId := resolveMediaId(r.URL.Path, ResourcePathRegex)
+
+	if mediaId == "" {
+		w.WriteHeader(http.StatusBadRequest)
+		errorResponse := ResponseMessage{Message: "Bad url path for adding a file"}
+		json.NewEncoder(w).Encode(errorResponse)
+	} else {
+		var medias = findMediaById(mediaId, session)
+		if len(medias) == 0 {
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
+		q := session.Query(`DELETE FROM uoc_animals.media WHERE id = ?`,
+			[]string{":id"}).
+			BindMap(map[string]interface{}{
+				":id": mediaId,
+			})
+
+		error := q.ExecRelease()
+		if error != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			errorResponse := ResponseMessage{Message: fmt.Errorf("error to exec delete query: %w", error).Error()}
+			json.NewEncoder(w).Encode(errorResponse)
+			return
+		}
+		slog.Info("Db deleted media", "id", mediaId)
+
+		folder := resolveStorageFolder(medias[0])
+		os.RemoveAll(folder)
+
+		slog.Info("Storage deleted media ", "folder", folder)
+
+		w.WriteHeader(http.StatusOK)
+		errorResponse := ResponseMessage{Message: mediaId + " deleted"}
+		json.NewEncoder(w).Encode(errorResponse)
+	}
+}
+
+func resolveMediaId(urlPath string, pattern string) string {
+	re := regexp.MustCompile(pattern)
+	matches := re.FindStringSubmatch(urlPath)
+	if len(matches) <= 0 {
+		return ""
+	} else {
+		return matches[1]
+	}
+}
+
+func resolveStorageFolder(media model.Media) string {
+	storageFolder := os.Getenv("STORAGE_FOLDER")
+	return filepath.Join(storageFolder, media.Location)
+}
+
+func resolveStorageFile(media model.Media) string {
+	storageFolder := os.Getenv("STORAGE_FOLDER")
+	return filepath.Join(storageFolder, media.Location, media.Name)
+}

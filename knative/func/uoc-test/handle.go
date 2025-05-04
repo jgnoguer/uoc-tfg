@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"net/http/httputil"
-	"github.com/gocql/gocql"
 )
 
 // Handle an HTTP Request.

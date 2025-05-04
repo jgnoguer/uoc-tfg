@@ -40,11 +40,11 @@ kubectl create secret docker-registry registry-dockerhub \
   --docker-username=jgnoguer \
   --docker-password=<dockerpat>
 
-  func build --registry docker.io/jgnoguer 
+  func build --registry ghcr.io/jgnoguer 
 
 or
 
-export FUNC_REGISTRY=docker.io/jgnoguer
+export FUNC_REGISTRY=ghcr.io/jgnoguer
 
 ## Enable persistent volumes
 
