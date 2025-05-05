@@ -3,3 +3,15 @@ kind: Kustomization
 resources:
   - ../base/prometheus
   - ../base/scylladb
+configMapGenerator:
+  - name: uoc-animals-services-cm
+    namespace: default # needs to match target ConfigMap from base
+    behavior: create
+    literals:
+      - scylladb-ip=192.168.2.126
+secretGenerator:
+- name: animals-database-creds
+  literals:
+  - username=animalsapp
+  - password=1f2d1e2e67df
+      

@@ -22,6 +22,24 @@ spec:
             - mountPath: /data
               name: mydata
               readOnly: false
+      env:
+        - name: SCYLLADB_IP
+          valueFrom:
+            configMapKeyRef:
+              name: uoc-animals-services-cm
+              key: scylladb-ip
+        - name: SCYLLA_APPUSER
+          valueFrom:
+            secretKeyRef:
+              name: animals-database-creds
+              key: username
+        - name: SCYLLA_APPPWD
+          valueFrom:
+            secretKeyRef:
+              name: animals-database-creds
+              key: password
+        - name: STORAGE_FOLDER
+          value: "todo_db"
       volumes:
         - name: mydata
           persistentVolumeClaim:

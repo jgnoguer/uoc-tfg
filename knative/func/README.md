@@ -67,3 +67,7 @@ kubectl --namespace kourier-system get service kourier
  ## Create a new function
 
  func create -l go hello
+
+ ## Create a new service 
+
+ kn service create gitopstest --image knativesamples/helloworld --target=/user/knfiles/test.yaml
