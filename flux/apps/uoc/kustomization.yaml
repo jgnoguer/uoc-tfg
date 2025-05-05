@@ -11,7 +11,8 @@ configMapGenerator:
     literals:
       - scylladb-ip=192.168.2.126
 secretGenerator:
-- name: animals-database-creds
+- name: uoc-animals-database-creds
+  namespace: default 
   literals:
   - username=animalsapp
   - password=1f2d1e2e67df
