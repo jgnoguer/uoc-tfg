@@ -26,7 +26,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%q\n", dump)
 	fmt.Fprintf(w, "%q", dump)
 
-	dirError := os.MkdirAll("/data/hola/cara/cola", os.ModePerm)
+	dirError := os.MkdirAll("/data/hola/cara/cola", os.ModeDir)
 	if dirError != nil {
 		slog.Error("Fail to create directory" + dirError.Error())
 		w.WriteHeader(http.StatusInternalServerError)

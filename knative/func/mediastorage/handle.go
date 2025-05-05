@@ -99,7 +99,7 @@ func addMedia(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
 	slog.Info("file", "name", fileHandler.Filename, "size", fileHandler.Size, "mime", fileHandler.Header.Get("Content-Type"))
 	newDirPath := filepath.Join(os.Getenv("STORAGE_FOLDER"), id.String()[:3], id.String())
 	dbLocation := id.String()[:3] + "/" + id.String()
-	dirError := os.MkdirAll(newDirPath, os.ModePerm)
+	dirError := os.MkdirAll(newDirPath, os.ModeDir)
 	if dirError != nil {
 		slog.Error("Fail to create directory" + dirError.Error())
 		w.WriteHeader(http.StatusInternalServerError)
