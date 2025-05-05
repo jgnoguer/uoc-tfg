@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: clear-nginx-deployment
 spec:
+
   selector:
     matchLabels:
       app: clear-nginx
@@ -11,9 +12,11 @@ spec:
       labels:
         app: clear-nginx
     spec:
+      nodeSelector:
+        longhorn: compatible
       containers:
       - name: clear-nginx
-        image: clearlinux/nginx
+        image: nginx
         volumeMounts:
         - mountPath: /var/www/html
           name: site-data
