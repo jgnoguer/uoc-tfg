@@ -28,7 +28,7 @@ https://knative.dev/docs/serving/deploying-from-private-registry/
    89  doctl registry kubernetes-manifest | kubectl apply -f -
   127  doctl registry kubernetes-manifest
 
-kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "registry-dockerhub"}]}'
+kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "registry-ghrc"}]}'
 
 
 kubectl annotate kservice helloworld-go networking.knative.dev/ingress-class=
@@ -39,6 +39,12 @@ kubectl create secret docker-registry registry-dockerhub \
   --docker-email=jgarciano@uoc.edu \
   --docker-username=jgnoguer \
   --docker-password=<dockerpat>
+
+kubectl create secret docker-registry registry-ghrc \
+--docker-server=ghcr.io/jgnoguer \
+--docker-email=jgarciano@uoc.edu \
+--docker-username=jgnoguer \
+--docker-password=<dockerpat>
 
   func build --registry ghcr.io/jgnoguer 
 
@@ -71,3 +77,6 @@ kubectl --namespace kourier-system get service kourier
  ## Create a new service 
 
  kn service create gitopstest --image knativesamples/helloworld --target=/user/knfiles/test.yaml
+
+
+kn service apply -f mediastorage-service.yaml

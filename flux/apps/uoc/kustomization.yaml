@@ -6,14 +6,12 @@ resources:
 #  - mediastorage-service.yaml
 configMapGenerator:
   - name: uoc-animals-services-cm
-    namespace: default # needs to match target ConfigMap from base
     behavior: create
     literals:
       - scylladb-ip=192.168.2.126
 secretGenerator:
-- name: uoc-animals-database-creds
-  namespace: default 
-  literals:
-  - username=animalsapp
-  - password=1f2d1e2e67df
+  - name: uoc-animals-database-creds
+    literals:
+    - username=animalsapp
+    - password=1f2d1e2e67df
       
