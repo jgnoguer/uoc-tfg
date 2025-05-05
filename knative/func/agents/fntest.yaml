@@ -21,6 +21,7 @@ spec:
         volumeMounts:
           - mountPath: /data
             name: mydata
+            subPath: knative
             readOnly: false
       volumes:
         - name: mydata
