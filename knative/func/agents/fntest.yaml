@@ -12,6 +12,8 @@ spec:
         client.knative.dev/user-image: ghcr.io/jgnoguer/agents:latest
       creationTimestamp: null
     spec:
+      nodeSelector:
+        longhorn: compatible
       containers:
       - image: ghcr.io/jgnoguer/agents:latest
         name: ""
