@@ -1,0 +1,28 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: agents
+  namespace: default
+spec:
+  template:
+    metadata:
+      annotations:
+        client.knative.dev/updateTimestamp: "2025-05-05T18:15:11Z"
+        client.knative.dev/user-image: ghcr.io/jgnoguer/agents:latest
+      creationTimestamp: null
+    spec:
+      containers:
+      - image: ghcr.io/jgnoguer/agents:latest
+        name: ""
+        resources: {}
+        volumeMounts:
+          - mountPath: /data
+            name: mydata
+            readOnly: false
+      volumes:
+        - name: mydata
+          persistentVolumeClaim:
+            claimName: noreplicavolume
+            readOnly: false
+status: {}

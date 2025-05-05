@@ -12,9 +12,9 @@ spec:
         - image: ghcr.io/jgnoguer/mediastorage:latest
           resources: {}
           volumeMounts:
-              - mountPath: /mnt/data
-                name: mydata
-                readOnly: false
+            - mountPath: /data
+              name: mydata
+              readOnly: false
           env:
             - name: SCYLLADB_IP
               valueFrom:
@@ -24,15 +24,15 @@ spec:
             - name: SCYLLA_APPUSER
               valueFrom:
                 secretKeyRef:
-                  name: animals-database-creds
+                  name: uoc-animals-database-creds
                   key: username
             - name: SCYLLA_APPPWD
               valueFrom:
                 secretKeyRef:
-                  name: animals-database-creds
+                  name: uoc-animals-database-creds
                   key: password
             - name: STORAGE_FOLDER
-              value: "/mnt/data"
+              value: "/data"
       volumes:
         - name: mydata
           persistentVolumeClaim:
