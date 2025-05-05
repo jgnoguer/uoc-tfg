@@ -4,13 +4,17 @@ resources:
   - ../base/prometheus
   - ../base/scylladb
 #  - mediastorage-service.yaml
+generatorOptions:
+  disableNameSuffixHash: true
 configMapGenerator:
   - name: uoc-animals-services-cm
+    namespace: default
     behavior: create
     literals:
       - scylladb-ip=192.168.2.126
 secretGenerator:
   - name: uoc-animals-database-creds
+    namespace: default
     literals:
     - username=animalsapp
     - password=1f2d1e2e67df
