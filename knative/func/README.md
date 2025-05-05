@@ -60,7 +60,7 @@ kubectl patch --namespace knative-serving configmap/config-features \
 
 kubectl --namespace kourier-system get service kourier
 
- curl -H "Host: mediastore.default.192.168.2.126.sslip.io" http://192.168.2.126:31860 -v
+ curl -H "Host: mediastorage.default.192.168.2.126.sslip.io" http://192.168.2.126:31860 -v
 
  kubectl get ksvc -A
 

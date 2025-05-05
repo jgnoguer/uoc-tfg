@@ -1,4 +1,4 @@
-CREATE ROLE animalsapp WITH LOGIN = true and PASSWORD = '******';
+CREATE ROLE animalsapp WITH LOGIN = true and PASSWORD = '1f2d1e2e67df';
 
 CREATE KEYSPACE IF NOT EXISTS uoc_animals WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'};
 

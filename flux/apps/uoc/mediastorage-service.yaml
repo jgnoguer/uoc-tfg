@@ -1,0 +1,48 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: mediastorage
+  namespace: default
+spec:
+  template:
+    metadata:
+      annotations:
+        client.knative.dev/updateTimestamp: "2025-05-03T00:37:53Z"
+        client.knative.dev/user-image: ghcr.io/jgnoguer/mediastorage:latest
+      creationTimestamp: null
+    spec:
+      nodeSelector:
+        longhorn: compatible
+      containers:
+      - image: ghcr.io/jgnoguer/mediastorage:latest
+        name: ""
+        resources: {}
+        volumeMounts:
+            - mountPath: /mnt/data
+              name: mydata
+              readOnly: false
+        env:
+          - name: SCYLLADB_IP
+            valueFrom:
+              configMapKeyRef:
+                name: uoc-animals-services-cm
+                key: scylladb-ip
+          - name: SCYLLA_APPUSER
+            valueFrom:
+              secretKeyRef:
+                name: animals-database-creds
+                key: username
+          - name: SCYLLA_APPPWD
+            valueFrom:
+              secretKeyRef:
+                name: animals-database-creds
+                key: password
+          - name: STORAGE_FOLDER
+            value: "/mnt/data"
+      volumes:
+        - name: mydata
+          persistentVolumeClaim:
+            claimName: noreplicavolume
+            readOnly: false
+status: {}

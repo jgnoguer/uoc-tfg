@@ -1,7 +1,7 @@
 # $schema: https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
 # yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/refs/tags/v0.36.0/schema/func_yaml-schema.json
 specVersion: 0.36.0
-name: mediastore
+name: mediastorage
 runtime: go
 registry: docker.io/jgnoguer
 created: 2025-05-01T18:08:29.744503063+02:00
@@ -9,5 +9,5 @@ build:
   git:
     url: https://github.com/jgnoguer/uoc-tfg.git
     revision: main
-    contextDir: knative/func/mediastore
+    contextDir: knative/func/mediastorage
   builder: pack
