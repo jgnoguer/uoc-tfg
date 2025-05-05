@@ -9,13 +9,13 @@ spec:
     metadata:
       annotations:
         client.knative.dev/updateTimestamp: "2025-05-03T00:37:53Z"
-        client.knative.dev/user-image: docker.io/jgnoguer/mediastore:latest
+        client.knative.dev/user-image: ghcr.io/jgnoguer/mediastore:latest
       creationTimestamp: null
     spec:
       nodeSelector:
         longhorn: compatible
       containers:
-      - image: docker.io/jgnoguer/mediastore:latest
+      - image: ghcr.io/jgnoguer/mediastore:latest
         name: ""
         resources: {}
         volumeMounts:
