@@ -33,3 +33,5 @@ flux reconcile kustomization infra-longhorn
 flux get helmrelease longhorn-release -n longhorn-system
 
 kubectl -n longhorn-system edit settings.longhorn.io deleting-confirmation-flag
+
+kubectl -n longhorn-system port-forward service/longhorn-frontend 8080:80

@@ -4,3 +4,5 @@ CREATE KEYSPACE IF NOT EXISTS uoc_animals WITH replication = {'class': 'SimpleSt
 
 -- CREATE KEYSPACE IF NOT EXISTS media_player WITH replication = {'class': 'NetworkTopologyStrategy', 'replication_factor': '3'}  AND durable_writes = true AND TABLETS = {'enabled': false};
 CREATE TABLE IF NOT EXISTS uoc_animals.media (id uuid,name text,contenttype text,location text,created_at timestamp,status int,size int, PRIMARY KEY (id));
+
+CREATE TABLE IF NOT EXISTS uoc_animals.agent (id uuid,lastname text,firstname text,type tinyint,created_at timestamp,status tinyint, PRIMARY KEY (id));
