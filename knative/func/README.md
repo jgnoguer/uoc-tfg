@@ -28,8 +28,6 @@ https://knative.dev/docs/serving/deploying-from-private-registry/
    89  doctl registry kubernetes-manifest | kubectl apply -f -
   127  doctl registry kubernetes-manifest
 
-kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "registry-ghrc"}]}'
-
 
 kubectl annotate kservice helloworld-go networking.knative.dev/ingress-class=
 
@@ -46,6 +44,8 @@ kubectl create secret docker-registry registry-ghrc \
 --docker-username=jgnoguer \
 --docker-password=<dockerpat>
 
+kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "registry-ghrc"}]}'
+
   func build --registry ghcr.io/jgnoguer 
 
 or
@@ -54,9 +54,7 @@ export FUNC_REGISTRY=ghcr.io/jgnoguer
 
 ## Enable persistent volumes
 
-kubectl patch --namespace knative-serving configmap/config-features \
- --type merge \
- --patch '{"data":{"kubernetes.podspec-persistent-volume-claim": "enabled", "kubernetes.podspec-persistent-volume-write": "enabled"}}'
+See knative kustomize
 
  ## Creating a REST service
 

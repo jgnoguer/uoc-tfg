@@ -3,11 +3,11 @@ kind: Kustomization
 resources:
 #  - serving-crds.yaml
   - serving-core.yaml
-  - kourier.yaml
+#  - kourier.yaml
 #  - operator.yaml
 #  - namespace.yaml
 #  - knative-serving.yaml
-#  - net-istio.yaml
+  - net-istio.yaml
 #  - knative-eventing.yaml
   - serving-default-domain.yaml
   - serving-hpa.yaml
@@ -24,4 +24,4 @@ configMapGenerator:
     namespace: knative-serving # needs to match target ConfigMap from base
     behavior: merge
     literals:
-      - ingress-class=kourier.ingress.networking.knative.dev
+      - ingress-class=istio.ingress.networking.knative.dev

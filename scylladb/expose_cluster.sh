@@ -1,4 +1,4 @@
-export KUBECONFIG=/home/jgnoguer/uocWksp/kubectl/uoc-cubie.yaml
+export KUBECONFIG=/home/jgnoguer/uocWksp/kubectl/uoc-zero2.yaml
 
 kubectl -n scylla patch service/scylladb-uoc-client -p '{"metadata": {"annotations": {"networking.gke.io/load-balancer-type": "Internal"}}, "spec": {"type": "LoadBalancer"}}'
 kubectl -n scylla wait --for=jsonpath='{.status.loadBalancer.ingress}' service/scylladb-uoc-client

@@ -1,4 +1,4 @@
-export KUBECONFIG=/home/jgnoguer/uocWksp/kubectl/uoc-cubie.yaml
+export KUBECONFIG=/home/jgnoguer/uocWksp/kubectl/uoc-zero2.yaml
 
 SCYLLADB_CONFIG="$( mktemp -d )" 
 
