@@ -10,7 +10,7 @@ See https://docs.k3s.io/datastore/ha-embedded
 
 #### First master server
 
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --snapshotter=native --cluster-init" K3S_TOKEN="THETOKEN" sh -
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --snapshotter=native --cluster-init --tls-san 192.168.2.1" K3S_TOKEN="THETOKEN" sh -
 
 Get main server node token:
 
@@ -20,22 +20,22 @@ cat /var/lib/rancher/k3s/server/token
 
 Install the second server node:
 
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --snapshotter=native --server https://uoc-zero2-01:6443" K3S_TOKEN="K1034992fa9e79f7264f9a451983949f328261c0d3fd7984bb0ae3d3296ed5a2046::server:de9c0dfa7ba5dd94f8a1343fd3a70159" sh -
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --snapshotter=native --tls-san 192.168.2.1 --server https://uoc-zero2-01:6443" K3S_TOKEN="THETOKEN" sh -
 
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --snapshotter=native --server https://uoc-zero2-01:6443" K3S_TOKEN="K1034992fa9e79f7264f9a451983949f328261c0d3fd7984bb0ae3d3296ed5a2046::server:de9c0dfa7ba5dd94f8a1343fd3a70159" sh -
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --snapshotter=native --server https://uoc-zero2-01:6443" K3S_TOKEN="THETOKEN" sh -
 
 K3S_TOKEN=
 check /var/lib/rancher/k3s/server/node-token
 
 Kubeconfig
 
- /etc/rancher/k3s/k3s.yaml
+ cat /etc/rancher/k3s/k3s.yaml
 
 
 ### Agents
 
+curl -sfL https://get.k3s.io | K3S_URL=https://192.168.2.1:6443 K3S_TOKEN="THETOKEN" sh -
 
-   34  curl -sfL https://get.k3s.io | K3S_URL=https://uoc-zero2-01:6443 K3S_TOKEN=token sh -
    35  ps -aux
    36  reboot
    37  k3s kubectl get nodes
@@ -57,9 +57,9 @@ https://docs.k3s.io/quick-start
 
 
 
-On nanopi core
+On nanopi core / nanopi zero2
 
-curl -sfL https://get.k3s.io | K3S_URL=https://uoc-cubie:6443 K3S_TOKEN=theks3token INSTALL_K3S_EXEC="agent --snapshotter=native" sh -
+curl -sfL https://get.k3s.io | K3S_URL=https://192.168.2.1:6443 K3S_TOKEN="THETOKEN" INSTALL_K3S_EXEC="agent --snapshotter=native" sh -
 
 
 jgnoguer@kiwi:~/uocWksp/repo/knative/func/uoc-test$ sudo cp /etc/rancher/k3s/k3s.yaml .
@@ -72,14 +72,13 @@ jgnoguer@kiwi:~/uocWksp/repo/knative/func/uoc-test$ kubectl get nodes
 
 # Taints
 
-kubectl taint nodes uoc-neo2core-01 memorytype=low:NoSchedule
-kubectl taint nodes uoc-neo2core-02 memorytype=low:NoSchedule
-kubectl taint nodes uoc-neo2core-03 memorytype=low:NoSchedule
+--kubectl taint nodes uoc-neo2core-01 memorytype=low:NoSchedule
+--kubectl taint nodes uoc-neo2core-02 memorytype=low:NoSchedule
+--kubectl taint nodes uoc-neo2core-03 memorytype=low:NoSchedule
 
-kubectl taint nodes uoc-neo2core-01 istiogateway=compatible:NoSchedule
-kubectl taint nodes uoc-neo2core-02 istiogateway=compatible:NoSchedule
-kubectl taint nodes uoc-neo2core-03 istiogateway=compatible:NoSchedule
-
+kubectl taint nodes uoc-zero2-01 uocnodetype=master:NoSchedule
+kubectl taint nodes uoc-zero2-02 uocnodetype=master:NoSchedule
+kubectl taint nodes uoc-zero2-03 uocnodetype=master:NoSchedule
 
 # Labels
 
@@ -89,7 +88,7 @@ kubectl label nodes uoc-neo2core-01 envoyLib=compatible
 kubectl label nodes uoc-neo2core-02 envoyLib=compatible
 kubectl label nodes uoc-neo2core-03 envoyLib=compatible
 
-kubectl label nodes uoc-zero2-01 istiogatewaylb=compatible
-kubectl label nodes uoc-zero2-02 istiogatewaylb=compatible
-kubectl label nodes uoc-zero2-03 istiogatewaylb=compatible
 
+# Loadbalancer HA
+
+https://www.google.com/search?client=firefox-b-lm&channel=entpr&q=k3s+load+balancer+external+ip
