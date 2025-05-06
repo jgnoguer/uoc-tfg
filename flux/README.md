@@ -1,4 +1,20 @@
-# For flux
+# Flux install
+
+https://fluxcd.io/flux/installation/bootstrap/github/#github-organization
+
+https://github.com/fluxcd/terraform-provider-flux/tree/main/examples/github-via-pat
+
+Create a GitHub personal access token and export it as an env var
+
+export GITHUB_TOKEN=<my-token>
+
+The fine-grained PAT must be generated with the following permissions:
+
+    Administration -> Access: Read-only
+    Contents -> Access: Read and write
+    Metadata -> Access: Read-only
+    
+
 
 flux bootstrap github \
   --token-auth \
