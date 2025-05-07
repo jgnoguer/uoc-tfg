@@ -3,4 +3,7 @@
 specVersion: 0.36.0
 name: agents
 runtime: go
+registry: ghcr.io/jgnoguer
 created: 2025-05-05T02:09:26.905799329+02:00
+build:
+  builder: pack
