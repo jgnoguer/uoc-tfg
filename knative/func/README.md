@@ -62,10 +62,10 @@ See knative kustomize
 
  ## Check
 
-kubectl --namespace kourier-system get service kourier
+kubectl --namespace istio-system get service istio
 
- curl -H "Host: mediastorage.default.192.168.2.126.sslip.io" http://192.168.2.126:31860 -v
- curl -H "Host: agents.default.192.168.2.126.sslip.io" http://192.168.2.126:31860 -v
+ curl -H "Host: mediastorage.default.192.168.2.1.sslip.io" http://192.168.2.1:31860 -v
+ curl -H "Host: agents.default.192.168.2.1.sslip.io" http://192.168.2.1:31860 -v
 
  kubectl get ksvc -A
 
