@@ -79,3 +79,4 @@ kubectl --namespace istio-system get service istio
 
 
 kn service apply -f mediastorage-service.yaml
+kn service apply -f agents-service.yaml

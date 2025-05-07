@@ -1,0 +1,28 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: agents
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - image: ghcr.io/jgnoguer/agents:latest
+          resources: {}
+          env:
+            - name: SCYLLADB_IP
+              valueFrom:
+                configMapKeyRef:
+                  name: uoc-animals-services-cm
+                  key: scylladb-ip
+            - name: SCYLLA_APPUSER
+              valueFrom:
+                secretKeyRef:
+                  name: uoc-animals-database-creds
+                  key: username
+            - name: SCYLLA_APPPWD
+              valueFrom:
+                secretKeyRef:
+                  name: uoc-animals-database-creds
+                  key: password
+
