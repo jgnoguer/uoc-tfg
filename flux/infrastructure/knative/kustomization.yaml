@@ -9,7 +9,7 @@ resources:
 #  - knative-serving.yaml
   - net-istio.yaml
 #  - knative-eventing.yaml
-  - serving-default-domain.yaml
+#  - serving-default-domain.yaml
   - serving-hpa.yaml
   - eventing-core.yaml
 configMapGenerator:

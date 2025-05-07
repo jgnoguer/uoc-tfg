@@ -62,7 +62,7 @@ See knative kustomize
 
  ## Check
 
-kubectl --namespace istio-system get service istio
+kubectl --namespace istio-system get service istio-ingressgateway
 
  curl -H "Host: mediastorage.default.192.168.2.1.sslip.io" http://192.168.2.1:31860 -v
  curl -H "Host: agents.default.192.168.2.1.sslip.io" http://192.168.2.1:31860 -v
