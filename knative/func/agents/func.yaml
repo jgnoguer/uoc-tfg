@@ -7,3 +7,6 @@ registry: ghcr.io/jgnoguer
 created: 2025-05-05T02:09:26.905799329+02:00
 build:
   builder: pack
+buildpacks:
+- paketo-buildpacks/go-dist
+- ghcr.io/jgnoguer/faas-go-bp:v0.10.0
