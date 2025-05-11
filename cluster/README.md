@@ -59,7 +59,7 @@ https://docs.k3s.io/quick-start
 
 On nanopi core / nanopi zero2
 
-curl -sfL https://get.k3s.io | K3S_URL=https://192.168.2.1:6443 K3S_TOKEN="THETOKEN" INSTALL_K3S_EXEC="agent --snapshotter=native" sh -
+curl -sfL https://get.k3s.io | K3S_URL=https://192.168.2.1:6443 K3S_TOKEN="thetoken" INSTALL_K3S_EXEC="agent --snapshotter=native" sh -
 
 
 jgnoguer@kiwi:~/uocWksp/repo/knative/func/uoc-test$ sudo cp /etc/rancher/k3s/k3s.yaml .
