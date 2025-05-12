@@ -3,3 +3,8 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - config.yaml
+  - pvc.yaml
+  - deployment.yaml
+#  manually
+#  - config-pwd.yaml
+#  - secret-certs-yaml

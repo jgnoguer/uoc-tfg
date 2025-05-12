@@ -36,8 +36,8 @@ spec:
         configMap:
           name: mosquitto-config
       - name: mosquitto-password
-        configMap:
-          name: mosquitto-password
+        secret:
+          secretName: mosquitto-password
       - name: certs
         secret:
           secretName: mosquitto-certs
