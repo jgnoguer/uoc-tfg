@@ -5,6 +5,7 @@ resources:
   - config.yaml
   - pvc.yaml
   - deployment.yaml
+  - service.yaml
 #  manually
 #  - config-pwd.yaml
 #  - secret-certs-yaml
