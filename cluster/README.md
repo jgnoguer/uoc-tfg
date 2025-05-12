@@ -91,6 +91,7 @@ kubectl label nodes uoc-neo2core-01 envoyLib=compatible
 kubectl label nodes uoc-neo2core-02 envoyLib=compatible
 kubectl label nodes uoc-neo2core-03 envoyLib=compatible
 
+kubectl label nodes uoc-cubie-02 mosquitto=compatible
 
 # Loadbalancer HA
 
