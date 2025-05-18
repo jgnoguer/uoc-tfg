@@ -76,6 +76,9 @@ kubectl taint nodes uoc-neo2core-01 memorytype=low:NoSchedule
 kubectl taint nodes uoc-neo2core-02 memorytype=low:NoSchedule
 kubectl taint nodes uoc-neo2core-03 memorytype=low:NoSchedule
 
+
+kubectl taint nodes uoc-orangezeroplus2-01 memorytype=low:NoSchedule
+
 kubectl taint nodes uoc-zero2-01 uocnodetype=master:NoSchedule
 kubectl taint nodes uoc-zero2-02 uocnodetype=master:NoSchedule
 kubectl taint nodes uoc-zero2-03 uocnodetype=master:NoSchedule
