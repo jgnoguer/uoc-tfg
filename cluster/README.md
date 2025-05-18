@@ -55,9 +55,11 @@ curl -sfL https://get.k3s.io | K3S_URL=https://192.168.2.1:6443 K3S_TOKEN="THETO
 
 https://docs.k3s.io/quick-start
 
+#### RaspberryPi cm4
 
+https://learn.umh.app/course/resolving-cgroup-v2-memory-issues-when-running-umh-lite-in-docker-on-raspberry-pi/
 
-On nanopi core / nanopi zero2
+#### Nanopi core / nanopi zero2
 
 curl -sfL https://get.k3s.io | K3S_URL=https://192.168.2.1:6443 K3S_TOKEN="thetoken" INSTALL_K3S_EXEC="agent --snapshotter=native" sh -
 
@@ -88,7 +90,8 @@ kubectl taint nodes uoc-zero2-03 uocnodetype=master:NoExecute
 
 # Labels
 
-scylla.scylladb.com/node-type=scylla
+kubectl label nodes uoc-rock3a-02 scylla.scylladb.com/node-type=scylla
+
 
 kubectl label nodes uoc-neo2core-01 envoyLib=compatible
 kubectl label nodes uoc-neo2core-02 envoyLib=compatible
@@ -96,6 +99,16 @@ kubectl label nodes uoc-neo2core-03 envoyLib=compatible
 
 kubectl label nodes uoc-cubie-02 mosquitto=compatible
 
+
 # Loadbalancer HA
 
 https://www.google.com/search?client=firefox-b-lm&channel=entpr&q=k3s+load+balancer+external+ip
+
+
+2025-05-18T10:15:28.886205Z	info	Envoy command: [-c etc/istio/proxy/envoy-rev.json --drain-time-s 45 --drain-strategy immediate --local-address-ip-version v4 --file-flush-interval-msec 1000 --disable-hot-restart --allow-unknown-static-fields -l warning --component-log-level misc:error --skip-deprecated-logs --concurrency 2]
+2025-05-18T10:15:28.892844Z	info	sds	Starting SDS grpc server
+2025-05-18T10:15:28.893430Z	info	sds	Starting SDS server for workload certificates, will listen on "var/run/secrets/workload-spiffe-uds/socket"
+14 external/com_github_google_tcmalloc/tcmalloc/system-alloc.cc:769] MmapAligned() failed - unable to allocate with tag (hint=0xd2b40000000, size=1073741824, alignment=1073741824) - is something limiting address placement?
+14 external/com_github_google_tcmalloc/tcmalloc/system-alloc.cc:776] Note: the allocation may have failed because TCMalloc assumes a 48-bit virtual address space size; you may need to rebuild TCMalloc with TCMALLOC_ADDRESS_BITS defined to your system's virtual address space size
+14 external/com_github_google_tcmalloc/tcmalloc/arena.cc:56] CHECK in Alloc: FATAL ERROR: Out of memory trying to allocate internal tcmalloc data (bytes=131072, object-size=16384); is something preventing mmap from succeeding (sandbox, VSS limitations)?
+2025-05-18T10:15:28.903926Z	error	Envoy exited with error: signal: aborted
