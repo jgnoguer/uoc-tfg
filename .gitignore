@@ -1,0 +1,4 @@
+flux/infrastructure/mosquitto/cachain.pem
+flux/infrastructure/mosquitto/cert.pem
+flux/infrastructure/mosquitto/priv.pem
+

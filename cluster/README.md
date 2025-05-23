@@ -90,7 +90,9 @@ kubectl taint nodes uoc-zero2-03 uocnodetype=master:NoExecute
 
 # Labels
 
+kubectl label nodes uoc-rock3a-01 scylla.scylladb.com/node-type=scylla
 kubectl label nodes uoc-rock3a-02 scylla.scylladb.com/node-type=scylla
+kubectl label nodes uoc-rock3a-03 scylla.scylladb.com/node-type=scylla
 
 
 kubectl label nodes uoc-neo2core-01 envoyLib=compatible
