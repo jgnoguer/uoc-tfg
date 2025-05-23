@@ -1,4 +1,5 @@
 flux/infrastructure/mosquitto/cachain.pem
 flux/infrastructure/mosquitto/cert.pem
 flux/infrastructure/mosquitto/priv.pem
-
+flux/infrastructure/mosquitto/config-pwd.yaml
+flux/infrastructure/mosquitto/secret-certs.yaml
