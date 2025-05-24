@@ -88,6 +88,11 @@ kubectl taint nodes uoc-zero2-01 uocnodetype=master:NoExecute
 kubectl taint nodes uoc-zero2-02 uocnodetype=master:NoExecute
 kubectl taint nodes uoc-zero2-03 uocnodetype=master:NoExecute
 
+kubectl taint nodes uoc-rock3a-01 scylla-operator.scylladb.com/dedicated=scyllaclusters:NoSchedule
+kubectl taint nodes uoc-rock3a-02 scylla-operator.scylladb.com/dedicated=scyllaclusters:NoSchedule
+kubectl taint nodes uoc-rock3a-03 scylla-operator.scylladb.com/dedicated=scyllaclusters:NoSchedule
+
+
 # Labels
 
 kubectl label nodes uoc-rock3a-01 scylla.scylladb.com/node-type=scylla
