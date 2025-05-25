@@ -225,10 +225,10 @@ spec:
       nodeSelector:
         scylla.scylladb.com/node-type: scylla
       tolerations:
-        - effect: NoSchedule
-          key: scylla-operator.scylladb.com/dedicated
-          operator: Equal
-          value: scyllaclusters              
+      - key: scylla-operator.scylladb.com/dedicated
+        effect: NoSchedule
+        operator: Equal
+        value: scyllaclusters              
       containers:
       - name: scylla-manager-controller
         image: docker.io/scylladb/scylla-operator:latest
@@ -278,10 +278,10 @@ spec:
       nodeSelector:
         scylla.scylladb.com/node-type: scylla
       tolerations:
-        - effect: NoSchedule
-          key: scylla-operator.scylladb.com/dedicated
-          operator: Equal
-          value: scyllaclusters
+      - key: scylla-operator.scylladb.com/dedicated
+        effect: NoSchedule
+        operator: Equal
+        value: scyllaclusters  
       containers:
       - name: scylla-manager
         image: docker.io/scylladb/scylla-manager:latest
@@ -338,10 +338,10 @@ spec:
                       values:
                         - scylla
           tolerations:
-            - effect: NoSchedule
-              key: scylla-operator.scylladb.com/dedicated
-              operator: Equal
-              value: scyllaclusters
+          - key: scylla-operator.scylladb.com/dedicated
+            effect: NoSchedule
+            operator: Equal
+            value: scyllaclusters  
         resources:
           limits:
             cpu: 200m
