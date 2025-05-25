@@ -5,6 +5,6 @@ resources:
   - repository.yaml
   - helm-release-istio-base.yaml
   - helm-release-istiod.yaml
-#  - helm-release-ingressgateway.yaml
+  - helm-release-ingressgateway.yaml
   
 
