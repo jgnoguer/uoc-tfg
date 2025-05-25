@@ -3,7 +3,8 @@ kind: Kustomization
 resources:
   - ../base/prometheus
   - ../base/scylladb
-#  - mediastorage-service.yaml
+  - mediastorage-service.yaml
+  - agents-service.yaml
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:

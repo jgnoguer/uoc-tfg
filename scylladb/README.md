@@ -28,3 +28,12 @@ docker exec -it uoc-localscylla nodetool status
 docker exec -it uoc-localscylla cqlsh
 
 https://opensource.docs.scylladb.com/stable/getting-started/install-scylla/run-in-docker.html
+
+# kubernetes scylladb
+
+Connect to scylladb pod (open shell)
+
+cqlsh -u cassandra
+(password cassandra)
+
+
