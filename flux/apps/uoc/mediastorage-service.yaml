@@ -37,5 +37,5 @@ spec:
       volumes:
         - name: mydata
           persistentVolumeClaim:
-            claimName: noreplicavolume
+            claimName: mediastorage-pvc
             readOnly: false
