@@ -3,12 +3,12 @@ kind: Kustomization
 resources:
 #  - node_config_alpha.yaml
   - 00_namespace.yaml
-  - 00_scylladb-local-xfs.storageclass.yaml
-  - 10_csidriver.yaml
-  - 10_serviceaccount.yaml
-  - 10_clusterrole.yaml
-  - 20_clusterrolebinding.yaml
-  - 50_daemonset.yaml
-  - scylladb_operator.yaml
-  - manager_dev.yaml
+#  - 00_scylladb-local-xfs.storageclass.yaml
+#  - 10_csidriver.yaml
+#  - 10_serviceaccount.yaml
+#  - 10_clusterrole.yaml
+#  - 20_clusterrolebinding.yaml
+#  - 50_daemonset.yaml
+#  - scylladb_operator.yaml
+#  - manager_dev.yaml
   
