@@ -14,12 +14,16 @@ spec:
       labels:
         app.kubernetes.io/name: local-csi-driver
     spec:
+      serviceAccountName: local-csi-driver
       nodeSelector:
         kubernetes.io/os: linux
         scylla.scylladb.com/node-type: scylla
-      serviceAccountName: local-csi-driver
       tolerations:
       - operator: Exists
+      - key: scylla-operator.scylladb.com/dedicated
+        operator: Equal
+        value: scyllaclusters
+        effect: NoSchedule
       containers:
       - name: local-csi-driver
         securityContext:

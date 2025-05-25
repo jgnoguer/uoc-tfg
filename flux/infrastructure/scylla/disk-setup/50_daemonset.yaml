@@ -15,7 +15,11 @@ spec:
         app: xfs-disk-setup
     spec:
       tolerations:
-      - operator: Exists
+        - operator: Exists
+        - key: scylla-operator.scylladb.com/dedicated
+          operator: Equal
+          value: scyllaclusters
+          effect: NoSchedule
       nodeSelector:
         kubernetes.io/os: linux
         scylla.scylladb.com/node-type: scylla

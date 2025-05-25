@@ -46749,6 +46749,11 @@ spec:
       serviceAccountName: scylla-operator
       nodeSelector:
         scylla.scylladb.com/node-type: scylla
+      tolerations:
+        - key: scylla-operator.scylladb.com/dedicated
+          operator: Equal
+          value: scyllaclusters
+          effect: NoSchedule
       containers:
       - name: scylla-operator
         image: docker.io/scylladb/scylla-operator:latest
@@ -46764,11 +46769,6 @@ spec:
             cpu: 100m
             memory: 20Mi
       terminationGracePeriodSeconds: 10
-      tolerations:
-        - key: scylla-operator.scylladb.com/dedicated
-          operator: Equal
-          value: scyllaclusters
-          effect: NoSchedule
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -46806,6 +46806,11 @@ spec:
       serviceAccountName: "webhook-server"
       nodeSelector:
         scylla.scylladb.com/node-type: scylla
+      tolerations:
+        - key: scylla-operator.scylladb.com/dedicated
+          operator: Equal
+          value: scyllaclusters
+          effect: NoSchedule
       containers:
       - name: webhook-server
         image: docker.io/scylladb/scylla-operator:latest
