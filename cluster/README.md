@@ -10,7 +10,19 @@ See https://docs.k3s.io/datastore/ha-embedded
 
 #### First master server
 
+curl -sfL https://get.k3s.io | K3S_TOKEN=SECRET sh -s - server \
+    --cluster-init \
+    --tls-san=<FIXED_IP> # Optional, needed if using a fixed registration address
+
+export K3S_TOKEN=blablatoken
+
+curl -sfL https://get.k3s.io | sh -s - server \
+    --disable traefik \
+    --cluster-init \
+    --tls-san 192.168.2.1
+
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --snapshotter=native --cluster-init --tls-san 192.168.2.1" K3S_TOKEN="THETOKEN" sh -
+
 
 Get main server node token:
 
@@ -22,7 +34,15 @@ Install the second server node:
 
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --snapshotter=native --tls-san 192.168.2.1 --server https://uoc-zero2-01:6443" K3S_TOKEN="THETOKEN" sh -
 
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --snapshotter=native --server https://uoc-zero2-01:6443" K3S_TOKEN="THETOKEN" sh -
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --tls-san 192.168.2.1 --server https://uoc-zero2-01:6443" K3S_TOKEN="K10fef5272b0266af9c27ce01487d448d0da8a8d5fa4325d8dcba204661f82dccc4::server:de9c0dfa7ba5dd94f8a1343fd3a70159" sh -
+
+curl -sfL https://get.k3s.io | sh -s - server \
+    --server https://uoc-neo3-01:6443 \
+    --disable traefik \
+    --tls-san=192.168.2.1
+
+
+
 
 K3S_TOKEN=
 check /var/lib/rancher/k3s/server/node-token
@@ -78,15 +98,14 @@ kubectl taint nodes uoc-neo2core-01 memorytype=low:NoSchedule
 kubectl taint nodes uoc-neo2core-02 memorytype=low:NoSchedule
 kubectl taint nodes uoc-neo2core-03 memorytype=low:NoSchedule
 
-
 kubectl taint nodes uoc-orangezeroplus2-01 memorytype=low:NoSchedule
 
-kubectl taint nodes uoc-zero2-01 uocnodetype=master:NoSchedule
-kubectl taint nodes uoc-zero2-02 uocnodetype=master:NoSchedule
-kubectl taint nodes uoc-zero2-03 uocnodetype=master:NoSchedule
-kubectl taint nodes uoc-zero2-01 uocnodetype=master:NoExecute
-kubectl taint nodes uoc-zero2-02 uocnodetype=master:NoExecute
-kubectl taint nodes uoc-zero2-03 uocnodetype=master:NoExecute
+kubectl taint nodes uoc-neo3-01 uocnodetype=master:NoSchedule
+kubectl taint nodes uoc-neo3-02 uocnodetype=master:NoSchedule
+kubectl taint nodes uoc-neo3-03 uocnodetype=master:NoSchedule
+kubectl taint nodes uoc-neo3-01 uocnodetype=master:NoExecute
+kubectl taint nodes uoc-neo3-02 uocnodetype=master:NoExecute
+kubectl taint nodes uoc-neo3-03 uocnodetype=master:NoExecute
 
 kubectl taint nodes uoc-rock3a-01 scylla-operator.scylladb.com/dedicated=scyllaclusters:NoSchedule
 kubectl taint nodes uoc-rock3a-02 scylla-operator.scylladb.com/dedicated=scyllaclusters:NoSchedule
