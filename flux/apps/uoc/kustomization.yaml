@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - ../base/prometheus
   - ../base/scylladb
-  - mediatorage-pv.yaml
+  - mediastorage-pv.yaml
   - mediastorage-service.yaml
   - agents-service.yaml
 generatorOptions:
