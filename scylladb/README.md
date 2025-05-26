@@ -3,14 +3,8 @@
 https://operator.docs.scylladb.com/stable/installation/kubernetes/generic.html
 
 
-
-kubectl label nodes uoc-rock3a-03 scylla.scylladb.com/node-type=scylla
-
 kubectl label nodes uoc-rpicm4-02 scylla.scylladb.com/node-type=scylla
-
-kubectl taint nodes uoc-rock3a-03 scylla-operator.scylladb.com/dedicated=scyllaclusters:NoSchedule
 kubectl taint nodes uoc-rpicm4-02 scylla-operator.scylladb.com/dedicated=scyllaclusters:NoSchedule
-
 
 
 Client discovery
