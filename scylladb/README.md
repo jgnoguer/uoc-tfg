@@ -3,9 +3,15 @@
 https://operator.docs.scylladb.com/stable/installation/kubernetes/generic.html
 
 
-kubectl label nodes uoc-rock3a-01 scylla.scylladb.com/node-type=scylla
-kubectl label nodes uoc-rock3a-02 scylla.scylladb.com/node-type=scylla
+
 kubectl label nodes uoc-rock3a-03 scylla.scylladb.com/node-type=scylla
+
+kubectl label nodes uoc-rpicm4-02 scylla.scylladb.com/node-type=scylla
+
+kubectl taint nodes uoc-rock3a-03 scylla-operator.scylladb.com/dedicated=scyllaclusters:NoSchedule
+kubectl taint nodes uoc-rpicm4-02 scylla-operator.scylladb.com/dedicated=scyllaclusters:NoSchedule
+
+
 
 Client discovery
 
@@ -29,11 +35,5 @@ docker exec -it uoc-localscylla cqlsh
 
 https://opensource.docs.scylladb.com/stable/getting-started/install-scylla/run-in-docker.html
 
-# kubernetes scylladb
-
-Connect to scylladb pod (open shell)
-
-cqlsh -u cassandra
-(password cassandra)
 
 

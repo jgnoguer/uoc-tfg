@@ -20,7 +20,6 @@ The fine-grained PAT must be generated with the following permissions:
 
 
 kubectl label nodes uoc-rpicm4-01 role=flux
-kubectl label nodes uoc-rpicm4-02 role=flux
 kubectl label nodes uoc-cubie-01 role=flux
 
 ## Install with cli
