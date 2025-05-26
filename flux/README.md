@@ -19,7 +19,9 @@ The fine-grained PAT must be generated with the following permissions:
   https://fluxcd.io/flux/installation/configuration/vertical-scaling/#node-affinity-and-tolerations
 
 
-kubectl label nodes uoc-rpicm4-01 role=flux
+kubectl label nodes uoc-rock3a-01 role=flux
+kubectl label nodes uoc-rock3a-02 role=flux
+kubectl label nodes uoc-rock3a-03 role=flux
 kubectl label nodes uoc-cubie-01 role=flux
 
 ## Install with cli
