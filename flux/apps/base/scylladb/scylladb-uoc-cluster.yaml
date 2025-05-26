@@ -17,8 +17,8 @@ metadata:
   namespace: scylla
 spec:
   repository: docker.io/scylladb/scylla
-  version: 2025.1.2
-  agentVersion: 3.5.0
+  version: 2025.5.27
+  agentVersion: 3.6.0
   developerMode: true
   automaticOrphanedNodeCleanup: true
   sysctls:
