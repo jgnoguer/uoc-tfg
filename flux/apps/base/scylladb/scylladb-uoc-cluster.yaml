@@ -53,3 +53,7 @@ spec:
           operator: Equal
           value: scyllaclusters
           effect: NoSchedule
+        - key: scylla-operator.scylladb.com/dedicated
+          operator: Equal
+          value: scyllaclusters
+          effect: NoExecute

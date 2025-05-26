@@ -46754,6 +46754,10 @@ spec:
           operator: Equal
           value: scyllaclusters
           effect: NoSchedule
+        - key: scylla-operator.scylladb.com/dedicated
+          operator: Equal
+          value: scyllaclusters
+          effect: NoExecute
       containers:
       - name: scylla-operator
         image: docker.io/scylladb/scylla-operator:latest
@@ -46811,6 +46815,10 @@ spec:
           operator: Equal
           value: scyllaclusters
           effect: NoSchedule
+        - key: scylla-operator.scylladb.com/dedicated
+          operator: Equal
+          value: scyllaclusters
+          effect: NoExecute
       containers:
       - name: webhook-server
         image: docker.io/scylladb/scylla-operator:latest

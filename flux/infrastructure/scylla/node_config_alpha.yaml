@@ -24,3 +24,7 @@ spec:
       key: scylla-operator.scylladb.com/dedicated
       operator: Equal
       value: scyllaclusters
+    - key: scylla-operator.scylladb.com/dedicated
+      operator: Equal
+      value: scyllaclusters
+      effect: NoExecute

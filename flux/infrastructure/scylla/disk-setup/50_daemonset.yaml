@@ -20,6 +20,10 @@ spec:
           operator: Equal
           value: scyllaclusters
           effect: NoSchedule
+        - key: scylla-operator.scylladb.com/dedicated
+          operator: Equal
+          value: scyllaclusters
+          effect: NoExecute
       nodeSelector:
         kubernetes.io/os: linux
         scylla.scylladb.com/node-type: scylla
