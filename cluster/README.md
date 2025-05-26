@@ -125,6 +125,8 @@ kubectl label nodes uoc-neo2core-03 envoyLib=compatible
 
 kubectl label nodes uoc-rpicm4-02 mosquitto=compatible
 
+kubectl label namespace default istio-injection=enabled
+
 # Loadbalancer HA
 
 https://www.google.com/search?client=firefox-b-lm&channel=entpr&q=k3s+load+balancer+external+ip
