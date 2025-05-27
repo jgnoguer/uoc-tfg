@@ -251,8 +251,8 @@ spec:
         - --loglevel=2
         resources:
           requests:
-            cpu: 20m
-            memory: 40Mi
+            cpu: 10m
+            memory: 20Mi
       terminationGracePeriodSeconds: 10
 
 ---
@@ -300,7 +300,7 @@ spec:
         - --config-file=/mnt/etc/scylla-manager/scylla-manager.yaml
         resources:
           requests:
-            cpu: 20m
+            cpu: 10m
             memory: 20Mi
         volumeMounts:
         - mountPath: /mnt/etc/scylla-manager
@@ -334,7 +334,7 @@ spec:
   datacenter:
     name: manager-dc
     racks:
-      - members: 2
+      - members: 1
         name: manager-rack
         placement:
           nodeAffinity:
@@ -356,10 +356,10 @@ spec:
             effect: NoExecute
         resources:
           limits:
-            cpu: 300m
+            cpu: 200m
             memory: 200Mi
           requests:
-            cpu: 20m
+            cpu: 10m
             memory: 100Mi
         storage:
           capacity: 5Gi
