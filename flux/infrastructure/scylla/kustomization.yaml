@@ -11,4 +11,3 @@ resources:
   - 50_daemonset.yaml
   - scylladb_operator.yaml
   - manager_dev.yaml
-  
