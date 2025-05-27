@@ -1,20 +1,9 @@
-# Label nodes
+# ScyllaDB config
 
-https://operator.docs.scylladb.com/stable/installation/kubernetes/generic.html
+Connect to scylladb pod (open shell)
 
-kubectl label nodes uoc-rock3a-02 scylla.scylladb.com/node-type=scylla
-kubectl taint nodes uoc-rock3a-02 scylla-operator.scylladb.com/dedicated=scyllaclusters:NoSchedule
-kubectl taint nodes uoc-rock3a-02 scylla-operator.scylladb.com/dedicated=scyllaclusters:NoExecute
-
-kubectl label nodes uoc-rpicm4-02 scylla.scylladb.com/node-type=scylla
-kubectl taint nodes uoc-rpicm4-02 scylla-operator.scylladb.com/dedicated=scyllaclusters:NoSchedule
-kubectl taint nodes uoc-rpicm4-02 scylla-operator.scylladb.com/dedicated=scyllaclusters:NoExecute
-
-
-Client discovery
-
-https://operator.docs.scylladb.com/stable/resources/scyllaclusters/clients/discovery.html
-
+cqlsh -u cassandra
+(password cassandra)
 
 
 # Local development
