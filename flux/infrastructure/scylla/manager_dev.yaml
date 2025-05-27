@@ -333,7 +333,7 @@ spec:
   developerMode: true
   cpuset: false
   sysctls:
-    - fs.aio-max-nr=1048576
+    - fs.aio-max-nr=232323
   datacenter:
     name: manager-dc
     racks:
