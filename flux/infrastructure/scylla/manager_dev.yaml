@@ -337,7 +337,7 @@ spec:
   datacenter:
     name: manager-dc
     racks:
-      - members: 2
+      - members: 1
         name: manager-rack
         placement:
           nodeAffinity:
