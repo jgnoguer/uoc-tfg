@@ -27,6 +27,7 @@ rules:
   - ""
   resources:
   - secrets
+  - pods
   verbs:
   - get
   - list
@@ -67,6 +68,7 @@ rules:
   - ""
   resources:
   - configmaps
+  - pods
   verbs:
   - create
   - delete
@@ -79,6 +81,7 @@ rules:
   - coordination.k8s.io
   resources:
   - leases
+  - pods
   verbs:
   - create
   - delete
