@@ -2,7 +2,7 @@
 
 https://operator.docs.scylladb.com/stable/installation/kubernetes/generic.html
 
-kubectl label nodes uoc-rpicm4-01 scylla.scylladb.com/node-type=scylla
+kubectl label nodes uoc-rpicm4-01 scylla.scylladb.com/node-type-
 kubectl taint nodes uoc-rpicm4-01 scylla-operator.scylladb.com/dedicated=scyllaclusters:NoSchedule
 kubectl taint nodes uoc-rpicm4-01 scylla-operator.scylladb.com/dedicated=scyllaclusters:NoExecute
 
