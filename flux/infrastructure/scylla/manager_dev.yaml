@@ -211,7 +211,7 @@ metadata:
     app.kubernetes.io/name: scylla-manager-controller
     app.kubernetes.io/instance: scylla-manager
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app.kubernetes.io/name: scylla-manager-controller
