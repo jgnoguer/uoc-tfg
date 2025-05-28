@@ -44,10 +44,11 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: scylla.scylladb.com/node-type
+              - key: kubernetes.io/hostname
                 operator: In
                 values:
-                - scylla
+                - uoc-rock3a-02
+                - uoc-rock3a-03
         tolerations:
         - key: scylla-operator.scylladb.com/dedicated
           operator: Equal
