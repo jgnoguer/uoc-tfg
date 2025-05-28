@@ -44,7 +44,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: scylla.scylladb.com/node-type
+              - key: scylla.scylladb.com/cluster-type
                 operator: In
                 values:
                 - uoc-animals
