@@ -27,10 +27,10 @@ spec:
     name: animals
     racks:
     - name: db-rack
-      members: 1
+      members: 2
       scyllaConfig: scylladb-config
       storage:
-        capacity: 10Gi
+        capacity: 12Gi
         storageClassName: scylladb-local-xfs
       resources:
         requests:
