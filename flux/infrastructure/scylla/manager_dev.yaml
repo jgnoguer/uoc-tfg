@@ -360,10 +360,10 @@ spec:
         resources:
           limits:
             cpu: 200m
-            memory: 200Mi
+            memory: 300Mi
           requests:
-            cpu: 10m
-            memory: 100Mi
+            cpu: 100m
+            memory: 200Mi
         storage:
           capacity: 15Gi
           storageClassName: scylladb-local-xfs
