@@ -11,8 +11,8 @@ kubectl taint nodes uoc-rock3a-01 scylla-operator.scylladb.com/dedicated=scyllac
 kubectl label nodes uoc-rock3a-02 scylla.scylladb.com/node-type=uoc-animals
 kubectl taint nodes uoc-rock3a-02 scylla-operator.scylladb.com/dedicated-
 
-kubectl label nodes uoc-rock3a-02 scylla.scylladb.com/node-type=uoc-animals
-kubectl taint nodes uoc-rock3a-02 scylla-operator.scylladb.com/dedicated-
+kubectl label nodes uoc-rock3a-03 scylla.scylladb.com/node-type=uoc-animals
+kubectl taint nodes uoc-rock3a-03 scylla-operator.scylladb.com/dedicated-
 
 
 kubectl label nodes uoc-rpicm4-01 scylla.scylladb.com/node-type-
