@@ -44,10 +44,10 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: scylla.scylladb.com/cluster-type
+              - key: scylla.scylladb.com/node-type
                 operator: In
                 values:
-                - uoc-animals
+                - scylla
         tolerations:
         - key: scylla-operator.scylladb.com/dedicated
           operator: Equal
