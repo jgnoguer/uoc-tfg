@@ -47,7 +47,7 @@ spec:
               - key: scylla.scylladb.com/node-type
                 operator: In
                 values:
-                - scylla.scylladb.com/node-type=uoc-animals
+                - uoc-animals
         tolerations:
         - key: scylla-operator.scylladb.com/dedicated
           operator: Equal

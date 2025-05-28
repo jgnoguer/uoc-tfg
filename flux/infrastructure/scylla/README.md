@@ -14,6 +14,7 @@ kubectl taint nodes uoc-rpicm4-01 scylla-operator.scylladb.com/dedicated=scyllac
 
 kubectl label nodes uoc-rpicm4-02 scylla.scylladb.com/node-type-
 kubectl taint nodes uoc-rpicm4-02 scylla-operator.scylladb.com/dedicated-
+kubectl taint nodes uoc-rpicm4-02 scylla-operator.scylladb.com/dedicated-
 
 
 Client discovery
