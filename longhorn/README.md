@@ -17,6 +17,8 @@ https://longhorn.io/docs/1.8.1/deploy/accessing-the-ui/longhorn-ingress/
 
 USER=<USERNAME_HERE>; PASSWORD=<PASSWORD_HERE>; echo "${USER}:$(openssl passwd -stdin -apr1 <<< ${PASSWORD})" >> auth
 
+USER=<USERNAME_HERE>; PASSWORD=<PASSWORD_HERE>; echo "${USER}:$(openssl passwd -stdin -apr1 <<< ${PASSWORD})" >> auth
+
 kubectl -n longhorn-system create secret generic basic-auth --from-file=auth
 
 helm uninstall longhorn-release -n longhorn-system
