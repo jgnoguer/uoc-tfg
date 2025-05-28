@@ -3,9 +3,9 @@ kind: Kustomization
 resources:
   - ../base/prometheus
   - ../base/scylladb
-#  - mediastorage-pv.yaml
-#  - mediastorage-service.yaml
-#  - agents-service.yaml
+  - mediastorage-pv.yaml
+  - mediastorage-service.yaml
+  - agents-service.yaml
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:
