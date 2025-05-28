@@ -344,10 +344,10 @@ spec:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
                 - matchExpressions:
-                    - key: scylla.scylladb.com/node-type
+                    - key: scylla.scylladb.com/cluster-type
                       operator: In
                       values:
-                        - scylla
+                        - master
           tolerations:
           - key: scylla-operator.scylladb.com/dedicated
             effect: NoSchedule
