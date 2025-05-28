@@ -365,7 +365,7 @@ spec:
             cpu: 10m
             memory: 100Mi
         storage:
-          capacity: 5Gi
+          capacity: 15Gi
           storageClassName: scylladb-local-xfs
 
 ---
