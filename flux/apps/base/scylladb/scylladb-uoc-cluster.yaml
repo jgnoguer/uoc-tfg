@@ -27,7 +27,7 @@ spec:
     name: animals
     racks:
     - name: db-rack
-      members: 1
+      members: 2
       scyllaConfig: scylladb-config
       storage:
         capacity: 12Gi
