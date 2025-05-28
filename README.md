@@ -23,3 +23,9 @@ NS=`kubectl get ns |grep Terminating | awk 'NR==1 {print $1}'` && kubectl get na
 ## Longhorn
 
 https://longhorn.io/kb/tip-only-use-storage-on-a-set-of-nodes/
+
+
+192.168.2.123
+192.168.2.126
+192.168.2.137
+192.168.2.222 

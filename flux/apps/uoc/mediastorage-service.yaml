@@ -6,8 +6,8 @@ metadata:
 spec:
   template:
     spec:
-      nodeSelector:
-        longhorn: compatible
+      # nodeSelector:
+      #   longhorn: compatible
       containers:
         - image: ghcr.io/jgnoguer/mediastorage:latest
           resources: {}
