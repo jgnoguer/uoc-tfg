@@ -13,7 +13,7 @@ configMapGenerator:
     namespace: default
     behavior: create
     literals:
-      - scylladb-ip=10.43.156.173
+      - scylladb-ip=10.43.208.229
 secretGenerator:
   - name: uoc-animals-database-creds
     namespace: default
