@@ -359,10 +359,10 @@ spec:
             effect: NoExecute
         resources:
           limits:
-            cpu: 200m
+            cpu: 400m
             memory: 300Mi
           requests:
-            cpu: 100m
+            cpu: 200m
             memory: 200Mi
         storage:
           capacity: 30Gi
