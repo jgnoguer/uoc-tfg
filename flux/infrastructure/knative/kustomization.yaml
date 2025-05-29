@@ -12,6 +12,7 @@ resources:
   - serving-default-domain.yaml
   - serving-hpa.yaml
   - eventing-core.yaml
+  - in-memory-channel.yaml
 configMapGenerator:
   - name: config-features
     namespace: knative-serving # needs to match target ConfigMap from base

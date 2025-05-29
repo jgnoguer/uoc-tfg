@@ -7,11 +7,6 @@ registry: ghcr.io/jgnoguer
 namespace: default
 created: 2025-05-01T18:08:29.744503063+02:00
 build:
-  git:
-    url: https://github.com/jgnoguer/uoc-tfg.git
-    revision: main
-    contextDir: knative/func/mediastorage
   builder: pack
-deploy:
-  namespace: default
-  image: ghcr.io/jgnoguer/mediastorage@sha256:0dfa1759a1e72e79b7fdff45c03c5b57c8a83de3ce98b91bb1df578e20316a23
+buildpacks:
+- thisdoesnotwork:latest
