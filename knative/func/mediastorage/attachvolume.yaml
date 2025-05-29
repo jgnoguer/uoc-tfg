@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: clear-nginx-deployment
 spec:
-
   selector:
     matchLabels:
       app: clear-nginx
@@ -12,8 +11,8 @@ spec:
       labels:
         app: clear-nginx
     spec:
-      nodeSelector:
-        longhorn: compatible
+      # nodeSelector:
+      #   longhorn: compatible
       containers:
       - name: clear-nginx
         image: nginx
@@ -25,4 +24,4 @@ spec:
       volumes:
       - name: site-data
         persistentVolumeClaim:
-          claimName: noreplicavolume
+          claimName: mediastorage-pvc

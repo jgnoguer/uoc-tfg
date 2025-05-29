@@ -22,7 +22,6 @@ kubectl label nodes uoc-rpicm4-02 scylla.scylladb.com/node-type-
 kubectl taint nodes uoc-rpicm4-02 scylla-operator.scylladb.com/dedicated-
 
 
-
 Client discovery
 
 https://operator.docs.scylladb.com/stable/resources/scyllaclusters/clients/discovery.html
