@@ -3,7 +3,7 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: camelk-repo
-  namespace: camelk
+  namespace: camel-k
 spec:
   interval: 1m0s
   url: https://apache.github.io/camel-k/charts/
