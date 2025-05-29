@@ -11,5 +11,6 @@ flux reconcile kustomization infra-knative
 export CR_PAT=ghp_*****
 export FUNC_REGISTRY=ghcr.io/jgnoguer
 echo $CR_PAT | docker login ghcr.io -u ****** --password-stdin
+
 func build -v
 func deploy -v

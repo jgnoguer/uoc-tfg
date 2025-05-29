@@ -1,0 +1,17 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: camelk-release
+  namespace: camelk
+spec:
+  chart:
+    spec:
+      chart: camel-k
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: camelk-repo
+      version: 2.6.0
+  interval: 1m0s
+  values:
