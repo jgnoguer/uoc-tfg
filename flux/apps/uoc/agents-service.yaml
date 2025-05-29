@@ -10,6 +10,11 @@ spec:
         - image: ghcr.io/jgnoguer/agents:latest
           resources: {}
           env:
+            - name: AGENTS_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  name: uoc-animals-services-cm
+                  key: agver
             - name: SCYLLADB_IP
               valueFrom:
                 configMapKeyRef:

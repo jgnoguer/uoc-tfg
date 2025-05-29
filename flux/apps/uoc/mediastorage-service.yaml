@@ -17,6 +17,11 @@ spec:
               subPath: knative
               readOnly: false
           env:
+            - name: MEDIASTORE_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  name: uoc-animals-services-cm
+                  key: msver
             - name: SCYLLADB_IP
               valueFrom:
                 configMapKeyRef:
