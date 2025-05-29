@@ -9,6 +9,7 @@ data:
     authenticator: PasswordAuthenticator
     authorizer: CassandraAuthorizer
     # Other options
+    # 29/05/2025
 ---
 apiVersion: scylla.scylladb.com/v1
 kind: ScyllaCluster
