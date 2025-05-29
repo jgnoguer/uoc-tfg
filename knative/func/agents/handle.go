@@ -43,8 +43,9 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	dbIp := os.Getenv("SCYLLADB_IP")
 	dbUser := os.Getenv("SCYLLA_APPUSER")
 	dbPwd := os.Getenv("SCYLLA_APPPWD")
+	appVersion := os.Getenv("AGENTS_VERSION")
 
-	slog.Info("Info", "Method", r.Method)
+	slog.Info("Info", "v.", appVersion, "Method", r.Method)
 
 	slog.Info("Try connection to ", "ip", dbIp)
 	cluster := gocql.NewCluster(dbIp)
