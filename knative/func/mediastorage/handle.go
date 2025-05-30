@@ -4,7 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"function/model"
+	"github.com/sunshineplan/imgconv"
+	"image"
 	"io"
+	"log"
 	"log/slog"
 	"net/http"
 	"os"
@@ -58,6 +61,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	session, err := gocqlx.WrapSession(cluster.CreateSession())
 
 	if err != nil {
+		slog.Error("Fail to connect to database" + err.Error())
 		panic("Database connection failed ")
 	}
 
@@ -116,6 +120,10 @@ func addMedia(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
 	defer newFile.Close()
 
 	_, err = io.Copy(newFile, f)
+
+	wdth, hght := getImageDimension(newFilePath)
+	slog.Info("Dimensions: ", "width", wdth, "height", hght)
+	slog.Info(newFilePath)
 	if err != nil {
 		slog.Error("Fail to save the file" + err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
@@ -123,6 +131,11 @@ func addMedia(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
 	}
 
 	w.WriteHeader(http.StatusOK)
+
+	wtmark := "/home/jgnoguer/uocWksp/knative/tempStorage/richard.jpg"
+	outmark := "/home/jgnoguer/uocWksp/knative/tempStorage/richard-watter.jpg"
+	wattermarkTest(wtmark, outmark, "perroagua.png")
+
 	p := model.Media{Id: id.String(), Name: fileHandler.Filename,
 		ContentType: fileHandler.Header.Get("Content-Type"),
 		Location:    dbLocation, CreatedAt: time.Now(), Status: 0, Size: fileHandler.Size}
@@ -252,4 +265,47 @@ func resolveStorageFolder(media model.Media) string {
 func resolveStorageFile(media model.Media) string {
 	storageFolder := os.Getenv("STORAGE_FOLDER")
 	return filepath.Join(storageFolder, media.Location, media.Name)
+}
+
+func wattermarkTest(inputImage string, outputImage string, wattermarkImageFile string) {
+	// Open a test image.
+	srcImage, err := imgconv.Open(inputImage)
+	if err != nil {
+		log.Fatalf("failed to open image: %v", err)
+	}
+	markImage, err := imgconv.Open(wattermarkImageFile)
+	if err != nil {
+		log.Fatalf("failed to open wattermark image: %v", err)
+	}
+	markImage400 := imgconv.Resize(markImage, &imgconv.ResizeOption{Width: 200})
+	// Resize srcImage to width = 800px preserving the aspect ratio.
+	dstImage800 := imgconv.Resize(srcImage, &imgconv.ResizeOption{Width: 1200})
+	dstImage := imgconv.Watermark(dstImage800, &imgconv.WatermarkOption{Mark: markImage400, Opacity: 120, Random: false,
+		Offset: image.Pt(-520, 270)})
+
+	newFile, err := os.Create(outputImage)
+
+	// Write the resulting image
+	if err := imgconv.Write(newFile, dstImage, &imgconv.FormatOption{Format: imgconv.JPEG}); err != nil {
+		log.Fatalf("failed to write image: %v", err)
+	}
+	defer newFile.Close()
+
+}
+
+func getImageDimension(filepath string) (int, int) {
+
+	f, err := os.Open(filepath)
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+
+	config, _, err := image.DecodeConfig(f)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Width: %d\nHeight: %d\n", config.Width, config.Height)
+	return config.Width, config.Height
 }

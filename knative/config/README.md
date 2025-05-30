@@ -14,3 +14,8 @@ echo $CR_PAT | docker login ghcr.io -u ****** --password-stdin
 
 func build -v
 func deploy -v
+
+
+
+
+export GATEWAY_IP=`kubectl get svc istio-ingressgateway --namespace istio-system --output jsonpath="{.status.loadBalancer.ingress[*]['ip']}"`

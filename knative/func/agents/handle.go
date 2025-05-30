@@ -47,7 +47,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 
 	slog.Info("Info", "v.", appVersion, "Method", r.Method)
 
-	slog.Info("Try connection to ", "ip", dbIp)
+	slog.Info("🐕 Try connection to ", "ip", dbIp)
 	cluster := gocql.NewCluster(dbIp)
 	//
 	cluster.Authenticator = gocql.PasswordAuthenticator{Username: dbUser, Password: dbPwd}
