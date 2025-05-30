@@ -22,7 +22,7 @@ import (
 	"github.com/scylladb/gocqlx/v3"
 )
 
-const ResourcePathRegex = "^/([a-zA-Z0-9-]{36})$"
+const ResourcePathRegex = "^(/agents)?/([a-zA-Z0-9-]{36})$"
 
 type ResponseMessage struct {
 	Message string `json:"message"`
@@ -76,7 +76,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 }
 
 func addAgent(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
-	if r.URL.Path != "/" {
+	if (r.URL.Path != "/") && (r.URL.Path != "/agents") {
 		w.WriteHeader(http.StatusBadRequest)
 		errorResponse := ResponseMessage{Message: "Bad url path for adding an agent"}
 		json.NewEncoder(w).Encode(errorResponse)
@@ -233,6 +233,6 @@ func resolveAgentId(urlPath string, pattern string) string {
 	if len(matches) <= 0 {
 		return ""
 	} else {
-		return matches[1]
+		return matches[2]
 	}
 }

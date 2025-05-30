@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"function/model"
-	"github.com/sunshineplan/imgconv"
 	"image"
 	"io"
 	"log"
@@ -16,6 +15,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/sunshineplan/imgconv"
+
 	"github.com/scylladb/gocqlx/v3/qb"
 
 	"github.com/scylladb/gocqlx/v3/table"
@@ -26,8 +27,8 @@ import (
 	"github.com/scylladb/gocqlx/v3"
 )
 
-const ResourcePathRegex = "^/([a-zA-Z0-9-]{36})$"
-const ResourceMetadataPathRegex = "^/([a-zA-Z0-9-]{36})/metadata$"
+const ResourcePathRegex = "^(/mediastorage)?/([a-zA-Z0-9-]{36})$"
+const ResourceMetadataPathRegex = "^(/mediastorage)?/([a-zA-Z0-9-]{36})/metadata$"
 
 type ResponseMessage struct {
 	Message string `json:"message"`
@@ -253,7 +254,7 @@ func resolveMediaId(urlPath string, pattern string) string {
 	if len(matches) <= 0 {
 		return ""
 	} else {
-		return matches[1]
+		return matches[2]
 	}
 }
 
