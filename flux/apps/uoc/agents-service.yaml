@@ -7,7 +7,7 @@ spec:
   template:
     spec:
       containers:
-        - image: ghcr.io/jgnoguer/agents:latest
+        - image: ghcr.io/jgnoguer/agents:0.1.0
           resources: {}
           env:
             - name: AGENTS_VERSION
