@@ -117,8 +117,8 @@ kubectl label nodes uoc-neo2core-03 envoyLib=compatible
 
 kubectl label nodes uoc-rpicm4-02 mosquitto=compatible
 
-kubectl label namespace default istio-injection=enabled
-kubectl label namespace knative-serving istio-injection=enabled
+#kubectl label namespace default istio-injection=enabled
+#kubectl label namespace knative-serving istio-injection=enabled
 
 # Loadbalancer HA
 
