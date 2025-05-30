@@ -7,7 +7,6 @@ resources:
   - mediastorage-service.yaml
   - agents-service.yaml
   - routing.yaml
-  - routing-internal.yaml
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:
