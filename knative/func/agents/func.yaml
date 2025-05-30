@@ -4,7 +4,7 @@ specVersion: 0.36.0
 name: agents
 runtime: go
 registry: ghcr.io/jgnoguer
-image: agents:0.1.0
+image: ghcr.io/jgnoguer/agents:0.1.0
 created: 2025-05-05T02:09:26.905799329+02:00
 build:
   builder: pack
