@@ -8,6 +8,7 @@ resources:
 #  - namespace.yaml
 #  - knative-serving.yaml
   - net-istio.yaml
+  - istio-mesh.yaml
 #  - knative-eventing.yaml
 #  - serving-default-domain.yaml
   - serving-hpa.yaml
