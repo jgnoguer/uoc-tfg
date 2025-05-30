@@ -15,7 +15,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: entry-route
+  name: internal-entry-route
   namespace: default
 spec:
   # This is the gateway shared in knative service mesh.
@@ -23,7 +23,7 @@ spec:
   - knative-ingress-gateway.knative-serving.svc.cluster.local
   # Set host to the domain name that you own.
   hosts:
-  - example.com
+  - knative.jgnoguer.dev
   http:
   - match:
     - uri:

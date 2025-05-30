@@ -29,3 +29,8 @@ https://longhorn.io/kb/tip-only-use-storage-on-a-set-of-nodes/
 192.168.2.126
 192.168.2.137
 192.168.2.222 
+
+## curl
+
+kubectl run mycurlpod --image=curlimages/curl -i --tty -- sh
+
