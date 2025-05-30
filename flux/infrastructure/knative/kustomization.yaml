@@ -27,3 +27,8 @@ configMapGenerator:
     behavior: merge
     literals:
       - ingress-class=istio.ingress.networking.knative.dev
+  - name: config-domain
+    namespace: knative-serving # needs to match target ConfigMap from base
+    behavior: merge
+    literals:
+      - knative.jgnoguer.dev=""
