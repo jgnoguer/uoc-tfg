@@ -90,7 +90,7 @@ func addMedia(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
 	}
 	defer f.Close()
 
-	if r.URL.Path != "/" {
+	if (r.URL.Path != "/") && (r.URL.Path != "/mediastorage") {
 		w.WriteHeader(http.StatusBadRequest)
 		errorResponse := ResponseMessage{Message: "Bad url path for adding a file"}
 		json.NewEncoder(w).Encode(errorResponse)
