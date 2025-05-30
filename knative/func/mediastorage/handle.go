@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"function/model"
-	"image"
 	"io"
 	"log/slog"
 	"net/http"
@@ -119,8 +118,6 @@ func addMedia(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
 
 	_, err = io.Copy(newFile, f)
 
-	wdth, hght := getImageDimension(newFilePath)
-	slog.Info("Dimensions: ", "width", wdth, "height", hght)
 	slog.Info(newFilePath)
 	if err != nil {
 		slog.Error("Fail to save the file" + err.Error())
@@ -259,21 +256,4 @@ func resolveStorageFolder(media model.Media) string {
 func resolveStorageFile(media model.Media) string {
 	storageFolder := os.Getenv("STORAGE_FOLDER")
 	return filepath.Join(storageFolder, media.Location, media.Name)
-}
-
-func getImageDimension(filepath string) (int, int) {
-
-	f, err := os.Open(filepath)
-	if err != nil {
-		panic(err)
-	}
-	defer f.Close()
-
-	config, _, err := image.DecodeConfig(f)
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Printf("Width: %d\nHeight: %d\n", config.Width, config.Height)
-	return config.Width, config.Height
 }
