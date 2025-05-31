@@ -7,6 +7,7 @@ resources:
   - mediastorage-service.yaml
   - agents-service.yaml
   - routing.yaml
+  - watermark-evt.yaml
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:
