@@ -117,7 +117,7 @@ kubectl taint nodes uoc-neo3-03 uocnodetype=master:NoExecute
 kubectl label nodes uoc-neo2core-01 envoyLib=compatible
 kubectl label nodes uoc-bpim4zero-01 envoyLib=compatible
 
-kubectl label nodes uoc-rpicm4-02 mosquitto=compatible
+kubectl label nodes uoc-rpizero2-01 zigbee2mqtt=compatible
 
 #kubectl label namespace default istio-injection=enabled
 #kubectl label namespace knative-serving istio-injection=enabled
