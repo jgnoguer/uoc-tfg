@@ -12,7 +12,7 @@ data:
 
     password_file /mosquitto/config/password.txt
     
-    # MQTTS listener
+    # MQTT listener
     listener 1883
     protocol mqtt
 
