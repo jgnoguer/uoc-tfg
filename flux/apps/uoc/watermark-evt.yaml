@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: watermark
-          image: ghcr.io/jgnoguer/watermark:latest
+          image: ghcr.io/jgnoguer/watermark:0.1.0
 ---
 # Service that exposes watermark app.
 # This will be the subscriber for the Trigger
