@@ -22,3 +22,6 @@ spec:
       connectionPort: ${mail.connectionPort}
       username: ${mail.username}
       password: ${mail.password}
+      from: postmaster@jgnoguer.dev
+      subject: test
+      to: postmaster@jgnoguer.de
