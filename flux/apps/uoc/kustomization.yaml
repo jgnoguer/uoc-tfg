@@ -16,7 +16,7 @@ generatorOptions:
 configMapGenerator:
   - name: uoc-animals-services-cm
     namespace: default
-    behavior: create
+    behavior: replace
     literals:
       - scylladb-ip=10.43.239.157
       - msver=0.1.1
