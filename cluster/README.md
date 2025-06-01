@@ -120,7 +120,8 @@ kubectl label nodes uoc-bpim4zero-01 envoyLib=compatible
 kubectl label nodes uoc-rpizero2-01 zigbee2mqtt=compatible
 
 #kubectl label namespace default istio-injection=enabled
-#kubectl label namespace knative-serving istio-injection=enabled
+kubectl label namespace knative-serving istio-injection=enabled
+kubectl label namespace knative-eventing istio-injection=enabled
 
 # Loadbalancer HA
 
