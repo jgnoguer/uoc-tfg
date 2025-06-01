@@ -13,9 +13,9 @@ data:
     password_file /mosquitto/config/password.txt
     
     # MQTTS listener
-    listener 8883
+    listener 1883
     protocol mqtt
 
-    cafile /mosquitto/certs/ca-chain.pem
-    certfile /mosquitto/certs/cert.pem
-    keyfile /mosquitto/certs/privkey.pem
+    #cafile /mosquitto/certs/ca-chain.pem
+    #certfile /mosquitto/certs/cert.pem
+    #keyfile /mosquitto/certs/privkey.pem

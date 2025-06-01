@@ -7,9 +7,9 @@ kubectl label nodes uoc-rock3a-02 longhorn-ui=compatible
 kubectl label nodes uoc-rock3a-03 longhorn=compatible
 kubectl label nodes uoc-rock3a-03 longhorn-ui=compatible
 kubectl label nodes uoc-rpicm4-01 longhorn=compatible
-kubectl label nodes uoc-rpicm4-01 longhorn-ui=compatible
+kubectl label nodes uoc-rpicm4-01 longhorn-ui-
 kubectl label nodes uoc-rpicm4-02 longhorn=compatible
-kubectl label nodes uoc-rpicm4-02 longhorn-ui=compatible
+kubectl label nodes uoc-rpicm4-02 longhorn-ui=-
 
 
 flux get helmrelease longhorn-release -n longhorn-system
