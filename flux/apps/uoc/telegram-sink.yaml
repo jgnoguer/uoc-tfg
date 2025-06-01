@@ -19,4 +19,4 @@ spec:
       apiVersion: camel.apache.org/v1
       name: telegram-sink
     properties:
-      authorizationToken: "8002248014:AAHouz7oU_miCzhFDoSb2Mr46t4zVP14WiY"
+      authorizationToken: "${telegram.authorizationToken}"
