@@ -3,6 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: camelk-release
+  namespace: default
 spec:
   chart:
     spec:
