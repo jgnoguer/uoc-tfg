@@ -1,0 +1,19 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: snapshotter
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - image: ghcr.io/jgnoguer/snapshotter:0.1.0
+          resources: {}
+          env:
+            - name: AGENTS_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  name: uoc-animals-services-cm
+                  key: agver
+
+
