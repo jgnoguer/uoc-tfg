@@ -44,7 +44,12 @@ kubectl create secret docker-registry registry-ghrc \
 --docker-username=jgnoguer \
 --docker-password=<dockerpat>
 
---namespace=knative-samples \
+kubectl create secret docker-registry camelk-ghrc \
+--docker-server=ghcr.io/jgnoguer \
+--docker-email=jgarciano@uoc.edu \
+--docker-username=jgnoguer \
+--docker-password=<dockerpat> \
+--namespace=camel-k
 
 kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "registry-ghrc"}]}'
 kubectl patch serviceaccount default -n knative-samples -p '{"imagePullSecrets": [{"name": "registry-ghrc"}]}'

@@ -1,0 +1,9 @@
+statefulset:
+  nodeSelector:
+    zigbee2mqtt: compatible
+  tolerations:
+    key: memorytype
+    operator: Equal
+    value: low
+    effect: NoSchedule
+  
