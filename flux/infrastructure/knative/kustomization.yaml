@@ -13,6 +13,7 @@ resources:
 #  - serving-default-domain.yaml
   - serving-hpa.yaml
   - eventing-core.yaml
+  - mt-channel-broker.yaml
   - in-memory-channel.yaml
   - in-memory-channel-cm.yaml
 configMapGenerator:
