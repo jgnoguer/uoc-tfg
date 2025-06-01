@@ -36,7 +36,7 @@ func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, 
 }
 
 func main() {
-	log.Print("Hello world sample started.")
+	log.Print("Watermark sample started.")
 	c, err := cloudevents.NewDefaultClient()
 	if err != nil {
 		log.Fatalf("failed to create client, %v", err)

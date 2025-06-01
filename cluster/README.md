@@ -21,7 +21,8 @@ curl -sfL https://get.k3s.io | sh -s - server \
     --cluster-init \
     --tls-san 192.168.2.1
 
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --snapshotter=native --cluster-init --tls-san 192.168.2.1" K3S_TOKEN="THETOKEN" sh -
+K3S_TOKEN="THETOKEN"
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --snapshotter=native --cluster-init --tls-san 192.168.2.1"  sh -
 
 
 Get main server node token:
@@ -41,9 +42,6 @@ curl -sfL https://get.k3s.io | sh -s - server \
     --disable traefik \
     --tls-san=192.168.2.1
 
-
-
-
 K3S_TOKEN=
 check /var/lib/rancher/k3s/server/node-token
 
@@ -55,6 +53,9 @@ Kubeconfig
 ### Agents
 
 curl -sfL https://get.k3s.io | K3S_URL=https://192.168.2.1:6443 K3S_TOKEN="THETOKEN" sh -
+or
+export K3S_TOKEN=
+curl -sfL https://get.k3s.io | K3S_URL=https://192.168.2.1:6443 sh -
 
    35  ps -aux
    36  reboot
@@ -99,6 +100,8 @@ kubectl taint nodes uoc-neo2core-02 memorytype=low:NoSchedule
 kubectl taint nodes uoc-neo2core-03 memorytype=low:NoSchedule
 
 kubectl taint nodes uoc-orangezeroplus2-01 memorytype=low:NoSchedule
+kubectl taint nodes uoc-rpizero2-01 memorytype=low:NoSchedule
+kubectl taint nodes uoc-nanopiduo2-01 memorytype=low:NoSchedule
 
 kubectl taint nodes uoc-neo3-01 uocnodetype=master:NoSchedule
 kubectl taint nodes uoc-neo3-02 uocnodetype=master:NoSchedule
@@ -112,8 +115,7 @@ kubectl taint nodes uoc-neo3-03 uocnodetype=master:NoExecute
 
 
 kubectl label nodes uoc-neo2core-01 envoyLib=compatible
-kubectl label nodes uoc-neo2core-02 envoyLib=compatible
-kubectl label nodes uoc-neo2core-03 envoyLib=compatible
+kubectl label nodes uoc-bpim4zero-01 envoyLib=compatible
 
 kubectl label nodes uoc-rpicm4-02 mosquitto=compatible
 
