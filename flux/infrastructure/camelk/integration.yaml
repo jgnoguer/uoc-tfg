@@ -3,6 +3,7 @@ kind: IntegrationPlatform
 metadata:
   name: camel-k
   namespace: default
+#   namespace: camel-k
 spec:
   build:
     registry:
