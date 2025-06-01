@@ -1,0 +1,24 @@
+apiVersion: camel.apache.org/v1
+kind: Pipe
+metadata:
+  name: mail-pipe
+  annotations:
+    trait.camel.apache.org/mount.configs: "secret:mail-credentials"
+spec:
+  source:
+    ref:
+      kind: Broker
+      apiVersion: eventing.knative.dev/v1
+      name: activities-broker
+    properties:
+      type: dev.jgnoguer.knative.uoc.activityend
+  sink:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1
+      name: mail-sink
+    properties:
+      connectionHost: ${mail.connectionHost}
+      connectionPort: ${mail.connectionPort}
+      username: ${mail.username}
+      password: ${mail.password}

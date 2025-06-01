@@ -8,7 +8,7 @@ spec:
   filter:
     attributes:
       type: dev.jgnoguer.knative.uoc.activitystarted
-      source: dev.jgnoguer.knative.uoc/activity-service
+#      source: dev.jgnoguer.knative.uoc/activity-service
   subscriber:
     ref:
       apiVersion: eventing.knative.dev/v1

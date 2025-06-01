@@ -1,7 +1,7 @@
 apiVersion: camel.apache.org/v1
 kind: Pipe
 metadata:
-  name: telegram-sink
+  name: telegram-pipe
   annotations:
     trait.camel.apache.org/mount.configs: "secret:telegram-credentials"
 spec:
@@ -11,11 +11,11 @@ spec:
       apiVersion: eventing.knative.dev/v1
       name: activities-broker
     properties:
-      type: moderated-comment
+      type: dev.jgnoguer.knative.uoc.activitystarted
   sink:
     ref:
       kind: Kamelet
       apiVersion: camel.apache.org/v1
-      name: mail-sink
+      name: telegram-new-sink
     properties:
       authorizationToken: ${telegram.authorizationToken}
