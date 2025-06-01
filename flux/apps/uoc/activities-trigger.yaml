@@ -1,0 +1,15 @@
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: activity-start-trigger
+spec:
+  broker: activities-broker
+  filter:
+    attributes: # Trigger will filter events based on BOTH the type and badwordfilter attribute
+      type: moderated-comment # This is the filter that will be applied to the event, only events with the ce-type moderated-comment will be processed
+      badwordfilter: bad # This is the filter that will be applied to the event, only events with the ce-extension badwordfilter: bad will be processed
+  subscriber:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: activities-broker
