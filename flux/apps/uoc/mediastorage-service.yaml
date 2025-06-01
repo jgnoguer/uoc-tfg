@@ -9,7 +9,7 @@ spec:
       nodeSelector:
         longhorn: compatible
       containers:
-        - image: ghcr.io/jgnoguer/mediastorage:0.1.2
+        - image: ghcr.io/jgnoguer/mediastorage:0.1.3
           resources: {}
           volumeMounts:
             - mountPath: /data

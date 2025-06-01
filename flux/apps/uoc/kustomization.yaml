@@ -20,7 +20,7 @@ configMapGenerator:
     behavior: merge
     literals:
       - scylladb-ip=10.43.239.157
-      - msver=0.1.1
+      - msver=0.1.3
       - agver=0.1.0
 secretGenerator:
   - name: uoc-animals-database-creds
