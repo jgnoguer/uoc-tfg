@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"function/model"
+	cloudevents "github.com/cloudevents/sdk-go/v2"
+	"github.com/scylladb/gocqlx/v3/qb"
 	"io"
 	"log/slog"
 	"net/http"
@@ -12,8 +14,6 @@ import (
 	"regexp"
 	"strings"
 	"time"
-
-	"github.com/scylladb/gocqlx/v3/qb"
 
 	"github.com/scylladb/gocqlx/v3/table"
 
@@ -139,6 +139,22 @@ func addMedia(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
 		panic(fmt.Errorf("error in exec query to insert media %w", err))
 	}
 
+	event, err := publishEvent("123456")
+	slog.Info("Publishing event", "event", event)
+}
+
+func publishEvent(mediaId string) (*cloudevents.Event, cloudevents.Result) {
+	newEvent := cloudevents.NewEvent()
+	// Setting the ID here is not necessary. When using NewDefaultClient the ID is set
+	// automatically. We set the ID anyway so it appears in the log.
+	newEvent.SetID(uuid.New().String())
+	newEvent.SetSource("dev.jgnoguer.knative.uoc/mediastorage-service")
+	newEvent.SetType("dev.jgnoguer.knative.uoc.imageadded")
+	slog.Info("Responding with event\n%s\n", newEvent)
+	if err := newEvent.SetData(cloudevents.ApplicationJSON, ImageAdded{MediaId: mediaId}); err != nil {
+		return nil, cloudevents.NewHTTPResult(500, "failed to set response data: %s", err)
+	}
+	return &newEvent, cloudevents.ResultACK
 }
 
 func getMediaMetadata(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
