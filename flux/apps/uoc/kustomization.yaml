@@ -10,7 +10,7 @@ resources:
   - watermark-evt.yaml
   - activities-broker.yaml
   - activities-trigger.yaml
-  - telegram-sink.yaml
+#  - telegram-sink.yaml
   - animals-cm.yaml
 generatorOptions:
   disableNameSuffixHash: true
