@@ -11,13 +11,13 @@ spec:
       labels:
         app: clear-nginx
     spec:
-      # nodeSelector:
-      #   longhorn: compatible
+      nodeSelector:
+         longhorn: compatible
       containers:
       - name: clear-nginx
         image: nginx
         volumeMounts:
-        - mountPath: /data
+        - mountPath: /nginxdata
           name: site-data
         ports:
         - containerPort: 80
