@@ -1,0 +1,21 @@
+apiVersion: camel.apache.org/v1
+kind: Pipe
+metadata:
+  name: mqtt-source
+spec:
+  source:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: mqtt-source
+    properties:
+      brokerUrl: "tcp://mosquitto-mqtt:1883"
+      topic: "mytopic"
+      clientId: "animal-test"
+      username: jgnoguer
+      password: uocAn1m4ls
+  sink:
+    ref:
+      kind: Broker
+      apiVersion: eventing.knative.dev/v1
+      name: mqtt-camel-broker

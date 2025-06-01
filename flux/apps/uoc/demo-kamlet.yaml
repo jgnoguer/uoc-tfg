@@ -2,7 +2,6 @@ apiVersion: camel.apache.org/v1
 kind: Pipe
 metadata:
   name: timer-source-pipe
-  namespace: camel-k
 spec:
   source:
     ref:
