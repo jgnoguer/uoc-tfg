@@ -8,6 +8,8 @@ resources:
   - agents-service.yaml
   - routing.yaml
   - watermark-evt.yaml
+  - activities-broker.yaml
+  - activities-trigger.yaml
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:
