@@ -139,11 +139,11 @@ func addMedia(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
 		panic(fmt.Errorf("error in exec query to insert media %w", err))
 	}
 
-	event, err := publishEvent("123456")
-	slog.Info("Publishing event", "event", event)
+	event, err := publishEvent(id.String(), fileHandler.Size, fileHandler.Filename, fileHandler.Header.Get("Content-Type"))
+	slog.Info("Published event", "event", event)
 }
 
-func publishEvent(mediaId string) (*cloudevents.Event, cloudevents.Result) {
+func publishEvent(mediaId string, size int64, filename string, contentType string) (*cloudevents.Event, cloudevents.Result) {
 	newEvent := cloudevents.NewEvent()
 	// Setting the ID here is not necessary. When using NewDefaultClient the ID is set
 	// automatically. We set the ID anyway so it appears in the log.
