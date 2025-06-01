@@ -11,12 +11,13 @@ resources:
   - activities-broker.yaml
   - activities-trigger.yaml
   - telegram-sink.yaml
+  - animals-cm.yaml
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:
   - name: uoc-animals-services-cm
     namespace: default
-    behavior: create
+    behavior: merge
     literals:
       - scylladb-ip=10.43.239.157
       - msver=0.1.1
