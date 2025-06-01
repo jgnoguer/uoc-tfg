@@ -35,7 +35,7 @@ Install the second server node:
 
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --snapshotter=native --tls-san 192.168.2.1 --server https://uoc-zero2-01:6443" K3S_TOKEN="THETOKEN" sh -
 
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --tls-san 192.168.2.1 --server https://uoc-zero2-01:6443" K3S_TOKEN="K10fef5272b0266af9c27ce01487d448d0da8a8d5fa4325d8dcba204661f82dccc4::server:de9c0dfa7ba5dd94f8a1343fd3a70159" sh -
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --tls-san 192.168.2.1 --server https://uoc-zero2-01:6443" K3S_TOKEN="thetoken" sh -
 
 curl -sfL https://get.k3s.io | sh -s - server \
     --server https://uoc-neo3-01:6443 \
