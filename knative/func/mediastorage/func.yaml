@@ -5,7 +5,7 @@ name: mediastorage
 runtime: go
 registry: ghcr.io/jgnoguer
 namespace: default
-image: ghcr.io/jgnoguer/mediastorage:0.1.3
+image: ghcr.io/jgnoguer/mediastorage:0.1.4
 created: 2025-05-01T18:08:29.744503063+02:00
 build:
   builder: pack

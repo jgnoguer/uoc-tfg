@@ -1,12 +1,15 @@
 package function
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"function/model"
 	cloudevents "github.com/cloudevents/sdk-go/v2"
+	"github.com/cloudevents/sdk-go/v2/protocol"
 	"github.com/scylladb/gocqlx/v3/qb"
 	"io"
+	"log"
 	"log/slog"
 	"net/http"
 	"os"
@@ -141,18 +144,28 @@ func addMedia(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
 
 	event, err := publishEvent(id.String(), fileHandler.Size, fileHandler.Filename, fileHandler.Header.Get("Content-Type"))
 	slog.Info("Published event", "event", event)
+
 }
 
 func publishEvent(mediaId string, size int64, filename string, contentType string) (*cloudevents.Event, cloudevents.Result) {
+	ceClient, err := cloudevents.NewClientHTTP()
+	if err != nil {
+		log.Fatalf("failed to create client, %v", err)
+	}
 	newEvent := cloudevents.NewEvent()
 	// Setting the ID here is not necessary. When using NewDefaultClient the ID is set
 	// automatically. We set the ID anyway so it appears in the log.
 	newEvent.SetID(uuid.New().String())
 	newEvent.SetSource("dev.jgnoguer.knative.uoc/mediastorage-service")
 	newEvent.SetType("dev.jgnoguer.knative.uoc.imageadded")
-	slog.Info("Responding with event\n%s\n", newEvent)
-	if err := newEvent.SetData(cloudevents.ApplicationJSON, ImageAdded{MediaId: mediaId}); err != nil {
+	if err := newEvent.SetData(cloudevents.ApplicationJSON, ImageAdded{MediaId: mediaId, Size: size,
+		Filename: filename, ContentType: contentType}); err != nil {
 		return nil, cloudevents.NewHTTPResult(500, "failed to set response data: %s", err)
+	}
+	// Send that Event.
+	var result protocol.Result
+	if result = ceClient.Send(context.Background(), newEvent); cloudevents.IsUndelivered(result) {
+		log.Fatalf("failed to send, %v", result)
 	}
 	return &newEvent, cloudevents.ResultACK
 }
