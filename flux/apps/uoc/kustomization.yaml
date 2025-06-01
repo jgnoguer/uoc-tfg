@@ -18,7 +18,7 @@ configMapGenerator:
     namespace: default
     behavior: create
     literals:
-      - scylladb-ip=10.43.208.229
+      - scylladb-ip=10.43.239.157
       - msver=0.1.1
       - agver=0.1.0
 secretGenerator:
