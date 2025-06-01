@@ -1,7 +1,7 @@
 apiVersion: camel.apache.org/v1
 kind: Pipe
 metadata:
-  name: pipe
+  name: telegram-sink-pipe
   annotations:
     trait.camel.apache.org/mount.configs: "secret:telegram-credentials"
 spec:
@@ -18,4 +18,4 @@ spec:
       apiVersion: camel.apache.org/v1
       name: telegram-sink
     properties:
-      authorizationToken: ${telegram.authorizationToke}
+      authorizationToken: ${telegram.authorizationToken}
