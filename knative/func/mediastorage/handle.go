@@ -164,7 +164,9 @@ func publishEvent(mediaId string, size int64, filename string, contentType strin
 	}
 	// Send that Event.
 	var result protocol.Result
-	if result = ceClient.Send(context.Background(), newEvent); cloudevents.IsUndelivered(result) {
+	imageBroker := os.Getenv("IMAGE_BROKER")
+	ctx := cloudevents.ContextWithTarget(context.Background(), imageBroker)
+	if result = ceClient.Send(ctx, newEvent); cloudevents.IsUndelivered(result) {
 		log.Fatalf("failed to send, %v", result)
 	}
 	return &newEvent, cloudevents.ResultACK

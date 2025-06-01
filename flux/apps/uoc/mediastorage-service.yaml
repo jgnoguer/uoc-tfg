@@ -39,6 +39,11 @@ spec:
                   key: password
             - name: STORAGE_FOLDER
               value: "/data"
+            - name: IMAGE_BROKER
+              valueFrom:
+                configMapKeyRef:
+                  name: uoc-animals-services-cm
+                  key: imagebroker
       volumes:
         - name: mydata
           persistentVolumeClaim:
