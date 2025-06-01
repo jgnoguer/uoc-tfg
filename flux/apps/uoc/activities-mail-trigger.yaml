@@ -1,0 +1,16 @@
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: activity-end-trigger
+  namespace: default
+spec:
+  broker: activities-broker
+  filter:
+    attributes:
+      type: dev.jgnoguer.knative.uoc.activityend
+#      source: dev.jgnoguer.knative.uoc/activity-service
+  subscriber:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: activities-broker

@@ -9,7 +9,7 @@ resources:
   - routing.yaml
   - watermark-evt.yaml
   - activities-broker.yaml
-  - activities-trigger.yaml
+#  - activities-trigger.yaml
 #  - telegram-sink.yaml
   - animals-cm.yaml
 generatorOptions:
