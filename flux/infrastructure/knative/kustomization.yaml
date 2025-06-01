@@ -33,3 +33,10 @@ configMapGenerator:
     behavior: merge
     literals:
       - knative.jgnoguer.dev=""
+  - name: config-autoscaler
+    namespace: knative-serving # needs to match target ConfigMap from base
+    behavior: merge
+    literals:
+      - "scale-to-zero-grace-period=20m"
+
+ 
