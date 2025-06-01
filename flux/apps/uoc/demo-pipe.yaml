@@ -1,0 +1,12 @@
+
+
+apiVersion: camel.apache.org/v1
+kind: Pipe
+metadata:
+  name: timer-to-log
+  namespace: camel-k
+spec:
+  sink:
+    uri: log:bar
+  source:
+    uri: timer:foo

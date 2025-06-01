@@ -2,6 +2,7 @@ apiVersion: camel.apache.org/v1
 kind: Pipe
 metadata:
   name: telegram-sink-pipe
+  namespace: camel-k
   annotations:
     trait.camel.apache.org/mount.configs: "secret:telegram-credentials"
 spec:
