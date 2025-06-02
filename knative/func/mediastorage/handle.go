@@ -53,7 +53,7 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 
 	slog.Info("Info", "v.", appVersion, "Method", r.Method, "Storage folder", storageFolder)
 
-	slog.Info("Try connection to ", "ip", dbIp)
+	slog.Info("DB connection to ", "ip", dbIp)
 	cluster := gocql.NewCluster(dbIp)
 	//
 	cluster.Authenticator = gocql.PasswordAuthenticator{Username: dbUser, Password: dbPwd}
@@ -68,14 +68,18 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
 		if strings.HasSuffix(r.URL.Path, "/metadata") {
+			slog.Info("GET metadata")
 			getMediaMetadata(w, r, session)
 		} else {
+			slog.Info("GET")
 			getMedia(w, r, session)
 		}
 	case "POST":
+		slog.Info("POST")
 		w.Header().Set("Content-Type", "application/json")
 		addMedia(w, r, session)
 	case "DELETE":
+		slog.Info("DELETE")
 		w.Header().Set("Content-Type", "application/json")
 		deleteMedia(w, r, session)
 	default:
