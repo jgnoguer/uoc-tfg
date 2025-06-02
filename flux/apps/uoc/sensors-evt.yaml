@@ -46,14 +46,14 @@ spec:
               configMapKeyRef:
                 name: uoc-animals-services-cm
                 key: telegrambrokerurl
-          volumeMounts:
-            - name: video-volume
-              mountPath: /videoonhost
-      volumes: 
-        - name: video-volume
-          hostPath: 
-            path: /dev/video10
-            type: Directory
+      #     volumeMounts:
+      #       - name: video-volume
+      #         mountPath: /videoonhost
+      # volumes: 
+      #   - name: video-volume
+      #     hostPath: 
+      #       path: /dev/video10
+      #       type: Directory
 ---
 # Service that exposes watermark app.
 # This will be the subscriber for the Trigger
