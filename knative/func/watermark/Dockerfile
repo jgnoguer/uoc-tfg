@@ -26,6 +26,7 @@ RUN apk add --no-cache ca-certificates
 
 # Copy the binary to the production image from the builder stage.
 COPY --from=builder /app/watermark /watermark
+COPY /app/watermark.png /watermark.png
 
 # Run the web service on container startup.
 CMD ["/watermark"]
