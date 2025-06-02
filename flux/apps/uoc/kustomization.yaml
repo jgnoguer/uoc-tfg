@@ -7,8 +7,8 @@ resources:
   - mediastorage-service.yaml
   - agents-service.yaml
   - routing.yaml
-  - temp-storage.yaml
-  - watermark-evt.yaml
+#  - temp-storage.yaml
+#  - watermark-evt.yaml
   - activities-broker.yaml
 #  - activities-trigger.yaml
 #  - telegram-sink.yaml
