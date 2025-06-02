@@ -8,7 +8,7 @@ spec:
   replicas: 1
   selector:
     matchLabels: &labels
-      app: activity-grab
+      app: telegramsubs
   template:
     metadata:
       labels: *labels
@@ -17,7 +17,7 @@ spec:
         kubernetes.io/hostname: uoc-bpim4zero-01
       containers:
         - name: activity-grab
-          image: ghcr.io/jgnoguer/snapshotter:0.1.0      
+          image: ghcr.io/jgnoguer/telegramsubs:0.1.0     
 ---
 # Service that exposes activity-grab app.
 # This will be the subscriber for the Trigger
@@ -28,7 +28,7 @@ metadata:
   namespace: default
 spec:
   selector:
-    app: activity-grab
+    app: telegramsubs
   ports:
     - protocol: TCP
       port: 80
