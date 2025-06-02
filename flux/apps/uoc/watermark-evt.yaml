@@ -25,6 +25,8 @@ spec:
     metadata:
       labels: *labels
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: uoc-bpim4zero-01
       containers:
         - name: watermark
           image: ghcr.io/jgnoguer/watermark:0.1.10
