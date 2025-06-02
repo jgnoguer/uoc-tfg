@@ -34,7 +34,7 @@ spec:
         effect: NoSchedule
       containers:
         - name: snapshotter
-          image: ghcr.io/jgnoguer/snapshotter:0.1.2
+          image: ghcr.io/jgnoguer/snapshotter:0.1.3
           env:
           - name: VIDEO_DEVICE
             valueFrom:
@@ -46,7 +46,14 @@ spec:
               configMapKeyRef:
                 name: uoc-animals-services-cm
                 key: telegrambrokerurl
-            
+          volumeMounts:
+            - name: ideo-volume
+              mountPath: /videoonhost
+      volumes: 
+        - name: video-volume
+          hostPath: 
+            path: /dev/video10
+            type: Directory
 ---
 # Service that exposes watermark app.
 # This will be the subscriber for the Trigger

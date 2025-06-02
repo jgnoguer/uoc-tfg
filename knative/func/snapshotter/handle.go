@@ -55,7 +55,7 @@ func (recv *Receiver) ReceiveAndSend(ctx context.Context, event cloudevents.Even
 
 	ctx = cloudevents.ContextWithTarget(ctx, recv.Target)
 
-	go takePhoto()
+	//go takePhoto()
 
 	return recv.client.Send(ctx, r)
 
