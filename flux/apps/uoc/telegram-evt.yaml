@@ -11,6 +11,8 @@ spec:
       app: telegramsubs
   template:
     metadata:
+      annotations:
+        autoscaling.knative.dev/min-scale: "1"
       labels: *labels
     spec:
       nodeSelector:
