@@ -142,6 +142,7 @@ func addMedia(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
 		panic(fmt.Errorf("error in exec query to insert media %w", err))
 	}
 
+	slog.Info("Start publishing event")
 	defer publishEvent(id.String(), fileHandler.Size, fileHandler.Filename, fileHandler.Header.Get("Content-Type"))
 
 }
