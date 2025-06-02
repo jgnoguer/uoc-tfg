@@ -24,7 +24,7 @@ func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, 
 	}
 	log.Printf("Image added with %q", data.MediaId)
 
-	gatherImage(data.MediaId)
+	gatherImage(context.Background(), data.MediaId)
 
 	return nil, cloudevents.NewHTTPResult(201, "Accepted")
 }
@@ -38,7 +38,7 @@ func main() {
 	log.Fatal(c.StartReceiver(context.Background(), receive))
 }
 
-func gatherImage(imageId string) {
+func gatherImage(ctx context.Context, imageId string) {
 	endpoint := os.Getenv("MEDIASTORAGE_ENDPOINT")
 	storagefolder := os.Getenv("STORAGE_FOLDER")
 	resp, err := http.Get(endpoint + "/" + imageId)
