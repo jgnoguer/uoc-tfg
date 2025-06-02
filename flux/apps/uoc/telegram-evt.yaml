@@ -8,7 +8,7 @@ spec:
   replicas: 1
   selector:
     matchLabels: &labels
-      app: snapshotter
+      app: activity-grab
   template:
     metadata:
       labels: *labels
@@ -16,19 +16,19 @@ spec:
       nodeSelector:
         kubernetes.io/hostname: uoc-bpim4zero-01
       containers:
-        - name: snapshotter
+        - name: activity-grab
           image: ghcr.io/jgnoguer/snapshotter:0.1.0      
 ---
-# Service that exposes snapshotter app.
+# Service that exposes activity-grab app.
 # This will be the subscriber for the Trigger
 apiVersion: v1
 kind: Service
 metadata:
-  name: activity-event
+  name: activity-event-svc
   namespace: default
 spec:
   selector:
-    app: snapshotter
+    app: activity-grab
   ports:
     - protocol: TCP
       port: 80
@@ -38,7 +38,7 @@ spec:
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
-  name: activity-event
+  name: activity-event-trigger
   namespace: default
 spec:
   broker: activities-broker
@@ -46,5 +46,5 @@ spec:
     ref:
       apiVersion: v1
       kind: Service
-      name: activity-event
+      name: activity-event-svc
 
