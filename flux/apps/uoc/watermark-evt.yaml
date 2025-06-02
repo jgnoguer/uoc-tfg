@@ -27,7 +27,23 @@ spec:
     spec:
       containers:
         - name: watermark
-          image: ghcr.io/jgnoguer/watermark:0.1.0
+          image: ghcr.io/jgnoguer/watermark:0.1.1
+          volumeMounts:
+            - mountPath: /tempimage
+              name: tempimage
+              readOnly: false
+          env:
+          - name: MEDIASTORAGE_ENDPOINT
+            valueFrom:
+              configMapKeyRef:
+                name: uoc-animals-services-cm
+                key: imagebrokerurl
+          - name: STORAGE_FOLDER
+            value: "/tempimage"
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: image-tmp-data         
 ---
 # Service that exposes watermark app.
 # This will be the subscriber for the Trigger

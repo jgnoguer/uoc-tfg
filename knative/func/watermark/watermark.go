@@ -2,10 +2,13 @@ package main
 
 import (
 	"context"
+	"io"
 	"log"
+	"net/http"
+	"os"
+	"path/filepath"
 
 	cloudevents "github.com/cloudevents/sdk-go/v2"
-	"github.com/google/uuid"
 )
 
 func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, cloudevents.Result) {
@@ -17,22 +20,11 @@ func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, 
 		log.Printf("Error while extracting cloudevent Data: %s\n", err.Error())
 		return nil, cloudevents.NewHTTPResult(400, "failed to convert data: %s", err)
 	}
-	log.Printf("Image added from received event %q", data.MediaId)
+	log.Printf("Image added with %q", data.MediaId)
 
-	// Respond with another event (optional)
-	// This is optional and is intended to show how to respond back with another event after processing.
-	// The response will go back into the knative eventing system just like any other event
-	newEvent := cloudevents.NewEvent()
-	// Setting the ID here is not necessary. When using NewDefaultClient the ID is set
-	// automatically. We set the ID anyway so it appears in the log.
-	newEvent.SetID(uuid.New().String())
-	newEvent.SetSource("knative/eventing/samples/hello-world")
-	newEvent.SetType("dev.jgnoguer.knative.uoc.hifromknative")
-	if err := newEvent.SetData(cloudevents.ApplicationJSON, HiFromKnative{Msg: "Hi from helloworld-go app!"}); err != nil {
-		return nil, cloudevents.NewHTTPResult(500, "failed to set response data: %s", err)
-	}
-	log.Printf("Responding with event\n%s\n", newEvent)
-	return &newEvent, nil
+	gatherImage(data.MediaId)
+
+	return nil, cloudevents.NewHTTPResult(201, "Accepted")
 }
 
 func main() {
@@ -42,4 +34,20 @@ func main() {
 		log.Fatalf("failed to create client, %v", err)
 	}
 	log.Fatal(c.StartReceiver(context.Background(), receive))
+}
+
+func gatherImage(imageId string) {
+	endpoint := os.Getenv("MEDIASTORAGE_ENDPOINT")
+	storagefolder := os.Getenv("STORAGE_FOLDER")
+	resp, err := http.Get(endpoint + "/" + imageId)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	newFile, err := os.Create(filepath.Join(storagefolder, imageId))
+	_, errCopy := io.Copy(newFile, resp.Body)
+	if errCopy != nil {
+		log.Fatalln(err)
+	}
+	log.Print("Got the image.")
+
 }
