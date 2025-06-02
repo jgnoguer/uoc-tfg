@@ -26,7 +26,7 @@ func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, 
 
 	//go gatherImage(context.Background(), data.MediaId)
 
-	return nil, cloudevents.NewHTTPResult(201, "Accepted")
+	return nil, nil
 }
 
 func main() {
