@@ -143,7 +143,7 @@ func addMedia(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
 	}
 
 	slog.Info("Start publishing event")
-	defer publishEvent(id.String(), fileHandler.Size, fileHandler.Filename, fileHandler.Header.Get("Content-Type"))
+	go publishEvent(id.String(), fileHandler.Size, fileHandler.Filename, fileHandler.Header.Get("Content-Type"))
 
 }
 
