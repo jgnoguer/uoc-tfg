@@ -29,13 +29,19 @@ spec:
         kubernetes.io/hostname: uoc-bpim4zero-01
       containers:
         - name: snapshotter
-          image: ghcr.io/jgnoguer/snapshotter:0.1.1
-      env:
-      - name: VIDEO_DEVICE
-        valueFrom:
-          configMapKeyRef:
-            name: uoc-animals-services-cm
-            key: videodevice
+          image: ghcr.io/jgnoguer/snapshotter:0.1.2
+          env:
+          - name: VIDEO_DEVICE
+            valueFrom:
+              configMapKeyRef:
+                name: uoc-animals-services-cm
+                key: videodevice
+          - name: TELEGRAM_BROKER
+            valueFrom:
+              configMapKeyRef:
+                name: uoc-animals-services-cm
+                key: telegrambrokerurl
+            
 ---
 # Service that exposes watermark app.
 # This will be the subscriber for the Trigger

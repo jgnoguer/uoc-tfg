@@ -5,37 +5,60 @@ import (
 	"fmt"
 	"github.com/blackjack/webcam"
 	cloudevents "github.com/cloudevents/sdk-go/v2"
-	"github.com/google/uuid"
+	"github.com/kelseyhightower/envconfig"
 	"log"
 	"os"
 )
 
-func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, cloudevents.Result) {
+type Receiver struct {
+	client cloudevents.Client
+
+	// If the K_SINK environment variable is set, then events are sent there,
+	// otherwise we simply reply to the inbound request.
+	Target string `envconfig:"TELEGRAM_BROKER"`
+}
+
+// Request is the structure of the event we expect to receive.
+type Request struct {
+	Name string `json:"name"`
+}
+
+// Response is the structure of the event we send in response to requests.
+type Response struct {
+	Message string `json:"message,omitempty"`
+}
+
+// handle shared the logic for producing the Response event from the Request.
+func handle(req Request) Response {
+	return Response{Message: fmt.Sprintf("Sensor was triggered, %s", req.Name)}
+}
+
+func (recv *Receiver) ReceiveAndSend(ctx context.Context, event cloudevents.Event) cloudevents.Result {
 	// Here is where your code to process the event will go.
 	// In this example we will log the event msg
 	log.Printf("Event received. \n%s\n", event)
 	data := &SensorTriggered{}
 	if err := event.DataAs(data); err != nil {
 		log.Printf("Error while extracting cloudevent Data: %s\n", err.Error())
-		return nil, cloudevents.NewHTTPResult(400, "failed to convert data: %s", err)
+		return cloudevents.NewHTTPResult(400, "failed to convert data: %s", err)
 	}
 	log.Printf("Image added from received event %q", data.Msg)
 
-	// Respond with another event (optional)
-	// This is optional and is intended to show how to respond back with another event after processing.
-	// The response will go back into the knative eventing system just like any other event
-	newEvent := cloudevents.NewEvent()
-	// Setting the ID here is not necessary. When using NewDefaultClient the ID is set
-	// automatically. We set the ID anyway so it appears in the log.
-	newEvent.SetID(uuid.New().String())
-	newEvent.SetSource("knative/eventing/samples/hello-world")
-	newEvent.SetType("dev.jgnoguer.knative.uoc.hifromknative")
-	if err := newEvent.SetData(cloudevents.ApplicationJSON, HiFromKnative{Msg: "Hi from helloworld-go app!"}); err != nil {
-		return nil, cloudevents.NewHTTPResult(500, "failed to set response data: %s", err)
+	r := cloudevents.NewEvent(cloudevents.VersionV1)
+	r.SetType("dev.jgnoguer.knative.uoc.sensortriggered")
+	r.SetSource("dev.jgnoguer.knative.uoc/sensorresponse")
+	req := Request{}
+	resp := handle(req)
+	if err := r.SetData("application/json", resp); err != nil {
+		return cloudevents.NewHTTPResult(500, "failed to set response data: %s", err)
 	}
-	log.Printf("Responding with event\n%s\n", newEvent)
+
+	ctx = cloudevents.ContextWithTarget(ctx, recv.Target)
+
 	go takePhoto()
-	return &newEvent, nil
+
+	return recv.client.Send(ctx, r)
+
 }
 
 func takePhoto() {
@@ -88,9 +111,23 @@ func check(e error) {
 
 func main() {
 	log.Print("Snapshotter sample started.")
-	c, err := cloudevents.NewDefaultClient()
+	client, err := cloudevents.NewDefaultClient()
 	if err != nil {
-		log.Fatalf("failed to create client, %v", err)
+		log.Fatal(err.Error())
 	}
-	log.Fatal(c.StartReceiver(context.Background(), receive))
+
+	r := Receiver{client: client}
+	if err := envconfig.Process("", &r); err != nil {
+		log.Fatal(err.Error())
+	}
+
+	// Depending on whether targeting data has been supplied,
+	// we will either reply with our response or send it on to
+	// an event sink.
+	var receiver interface{} // the SDK reflects on the signature.
+	receiver = r.ReceiveAndSend
+
+	if err := client.StartReceiver(context.Background(), receiver); err != nil {
+		log.Fatal(err)
+	}
 }
