@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: activity-event-deployment
+  name: telegram-cmd-deployment
   namespace: default
 spec:
   replicas: 1
@@ -19,14 +19,14 @@ spec:
         kubernetes.io/hostname: uoc-bpim4zero-01
       containers:
         - name: telegramsubs
-          image: ghcr.io/jgnoguer/telegramsubs:0.1.1    
+          image: ghcr.io/jgnoguer/telegramsubs:0.1.2   
 ---
 # Service that exposes telegramsubs app.
 # This will be the subscriber for the Trigger
 apiVersion: v1
 kind: Service
 metadata:
-  name: activity-event-svc
+  name: telegram-cmd-svc
   namespace: default
 spec:
   selector:
@@ -40,7 +40,7 @@ spec:
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
-  name: activity-event-trigger
+  name: telegram-cmd-trigger
   namespace: default
 spec:
   broker: activities-broker
@@ -48,5 +48,5 @@ spec:
     ref:
       apiVersion: v1
       kind: Service
-      name: activity-event-svc
+      name: telegram-cmd-svc
 

@@ -2,7 +2,7 @@ package main
 
 // defines the Data of CloudEvent with type=dev.jgnoguer.knative.uoc.imageadded
 type TelegramMsg struct {
-	MsgId string `json:"message_id,omitempty"`
+	MsgId int32 `json:"message_id,omitempty"`
 
 	Date         int `json:"date"`
 	TelegramFrom struct {
