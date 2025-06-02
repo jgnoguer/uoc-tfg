@@ -2,13 +2,15 @@ package main
 
 import (
 	"context"
+	"fmt"
+	cloudevents "github.com/cloudevents/sdk-go/v2"
+	"github.com/sunshineplan/imgconv"
+	"image"
 	"io"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
-
-	cloudevents "github.com/cloudevents/sdk-go/v2"
 )
 
 func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, cloudevents.Result) {
@@ -43,11 +45,56 @@ func gatherImage(imageId string) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	newFile, err := os.Create(filepath.Join(storagefolder, imageId))
+	filePath := filepath.Join(storagefolder, imageId)
+	newFile, err := os.Create(filePath)
 	_, errCopy := io.Copy(newFile, resp.Body)
 	if errCopy != nil {
 		log.Fatalln(err)
 	}
 	log.Print("Got the image.")
+	wattermarkTest(filePath, filepath.Join(storagefolder, imageId+"_watermark"), "perroagua.png")
 
+}
+
+func wattermarkTest(inputImage string, outputImage string, wattermarkImageFile string) {
+	// Open a test image.
+	srcImage, err := imgconv.Open(inputImage)
+	if err != nil {
+		log.Fatalf("failed to open image: %v", err)
+	}
+	markImage, err := imgconv.Open(wattermarkImageFile)
+	if err != nil {
+		log.Fatalf("failed to open wattermark image: %v", err)
+	}
+	markImage400 := imgconv.Resize(markImage, &imgconv.ResizeOption{Width: 200})
+	// Resize srcImage to width = 800px preserving the aspect ratio.
+	dstImage800 := imgconv.Resize(srcImage, &imgconv.ResizeOption{Width: 1200})
+	dstImage := imgconv.Watermark(dstImage800, &imgconv.WatermarkOption{Mark: markImage400, Opacity: 120, Random: false,
+		Offset: image.Pt(-520, 270)})
+
+	newFile, err := os.Create(outputImage)
+
+	// Write the resulting image
+	if err := imgconv.Write(newFile, dstImage, &imgconv.FormatOption{Format: imgconv.JPEG}); err != nil {
+		log.Fatalf("failed to write image: %v", err)
+	}
+	defer newFile.Close()
+
+}
+
+func getImageDimension(filepath string) (int, int) {
+
+	f, err := os.Open(filepath)
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+
+	config, _, err := image.DecodeConfig(f)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Width: %d\nHeight: %d\n", config.Width, config.Height)
+	return config.Width, config.Height
 }
