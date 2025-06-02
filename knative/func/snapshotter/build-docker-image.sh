@@ -1,1 +1,1 @@
-docker buildx build --platform linux/arm64,linux/amd64 -t "ghcr.io/jgnoguer/telegramsubs:0.1.3" --push .
+docker buildx build --platform linux/arm64,linux/amd64 -t "ghcr.io/jgnoguer/telegramsubs:0.1.4" --push .
