@@ -43,7 +43,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: uoc-animals-services-cm
-                  key: imagebroker
+                  key: imagebrokerurl
       volumes:
         - name: mydata
           persistentVolumeClaim:
