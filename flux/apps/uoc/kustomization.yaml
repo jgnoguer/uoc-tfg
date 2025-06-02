@@ -15,6 +15,7 @@ resources:
   - animals-cm.yaml
   - mqtt-broker.yaml
   - mqtt-pipe.yaml
+  - sensors-evt.yaml
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:

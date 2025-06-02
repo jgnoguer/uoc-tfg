@@ -13,7 +13,7 @@ spec:
       name: mqtt-source
     properties:
       brokerUrl: "tcp://10.43.26.129:1883"
-      topic: "mytopic"
+      topic: "sensor-topic"
       clientId: "animal-test"
       username: ${mqtt.username}
       password: ${mqtt.password}

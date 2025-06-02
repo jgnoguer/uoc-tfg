@@ -116,6 +116,7 @@ kubectl taint nodes uoc-neo3-03 uocnodetype=master:NoExecute
 
 kubectl label nodes uoc-neo2core-01 envoyLib=compatible
 kubectl label nodes uoc-bpim4zero-01 envoyLib=compatible
+kubectl label nodes uoc-bpim4zero-01 mosquitto=compatible
 
 kubectl label nodes uoc-rpizero2-01 zigbee2mqtt=compatible
 
