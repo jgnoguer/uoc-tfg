@@ -25,9 +25,17 @@ spec:
     metadata:
       labels: *labels
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: uoc-bpim4zero-01
       containers:
         - name: snapshotter
-          image: ghcr.io/jgnoguer/snapshotter:0.1.0
+          image: ghcr.io/jgnoguer/snapshotter:0.1.1
+      env:
+      - name: VIDEO_DEVICE
+        valueFrom:
+          configMapKeyRef:
+            name: uoc-animals-services-cm
+            key: videodevice
 ---
 # Service that exposes watermark app.
 # This will be the subscriber for the Trigger

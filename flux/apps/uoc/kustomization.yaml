@@ -34,6 +34,7 @@ configMapGenerator:
       - agver=0.1.0
       - imagebrokerurl=http://broker-ingress.knative-eventing.svc.cluster.local/default/image-broker
       - mediastorageurl=http://mediastorage.default.svc.cluster.local
+      - videodevice=video10
 secretGenerator:
   - name: uoc-animals-database-creds
     namespace: default

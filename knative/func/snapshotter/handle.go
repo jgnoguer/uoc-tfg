@@ -7,7 +7,6 @@ import (
 	cloudevents "github.com/cloudevents/sdk-go/v2"
 	"github.com/google/uuid"
 	"log"
-	"net/http"
 	"os"
 )
 
@@ -35,12 +34,14 @@ func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, 
 		return nil, cloudevents.NewHTTPResult(500, "failed to set response data: %s", err)
 	}
 	log.Printf("Responding with event\n%s\n", newEvent)
+	go takePhoto()
 	return &newEvent, nil
 }
 
-func addAgent(w http.ResponseWriter, r *http.Request) {
+func takePhoto() {
+	videoDevice := os.Getenv("VIDEO_DEVICE")
 	// ...
-	cam, err := webcam.Open("/dev/video0") // Open webcam
+	cam, err := webcam.Open("/dev/" + videoDevice) // Open webcam
 	if err != nil {
 		panic(err.Error())
 	}
