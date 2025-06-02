@@ -38,7 +38,7 @@ configMapGenerator:
     namespace: knative-serving # needs to match target ConfigMap from base
     behavior: merge
     literals:
-      - "autoscaling.knative.dev/min-scale=1"
+#      - autoscaling.knative.dev/min-scale=1
       - "scale-to-zero-grace-period=300s"
 
  
