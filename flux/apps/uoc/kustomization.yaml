@@ -16,6 +16,7 @@ resources:
   - mqtt-broker.yaml
   - mqtt-pipe.yaml
   - sensors-evt.yaml
+  - telegram-source-new.yaml
   - telegram-source-pipe.yaml
 generatorOptions:
   disableNameSuffixHash: true
