@@ -27,6 +27,11 @@ spec:
     spec:
       nodeSelector:
         kubernetes.io/hostname: uoc-rpizero2-01
+      tolerations:
+      - key: memorytype
+        operator: Equal
+        value: low
+        effect: NoSchedule
       containers:
         - name: snapshotter
           image: ghcr.io/jgnoguer/snapshotter:0.1.2
