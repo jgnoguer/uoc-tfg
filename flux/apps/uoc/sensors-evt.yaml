@@ -47,7 +47,7 @@ spec:
                 name: uoc-animals-services-cm
                 key: telegrambrokerurl
           volumeMounts:
-            - name: ideo-volume
+            - name: video-volume
               mountPath: /videoonhost
       volumes: 
         - name: video-volume
