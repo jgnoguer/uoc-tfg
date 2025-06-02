@@ -142,8 +142,7 @@ func addMedia(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
 		panic(fmt.Errorf("error in exec query to insert media %w", err))
 	}
 
-	event, err := publishEvent(id.String(), fileHandler.Size, fileHandler.Filename, fileHandler.Header.Get("Content-Type"))
-	slog.Info("Published event", "event", event)
+	defer publishEvent(id.String(), fileHandler.Size, fileHandler.Filename, fileHandler.Header.Get("Content-Type"))
 
 }
 
@@ -169,6 +168,7 @@ func publishEvent(mediaId string, size int64, filename string, contentType strin
 	if result = ceClient.Send(ctx, newEvent); cloudevents.IsUndelivered(result) {
 		log.Fatalf("failed to send, %v", result)
 	}
+	slog.Info("Published event", "event", newEvent)
 	return &newEvent, cloudevents.ResultACK
 }
 

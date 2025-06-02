@@ -23,6 +23,7 @@ func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, 
 		return nil, cloudevents.NewHTTPResult(400, "failed to convert data: %s", err)
 	}
 	log.Printf("Image added with %q", data.MediaId)
+	ctx.Done()
 
 	gatherImage(context.Background(), data.MediaId)
 
