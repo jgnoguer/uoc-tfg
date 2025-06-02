@@ -15,7 +15,7 @@ func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, 
 		log.Printf("Error while extracting cloudevent Data: %s\n", err.Error())
 		return nil, cloudevents.NewHTTPResult(400, "failed to convert data: %s", err)
 	}
-	log.Printf("Received event %q", data.Msg)
+	log.Printf("Finished successfully received event %q with text %q", data.MsgId, data.Text)
 
 	return nil, nil
 }

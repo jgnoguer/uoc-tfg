@@ -9,13 +9,13 @@ spec:
     ref:
       kind: Broker
       apiVersion: eventing.knative.dev/v1
-      name: activities-broker
-    properties:
-      type: dev.jgnoguer.knative.uoc.activitystarted
+      name: telegram-broker
   sink:
     ref:
       kind: Kamelet
       apiVersion: camel.apache.org/v1
-      name: telegram-sink
+      name: telegram-new-sink
+      namespace: default
     properties:
       authorizationToken: ${telegram.authorizationToken}
+      chatId: ${telegram.chatId}

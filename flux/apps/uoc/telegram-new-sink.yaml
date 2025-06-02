@@ -17,7 +17,8 @@
 apiVersion: camel.apache.org/v1
 kind: Kamelet
 metadata:
-  name: telegram-new-sink
+  name: telegram-sink
+  namespace: default
   annotations:
     camel.apache.org/kamelet.support.level: "Stable"
     camel.apache.org/catalog.version: "4.13.0-SNAPSHOT"
@@ -75,11 +76,50 @@ spec:
     from:
       uri: "kamelet:source"
       steps:
-      - convertBodyTo:
-          type: "java.lang.String"
-      - setHeader:
-          name: CamelTelegramMediaTitleCaption
-          simple: "${header[text]}"
+      - choice:
+          when:
+          - simple: "${header[Content-Type]} == 'image/png'"
+            steps:
+            - convertBodyTo:
+                type: "byte[]"
+            - setHeader:
+                name: CamelTelegramMediaType
+                constant: PHOTO_PNG
+          - simple: "${header[Content-Type]} == 'image/jpeg'"
+            steps:
+            - convertBodyTo:
+                type: "byte[]"
+            - setHeader:
+                name: CamelTelegramMediaType
+                constant: PHOTO_JPG
+          otherwise:
+            steps:
+            - convertBodyTo:
+                type: "java.lang.String"
+      - choice:
+          when:
+          - simple: "${header[text]}"
+            steps:
+            - setHeader:
+                name: CamelTelegramMediaTitleCaption
+                simple: "${header[text]}"
+          - simple: "${header[ce-text]}"
+            steps:
+            - setHeader:
+                name: CamelTelegramMediaTitleCaption
+                simple: "${header[ce-text]}"
+      - choice:
+          when:
+          - simple: "${header[chat-id]}"
+            steps:
+            - setHeader:
+                name: CamelTelegramChatId
+                simple: "${header[chat-id]}"
+          - simple: "${header[ce-chatid]}"
+            steps:
+            - setHeader:
+                name: CamelTelegramChatId
+                simple: "${header[ce-chatid]}"
       - to:
           uri: "telegram:bots"
           parameters:
