@@ -1,0 +1,26 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: agents
+  namespace: default
+spec:
+  template:
+    metadata:
+      annotations:
+        client.knative.dev/updateTimestamp: "2025-05-05T18:15:11Z"
+        client.knative.dev/user-image: ghcr.io/jgnoguer/snapshotter:latest
+      creationTimestamp: null
+    spec:
+      nodeSelector:
+        longhorn: compatible
+      containers:
+      - image: ghcr.io/jgnoguer/snapshotter:latest
+        name: ""
+        resources: {}
+        volumeMounts:
+          - mountPath: /data
+            name: mydata
+            subPath: knative
+            readOnly: false
+status: {}
