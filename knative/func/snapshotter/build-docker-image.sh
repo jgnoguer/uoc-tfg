@@ -1,1 +1,0 @@
-docker buildx build --platform linux/arm64,linux/amd64 -t "ghcr.io/jgnoguer/snapshotter:0.1.5" --push .

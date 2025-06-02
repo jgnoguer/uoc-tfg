@@ -17,7 +17,7 @@ RUN go mod tidy
 
 # Build the binary.
 # -mod=readonly ensures immutable go.mod and go.sum in container builds.
-RUN CGO_ENABLED=0 GOOS=linux GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=readonly  -v -o snapshotter
+RUN CGO_ENABLED=0 GOOS=linux GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=readonly  -v -o sensorcontrol
 
 # Use a Docker multi-stage build to create a lean production image.
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
@@ -25,7 +25,7 @@ FROM alpine:3
 RUN apk add --no-cache ca-certificates
 
 # Copy the binary to the production image from the builder stage.
-COPY --from=builder /app/snapshotter /snapshotter
+COPY --from=builder /app/sensorcontrol /sensorcontrol
 
 # Run the web service on container startup.
-CMD ["/snapshotter"]
+CMD ["/sensorcontrol"]

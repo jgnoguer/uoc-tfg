@@ -13,27 +13,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: snapshotter
+  name: sensorcontrol
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels: &labels
-      app: snapshotter
+      app: sensorcontrol
   template:
     metadata:
       labels: *labels
     spec:
       nodeSelector:
-        kubernetes.io/hostname: uoc-rpizero2-01
+        kubernetes.io/hostname: uoc-bpim4zero-01
       tolerations:
       - key: memorytype
         operator: Equal
         value: low
         effect: NoSchedule
       containers:
-        - name: snapshotter
-          image: ghcr.io/jgnoguer/snapshotter:0.1.5
+        - name: sensorcontrol
+          image: ghcr.io/jgnoguer/sensorcontrol:0.1.1
           env:
           - name: VIDEO_DEVICE
             valueFrom:
@@ -54,26 +54,24 @@ spec:
       #       path: /dev/video10
       #       type: Directory
 ---
-# Service that exposes watermark app.
-# This will be the subscriber for the Trigger
 apiVersion: v1
 kind: Service
 metadata:
-  name: snapshotter
+  name: sensorcontrol-svc
   namespace: default
 spec:
   selector:
-    app: snapshotter
+    app: sensorcontrol
   ports:
     - protocol: TCP
       port: 80
       targetPort: 8080
 ---
-# Knative Eventing Trigger to trigger the snapshotter service
+# Knative Eventing Trigger to trigger the sensorcontrol service
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
-  name: snapshotter
+  name: sensorcontrol
   namespace: default
 spec:
   broker: mqtt-camel-broker
@@ -81,5 +79,5 @@ spec:
     ref:
       apiVersion: v1
       kind: Service
-      name: snapshotter
+      name: sensorcontrol-svc
 

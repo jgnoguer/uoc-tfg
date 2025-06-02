@@ -9,13 +9,13 @@ spec:
     metadata:
       annotations:
         client.knative.dev/updateTimestamp: "2025-05-05T18:15:11Z"
-        client.knative.dev/user-image: ghcr.io/jgnoguer/snapshotter:latest
+        client.knative.dev/user-image: ghcr.io/jgnoguer/telegramsubs:latest
       creationTimestamp: null
     spec:
       nodeSelector:
         longhorn: compatible
       containers:
-      - image: ghcr.io/jgnoguer/snapshotter:latest
+      - image: ghcr.io/jgnoguer/telegramsubs:latest
         name: ""
         resources: {}
         volumeMounts:

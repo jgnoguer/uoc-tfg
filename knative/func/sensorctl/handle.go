@@ -109,7 +109,7 @@ func check(e error) {
 }
 
 func main() {
-	log.Print("Snapshotter sample started.")
+	log.Print("sensorcontrol sample started.")
 	client, err := cloudevents.NewDefaultClient()
 	if err != nil {
 		log.Fatal(err.Error())
