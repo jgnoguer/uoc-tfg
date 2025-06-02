@@ -12,6 +12,7 @@ resources:
 #  - activities-trigger.yaml
 #  - telegram-sink.yaml
   - animals-cm.yaml
+  - temp-storage.yaml
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:
