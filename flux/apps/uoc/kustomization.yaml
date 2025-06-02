@@ -13,6 +13,8 @@ resources:
 #  - activities-trigger.yaml
 #  - telegram-sink.yaml
   - animals-cm.yaml
+  - mqtt-broker.yaml
+  - mqtt-pipe.yaml
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:
