@@ -10,7 +10,6 @@
 #     eventing.knative.dev/broker.class: MTChannelBasedBroker
 # spec: {}
 ---
-# Helloworld-go app deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
