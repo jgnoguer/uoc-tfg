@@ -24,7 +24,7 @@ func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, 
 	}
 	log.Printf("Image added with %q", data.MediaId)
 
-	//gatherImage(context.Background(), data.MediaId)
+	go gatherImage(context.Background(), data.MediaId)
 
 	return nil, cloudevents.NewHTTPResult(201, "Accepted")
 }
