@@ -52,7 +52,7 @@ func gatherImage(ctx context.Context, imageId string) {
 		log.Fatalln(err)
 	}
 	log.Print("Got the image.")
-	wattermarkTest(filePath, filepath.Join(storagefolder, imageId+"_watermark"), "perroagua.png")
+	wattermarkTest(filePath, filepath.Join(storagefolder, imageId+"_watermark"), "/app/perroagua.png")
 
 }
 
