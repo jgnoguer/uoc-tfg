@@ -18,6 +18,7 @@ resources:
   - sensors-evt.yaml
   - telegram-source-new.yaml
   - telegram-source-pipe.yaml
+  - telegram-evt.yaml
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:

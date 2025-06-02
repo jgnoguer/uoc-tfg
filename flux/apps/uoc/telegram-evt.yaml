@@ -1,0 +1,50 @@
+# Helloworld-go app deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: activity-event
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels: &labels
+      app: snapshotter
+  template:
+    metadata:
+      labels: *labels
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: uoc-bpim4zero-01
+      containers:
+        - name: snapshotter
+          image: ghcr.io/jgnoguer/snapshotter:0.1.0      
+---
+# Service that exposes snapshotter app.
+# This will be the subscriber for the Trigger
+apiVersion: v1
+kind: Service
+metadata:
+  name: activity-event
+  namespace: default
+spec:
+  selector:
+    app: snapshotter
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+# Knative Eventing Trigger to trigger the watermark service
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: activity-event
+  namespace: default
+spec:
+  broker: activities-broker
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: activity-event
+
