@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: activity-event
+  name: activity-event-deployment
   namespace: default
 spec:
   replicas: 1
@@ -17,7 +17,7 @@ spec:
         kubernetes.io/hostname: uoc-bpim4zero-01
       containers:
         - name: telegramsubs
-          image: ghcr.io/jgnoguer/telegramsubs:0.1.0     
+          image: ghcr.io/jgnoguer/telegramsubs:0.1.0    
 ---
 # Service that exposes telegramsubs app.
 # This will be the subscriber for the Trigger
