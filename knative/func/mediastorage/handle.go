@@ -68,24 +68,35 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
 		if strings.HasSuffix(r.URL.Path, "/metadata") {
-			slog.Info("GET metadata")
+			slog.Info("GET metadata", "url", r.URL.Path)
 			getMediaMetadata(w, r, session)
 		} else {
-			slog.Info("GET")
+			slog.Info("GET", "url", r.URL.Path)
 			getMedia(w, r, session)
 		}
 	case "POST":
-		slog.Info("POST")
+		slog.Info("POST", "url", r.URL.Path)
 		w.Header().Set("Content-Type", "application/json")
 		addMedia(w, r, session)
+	case "PUT":
+		slog.Info("PUT", "url", r.URL.Path)
+		w.Header().Set("Content-Type", "application/json")
+		editMedia(w, r, session)
 	case "DELETE":
-		slog.Info("DELETE")
+		slog.Info("DELETE", "url", r.URL.Path)
 		w.Header().Set("Content-Type", "application/json")
 		deleteMedia(w, r, session)
 	default:
 		w.WriteHeader(http.StatusBadRequest)
 	}
 
+}
+
+func editMedia(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
+	slog.Info("Edit media", "url", r.URL.Path)
+
+	mediaId := resolveMediaId(r.URL.Path, ResourceMetadataPathRegex)
+	slog.Info("Finding media metadata", "id", mediaId)
 }
 
 func addMedia(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {

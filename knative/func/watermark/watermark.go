@@ -22,9 +22,9 @@ func receive(ctx context.Context, event cloudevents.Event) (*cloudevents.Event, 
 		log.Printf("Error while extracting cloudevent Data: %s\n", err.Error())
 		return nil, cloudevents.NewHTTPResult(400, "failed to convert data: %s", err)
 	}
-	log.Printf("Image added with %q", data.MediaId)
+	log.Printf("Event image added with %q", data.MediaId)
 
-	//go gatherImage(context.Background(), data.MediaId)
+	go gatherImage(context.Background(), data.MediaId)
 
 	return nil, nil
 }
@@ -39,6 +39,7 @@ func main() {
 }
 
 func gatherImage(ctx context.Context, imageId string) {
+	log.Printf("Process image added %q", imageId)
 	endpoint := os.Getenv("MEDIASTORAGE_ENDPOINT")
 	storagefolder := os.Getenv("STORAGE_FOLDER")
 	resp, err := http.Get(endpoint + "/" + imageId)
@@ -51,8 +52,8 @@ func gatherImage(ctx context.Context, imageId string) {
 	if errCopy != nil {
 		log.Fatalln(err)
 	}
-	log.Print("Got the image.")
-	wattermarkTest(filePath, filepath.Join(storagefolder, imageId+"_watermark"), "/watermark.png")
+	log.Print("Image retrieved.")
+	//wattermarkTest(filePath, filepath.Join(storagefolder, imageId+"_watermark"), "/watermark.png")
 
 }
 
