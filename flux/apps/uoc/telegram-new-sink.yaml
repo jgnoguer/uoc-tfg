@@ -17,7 +17,7 @@
 apiVersion: camel.apache.org/v1
 kind: Kamelet
 metadata:
-  name: telegram-sink
+  name: telegram-new-sink
   namespace: default
   annotations:
     camel.apache.org/kamelet.support.level: "Stable"
