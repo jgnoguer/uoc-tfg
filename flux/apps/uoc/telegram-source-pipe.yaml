@@ -11,6 +11,7 @@ spec:
       kind: Kamelet
       apiVersion: camel.apache.org/v1
       name: telegram-source-new
+      namespace: default
     properties:
       authorizationToken: ${telegram.authorizationToken}
   sink:

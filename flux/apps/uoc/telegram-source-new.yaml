@@ -18,6 +18,7 @@ apiVersion: camel.apache.org/v1
 kind: Kamelet
 metadata:
   name: telegram-source-new
+  namespace: default
   annotations:
     camel.apache.org/kamelet.support.level: "Stable"
     camel.apache.org/catalog.version: "4.13.0-SNAPSHOT"
