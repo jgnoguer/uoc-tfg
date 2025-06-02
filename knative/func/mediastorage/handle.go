@@ -189,9 +189,9 @@ func publishEvent(mediaId string, size int64, filename string, contentType strin
 }
 
 func getMediaMetadata(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
-	slog.Info("Finding media metadata", "id", r.URL.Path)
 
 	mediaId := resolveMediaId(r.URL.Path, ResourceMetadataPathRegex)
+	slog.Info("Finding media metadata", "id", mediaId)
 
 	if mediaId == "" {
 		w.WriteHeader(http.StatusBadRequest)
@@ -209,9 +209,9 @@ func getMediaMetadata(w http.ResponseWriter, r *http.Request, session gocqlx.Ses
 }
 
 func getMedia(w http.ResponseWriter, r *http.Request, session gocqlx.Session) {
-	slog.Info("Finding media", "id", r.URL.Path)
 
 	mediaId := resolveMediaId(r.URL.Path, ResourcePathRegex)
+	slog.Info("Finding media", "id", mediaId)
 
 	if mediaId == "" {
 		w.WriteHeader(http.StatusBadRequest)

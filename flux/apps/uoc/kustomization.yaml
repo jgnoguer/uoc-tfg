@@ -21,7 +21,7 @@ configMapGenerator:
     behavior: merge
     literals:
       - scylladb-ip=10.43.239.157
-      - msver=0.1.3
+      - msver=0.1.11
       - agver=0.1.0
       - imagebrokerurl=http://broker-ingress.knative-eventing.svc.cluster.local/default/image-broker
       - mediastorageurl=http://mediastorage.default.svc.cluster.local
