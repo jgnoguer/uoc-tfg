@@ -19,6 +19,8 @@ resources:
   - telegram-source-new.yaml
   - telegram-source-pipe.yaml
   - telegram-evt.yaml
+  - telegram-broker.yaml
+  - telegram-pipe.yaml
 generatorOptions:
   disableNameSuffixHash: true
 configMapGenerator:
