@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: watermark
-          image: ghcr.io/jgnoguer/watermark:0.1.6
+          image: ghcr.io/jgnoguer/watermark:0.1.7
           volumeMounts:
             - mountPath: /tempimage
               name: tempimage
