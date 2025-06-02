@@ -16,7 +16,7 @@ curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/default/telegr
 -H "Ce-Type: dev.jgnoguer.knative.uoc.activitystarted" \
 -H "Ce-Source: dev.jgnoguer.knative.uoc/activity-service" \
 -H "Content-Type: application/json" \
--d '{"from":"jesus@jgnoguer.es"}'
+-d '{"message":"Booof"}'
 
 curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/default/demo-broker" \
 -X POST \

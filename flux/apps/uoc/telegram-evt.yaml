@@ -19,7 +19,7 @@ spec:
         kubernetes.io/hostname: uoc-bpim4zero-01
       containers:
         - name: telegramsubs
-          image: ghcr.io/jgnoguer/telegramsubs:0.1.0    
+          image: ghcr.io/jgnoguer/telegramsubs:0.1.1    
 ---
 # Service that exposes telegramsubs app.
 # This will be the subscriber for the Trigger

@@ -19,3 +19,4 @@ spec:
       namespace: default
     properties:
       authorizationToken: ${telegram.authorizationToken}
+      chatId: ${telegram.chatId}
