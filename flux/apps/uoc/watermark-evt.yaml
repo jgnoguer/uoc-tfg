@@ -37,7 +37,7 @@ spec:
             valueFrom:
               configMapKeyRef:
                 name: uoc-animals-services-cm
-                key: imagebrokerurl
+                key: mediastorageurl
           - name: STORAGE_FOLDER
             value: "/tempimage"
       volumes:
