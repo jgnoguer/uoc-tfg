@@ -33,7 +33,7 @@ spec:
         effect: NoSchedule
       containers:
         - name: snapshotter
-          image: ghcr.io/jgnoguer/snapshotter:0.1.4
+          image: ghcr.io/jgnoguer/snapshotter:0.1.5
           env:
           - name: VIDEO_DEVICE
             valueFrom:

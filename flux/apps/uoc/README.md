@@ -4,8 +4,20 @@ kubectl create secret generic mqtt-credentials --from-file=mqtt-credentials.prop
 
 kubectl create secret generic telegram-credentials --from-file=telegram-credentials.properties
 
-mosquitto_pub -m "{ "msg": "message from mosquitto_pub client"} " -t "sensor-topic" -u jgnoguer -h 10.43.26.129 -P uocAn1m4ls
+# Mqtt messsage
 
+https://docs.litmus.io/litmusedge/how-to-guides/integration-guides/install-mosquitto-mqtt-broker-ubuntu
+
+curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/default/mqtt-camel-broker" \
+-X POST \
+-H "Ce-Id: 536808d3-88be-4077-9d7a-a3f162705f79" \
+-H "Ce-Specversion: 1.0" \
+-H "Ce-Type: dev.jgnoguer.knative.uoc.sensormqtt" \
+-H "Ce-Source: dev.jgnoguer.knative.uoc/mqtt-broker-source" \
+-H "Content-Type: application/json" \
+-d '{"msg":"Message from a sensor."}'
+
+mosquitto_pub -m '{ "msg": "message from mosquitto_pub client", "temperature": 45.6, "sensorID": "sensAbcTerm"}' -t "sensor-topic" -u jgnoguer -h 10.43.26.129 -P uocAn1m4ls
 
 # Devices
 

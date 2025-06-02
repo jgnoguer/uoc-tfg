@@ -42,14 +42,13 @@ func (recv *Receiver) ReceiveAndSend(ctx context.Context, event cloudevents.Even
 		log.Printf("Error while extracting cloudevent Data: %s\n", err.Error())
 		return cloudevents.NewHTTPResult(400, "failed to convert data: %s", err)
 	}
-	log.Printf("Image added from received event %q", data.Msg)
+	log.Printf("Received event %q", data.Msg)
 
 	r := cloudevents.NewEvent(cloudevents.VersionV1)
 	r.SetType("dev.jgnoguer.knative.uoc.sensortriggered")
 	r.SetSource("dev.jgnoguer.knative.uoc/sensorresponse")
-	req := Request{}
-	resp := handle(req)
-	if err := r.SetData("application/json", resp); err != nil {
+
+	if err := r.SetData(cloudevents.TextPlain, fmt.Sprintf("The sensor %s reported temperature %f. Msg: %s", data.SensorID, data.Temperature, data.Msg)); err != nil {
 		return cloudevents.NewHTTPResult(500, "failed to set response data: %s", err)
 	}
 
