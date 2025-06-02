@@ -15,7 +15,7 @@ resources:
   - animals-cm.yaml
   - mqtt-broker.yaml
   - mqtt-pipe.yaml
-  - sensors-evt.yaml
+#  - sensors-evt.yaml
   - telegram-source-new.yaml
   - telegram-source-pipe.yaml
   - telegram-evt.yaml
