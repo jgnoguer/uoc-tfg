@@ -9,7 +9,7 @@ curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/default/image-
 exit
 
 
-curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/default/activities-broker" \
+curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/default/telegram-broker" \
 -X POST \
 -H "Ce-Id: 12324324-88be-4077-9d7a-a3f162705f79" \
 -H "Ce-Specversion: 1.0" \
