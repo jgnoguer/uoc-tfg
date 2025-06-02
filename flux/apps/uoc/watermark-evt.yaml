@@ -30,7 +30,7 @@ spec:
           image: ghcr.io/jgnoguer/watermark:0.1.1
           volumeMounts:
             - mountPath: /tempimage
-              name: tempimage
+              name: image-tmp-data
               readOnly: false
           env:
           - name: MEDIASTORAGE_ENDPOINT
