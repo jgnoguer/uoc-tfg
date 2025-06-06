@@ -5,6 +5,7 @@ metadata:
   namespace: default
   annotations:
     trait.camel.apache.org/mount.configs: "secret:telegram-credentials"
+    trynewcredentials: "true"
 spec:
   source:
     ref:
