@@ -17,7 +17,7 @@ curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/default/mqtt-c
 -H "Content-Type: application/json" \
 -d '{"msg":"Message from a sensor."}'
 
-mosquitto_pub -m '{ "msg": "message from mosquitto_pub client", "temperature": 45.6, "sensorID": "sensAbcTerm"}' -t "sensor-topic" -u jgnoguer -h 10.43.26.129 -P uocAn1m4ls
+mosquitto_pub -m '{ "msg": "message from mosquitto_pub client", "temperature": 22.6, "sensorID": "sensorC"}' -t "sensor-topic" -u jgnoguer -h 10.43.26.129 -P uocAn1m4ls
 
 # Devices
 
