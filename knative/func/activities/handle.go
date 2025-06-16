@@ -241,8 +241,6 @@ func findActivityByCode(activityCode string, session gocqlx.Session) []model.Act
 	row := &model.Activity{}
 	q := qb.Select("uoc_animals.activity").Where(qb.EqLit("shortcode", "a34fsdr")).Query(session)
 
-	
-
 	if err := q.Iter().Get(row); err != nil {
 		panic(fmt.Errorf("error in exec query to get activity by code: %w", err))
 	} else {

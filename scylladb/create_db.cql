@@ -17,20 +17,6 @@ CREATE TABLE IF NOT EXISTS uoc_animals.agent (id uuid,lastname text,firstname te
 CREATE TABLE IF NOT EXISTS uoc_animals.activity (id uuid,shortcode text,description text,type text,status tinyint,created_at timestamp,updated_at timestamp, PRIMARY KEY (id));
 CREATE TABLE IF NOT EXISTS uoc_animals.activity_log (id uuid,status tinyint,update_time timestamp,updated_by text,description text, PRIMARY KEY (id, update_time));
 
+CREATE TABLE IF NOT EXISTS uoc_animals.animal (id uuid,name text,breed text,description text,type tinyint,status tinyint,created_at timestamp,updated_at timestamp, PRIMARY KEY (id));
 
-type Activity struct {
-	Id          string         `json:"id"`
-	ShortCode   string         `json:"shortcode" db:"shortcode"`
-	Description string         `json:"description" db:"description"`
-	Type        string         `json:"type"`
-	Status      ActivityStatus `json:"status"`
-	CreatedAt   time.Time      `json:"creationTime" db:"creation_time"`
-	UpdatedAt   time.Time      `json:"updateTime" db:"update_time"`
-}
-
-type ActivityLog struct {
-	Id        string         `json:"id"`
-	Status    ActivityStatus `json:"status"`
-	UpdatedAt time.Time      `json:"updateTime" db:"update_time"`
-	UpdateBy  string         `json:"updateBy" db:"updated_by"`
-}
+CREATE TABLE IF NOT EXISTS uoc_animals.animal_media (id uuid,media_id uuid,description text,type tinyint,created_at timestamp, PRIMARY KEY (id, media_id));

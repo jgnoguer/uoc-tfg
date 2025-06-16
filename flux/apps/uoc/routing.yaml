@@ -27,6 +27,38 @@ spec:
   http:
   - match:
     - uri:
+        prefix: "/animals"
+    rewrite:
+      # Rewrite the original host header to the host header of Search service
+      # in order to redirect requests to Search service.
+      authority: animals.default.knative.jgnoguer.dev
+    route:
+      # Basically here we redirect the request to the cluster entry again with
+      # updated header "search-service.default.example.com" so the request will
+      # eventually be directed to Search service.
+      - destination:
+          host: istio-ingressgateway.istio-system.svc.cluster.local
+          port:
+            number: 80
+        weight: 100
+  - match:
+    - uri:
+        prefix: "/activities"
+    rewrite:
+      # Rewrite the original host header to the host header of Search service
+      # in order to redirect requests to Search service.
+      authority: activities.default.knative.jgnoguer.dev
+    route:
+      # Basically here we redirect the request to the cluster entry again with
+      # updated header "search-service.default.example.com" so the request will
+      # eventually be directed to Search service.
+      - destination:
+          host: istio-ingressgateway.istio-system.svc.cluster.local
+          port:
+            number: 80
+        weight: 100
+  - match:
+    - uri:
         prefix: "/agents"
     rewrite:
       # Rewrite the original host header to the host header of Search service

@@ -12,14 +12,12 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/scylladb/gocqlx/v3/qb"
-
-	"github.com/scylladb/gocqlx/v3/table"
-
 	"github.com/gocql/gocql"
 	"github.com/google/uuid"
 	"github.com/joho/godotenv"
 	"github.com/scylladb/gocqlx/v3"
+	"github.com/scylladb/gocqlx/v3/qb"
+	"github.com/scylladb/gocqlx/v3/table"
 )
 
 const ResourcePathRegex = "^(/agents)?/([a-zA-Z0-9-]{36})$"
