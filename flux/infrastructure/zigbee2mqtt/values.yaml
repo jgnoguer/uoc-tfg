@@ -2,8 +2,30 @@ statefulset:
   nodeSelector:
     zigbee2mqtt: compatible
   tolerations:
-    key: memorytype
-    operator: Equal
-    value: low
-    effect: NoSchedule
-  
+    - key: memorytype
+      operator: Equal
+      value: low
+      effect: NoSchedule
+  resources:
+    requests:
+      memory: 100Mi
+      cpu: 200m
+    limits:
+      memory: 600Mi
+      cpu: 200m
+volumeMounts:
+  - name: usb-device
+    mountPath: /dev/usb
+volumes:
+  - name: usb-device
+    hostPath:
+      path: /dev/ttyS0
+zigbee2mqtt:
+  mqtt:
+    # -- Required: MQTT server URL (use mqtts:// for SSL/TLS connection)
+    server: "mqtt://10.42.14.105:1883"
+    user: jgnoguer
+    password: uocAn1m4ls
+  serial:
+    dapter: deconz
+    port: "/dev/usb"
