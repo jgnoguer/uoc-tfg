@@ -20,3 +20,5 @@ CREATE TABLE IF NOT EXISTS uoc_animals.activity_log (id uuid,status tinyint,upda
 CREATE TABLE IF NOT EXISTS uoc_animals.animal (id uuid,name text,breed text,description text,type tinyint,status tinyint,created_at timestamp,updated_at timestamp, PRIMARY KEY (id));
 
 CREATE TABLE IF NOT EXISTS uoc_animals.animal_media (id uuid,media_id uuid,description text,type tinyint,created_at timestamp, PRIMARY KEY (id, media_id));
+
+CREATE TABLE IF NOT EXISTS uoc_animals.group (id uuid,name text,description text,members set<text>, created_at timestamp,updated_at timestamp, PRIMARY KEY (id));

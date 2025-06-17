@@ -1,0 +1,219 @@
+Pulling image [94mghcr.io/knative/builder-jammy-tiny:latest[0m
+latest: Pulling from knative/builder-jammy-tiny
+Digest: sha256:4fd0ae6ecb472070001b98e517a80eb9b46f44d2a9a31e676597156fddbfb599
+Status: Image is up to date for ghcr.io/knative/builder-jammy-tiny:latest
+CheckReadAccess succeeded for the run image ghcr.io/knative/run-jammy-tiny:latest
+Selected run image [94mghcr.io/knative/run-jammy-tiny:latest[0m
+Pulling image [94mghcr.io/knative/run-jammy-tiny:latest[0m with platform [94mlinux/arm64[0m
+latest: Pulling from knative/run-jammy-tiny
+Digest: sha256:8e7fd259b498770a75ba146816434d9726a46c3b8371846a7b96d7febd89ca28
+Status: Image is up to date for ghcr.io/knative/run-jammy-tiny:latest
+Using build cache volume [94mpack-cache-jgnoguer_groups_latest-2c36724c7a41.build[0m
+Running the [94mcreator[0m on OS [94mlinux[0m from image [94mghcr.io/knative/builder-jammy-tiny:latest[0m with:
+Container Settings:
+  Args: [94m/cnb/lifecycle/creator -daemon -launch-cache /launch-cache -log-level debug -app /workspace -cache-dir /cache -run-image ghcr.io/knative/run-jammy-tiny:latest -gid 0 -uid 0 ghcr.io/jgnoguer/groups:latest[0m
+  System Envs: [94mCNB_PLATFORM_API=0.13[0m
+  Image: [94mghcr.io/knative/builder-jammy-tiny:latest[0m
+  User: [94mroot[0m
+  Labels: [94mmap[author:pack][0m
+Host Settings:
+  Binds: [94mpack-cache-jgnoguer_groups_latest-2c36724c7a41.build:/cache /var/run/docker.sock:/var/run/docker.sock pack-cache-jgnoguer_groups_latest-2c36724c7a41.launch:/launch-cache pack-layers-aytheckqhf:/layers pack-app-smqokqrjfs:/workspace[0m
+  Network Mode: [94mhost[0m
+Starting creator...
+Parsing inputs...
+Ensuring privileges...
+Executing command...
+[36m===> ANALYZING[0m
+Timer: Analyzer started at 2025-05-08T22:42:20Z
+Found image with identifier "b926b317a4ef06de86deef0f97b82bd4c8fe0551bf15288fce905fd1a9a59ca2"
+Restoring data for SBOM from previous image
+Retrieving previous image SBOM layer for "sha256:047f09d8ef441c3d5362cf088ad98a7e094a5d2fd5af18337633bb36fe9c775b"
+Found image with identifier "c424179dc58bdd5af89df39e6094b19bbdb2e8c83fb0e99d3ee6eef62bfab311"
+Timer: Analyzer ran for 1.810226ms and ended at 2025-05-08T22:42:20Z
+Run image info in analyzed metadata is: 
+{"Reference":"c424179dc58bdd5af89df39e6094b19bbdb2e8c83fb0e99d3ee6eef62bfab311","Image":"ghcr.io/knative/run-jammy-tiny:latest","Extend":false,"target":{"os":"linux","arch":"arm64"}}
+[36m===> DETECTING[0m
+Timer: Detector started at 2025-05-08T22:42:20Z
+Checking for match against descriptor: {linux amd64  []}
+target distro name/version labels not found, reading /etc/os-release file
+Checking for match against descriptor: {linux arm64  []}
+Checking for match against descriptor: {linux amd64  []}
+Checking for match against descriptor: {linux arm64  []}
+Checking for match against descriptor: {linux amd64  []}
+Checking for match against descriptor: {linux arm64  []}
+Checking for match against descriptor: {linux amd64  []}
+Checking for match against descriptor: {linux arm64  []}
+Checking for match against descriptor: {linux amd64  []}
+Checking for match against descriptor: {linux arm64  []}
+Checking for match against descriptor: {   []}
+Checking for match against descriptor: {   []}
+Checking for match against descriptor: {linux   []}
+======== Output: paketo-buildpacks/procfile@5.11.0 ========
+SKIPPED: No procfile found from environment, source path, or binding.
+======== Results ========
+pass: paketo-community/rustup@1.14.2
+pass: paketo-community/rust-dist@1.37.0
+pass: paketo-buildpacks/syft@2.11.0
+fail: paketo-community/cargo@0.14.0
+skip: paketo-buildpacks/procfile@5.11.0
+======== Output: paketo-buildpacks/git@1.0.47 ========
+failed to find .git directory and no git credential service bindings present
+======== Results ========
+skip: paketo-buildpacks/git@1.0.47
+pass: paketo-buildpacks/go-dist@2.7.3
+pass: dev.knative-extensions.go@0.0.6
+Resolving plan... (try #1)
+2 of 3 buildpacks participating
+paketo-buildpacks/go-dist 2.7.3
+dev.knative-extensions.go 0.0.6
+Timer: Detector ran for 30.094036ms and ended at 2025-05-08T22:42:20Z
+[36m===> RESTORING[0m
+Timer: Restorer started at 2025-05-08T22:42:20Z
+Restoring Layer Metadata
+Reading buildpack directory: /layers/paketo-buildpacks_go-dist
+Restoring metadata for "paketo-buildpacks/go-dist:go" from cache
+Writing layer metadata for "paketo-buildpacks/go-dist:go"
+Reading buildpack directory: /layers/dev.knative-extensions.go
+Restoring metadata for "dev.knative-extensions.go:app" from app image
+Writing layer metadata for "dev.knative-extensions.go:app"
+Reading Buildpack Layers directory /layers
+Reading buildpack directory: /layers/paketo-buildpacks_go-dist
+Reading buildpack directory item: go.toml
+Restoring data for "paketo-buildpacks/go-dist:go" from cache
+Reading Buildpack Layers directory /layers
+Reading buildpack directory: /layers/dev.knative-extensions.go
+Retrieving data for "sha256:b82378cf848d8b02d79b7c9855807e48f4f98a9190f4d73b832bcaa0ba702e51"
+Reading buildpack directory item: app.toml
+Restoring data for SBOM from cache
+Retrieving SBOM layer data for "sha256:b594fd4a0584777d823613a3e970f95249fe7c6bb92b4ab11805c2702f260898"
+Timer: Restorer ran for 1.059567661s and ended at 2025-05-08T22:42:21Z
+[36m===> BUILDING[0m
+Timer: Builder started at 2025-05-08T22:42:21Z
+target distro name/version labels not found, reading /etc/os-release file
+Running build for buildpack paketo-buildpacks/go-dist@2.7.3
+Looking up buildpack
+Finding plan
+Creating plan directory
+Preparing paths
+Running build command
+Paketo Buildpack for Go Distribution 2.7.3
+  Resolving Go version
+    Candidate version sources (in priority order):
+      <unknown> -> ""
+
+    Selected Go version (using <unknown>): 1.23.8
+
+  Reusing cached layer /layers/paketo-buildpacks_go-dist/go
+
+Processing layers
+Updating environment
+Reading output files
+Updating buildpack processes
+Updating process list
+Finished running build for buildpack paketo-buildpacks/go-dist@2.7.3
+Running build for buildpack dev.knative-extensions.go@0.0.6
+Looking up buildpack
+Finding plan
+Creating plan directory
+Preparing paths
+Running build command
+> Knative Functions Go Buildpack
+  Fetching framework dependencies
+  Executing: go build -o /workspace/bin/faas /workspace/faas
+Processing layers
+Updating environment
+Reading output files
+Updating buildpack processes
+Updating process list
+Finished running build for buildpack dev.knative-extensions.go@0.0.6
+Copying SBOM files
+Creating SBOM files for legacy BOM
+Listing processes
+Timer: Builder ran for 23.792293315s and ended at 2025-05-08T22:42:45Z
+[36m===> EXPORTING[0m
+Reusing layers from image with id 'b926b317a4ef06de86deef0f97b82bd4c8fe0551bf15288fce905fd1a9a59ca2'
+Timer: Exporter started at 2025-05-08T22:42:45Z
+Copying SBOM lifecycle.sbom.cdx.json to /layers/sbom/build/buildpacksio_lifecycle/sbom.cdx.json
+Copying SBOM lifecycle.sbom.spdx.json to /layers/sbom/build/buildpacksio_lifecycle/sbom.spdx.json
+Copying SBOM lifecycle.sbom.syft.json to /layers/sbom/build/buildpacksio_lifecycle/sbom.syft.json
+Copying SBOM launcher.sbom.cdx.json to /layers/sbom/launch/buildpacksio_lifecycle/launcher/sbom.cdx.json
+Copying SBOM launcher.sbom.spdx.json to /layers/sbom/launch/buildpacksio_lifecycle/launcher/sbom.spdx.json
+Copying SBOM launcher.sbom.syft.json to /layers/sbom/launch/buildpacksio_lifecycle/launcher/sbom.syft.json
+Reading buildpack directory: /layers/paketo-buildpacks_go-dist
+Reading buildpack directory item: build.toml
+Reading buildpack directory item: go
+Reading buildpack directory item: go.sbom.cdx.json
+Reading buildpack directory item: go.sbom.spdx.json
+Reading buildpack directory item: go.sbom.syft.json
+Reading buildpack directory item: go.toml
+Processing buildpack directory: /layers/paketo-buildpacks_go-dist
+Reading buildpack directory: /layers/dev.knative-extensions.go
+Reading buildpack directory item: app
+Reading buildpack directory item: app.toml
+Reading buildpack directory item: launch.toml
+Processing buildpack directory: /layers/dev.knative-extensions.go
+Processing launch layer: /layers/dev.knative-extensions.go/app
+Reusing tarball for layer "dev.knative-extensions.go:app" with SHA: sha256:542f36e650f06194eaab56367132ba505ec78ddafb8cc1df8f616070c8a1a113
+Reusing layer 'dev.knative-extensions.go:app'
+Layer 'dev.knative-extensions.go:app' SHA: sha256:542f36e650f06194eaab56367132ba505ec78ddafb8cc1df8f616070c8a1a113
+Found SBOM of type launch for at /layers/sbom/launch
+Reusing tarball for layer "buildpacksio/lifecycle:launch.sbom" with SHA: sha256:047f09d8ef441c3d5362cf088ad98a7e094a5d2fd5af18337633bb36fe9c775b
+Reusing layer 'buildpacksio/lifecycle:launch.sbom'
+Layer 'buildpacksio/lifecycle:launch.sbom' SHA: sha256:047f09d8ef441c3d5362cf088ad98a7e094a5d2fd5af18337633bb36fe9c775b
+Adding app layers
+Layer 'slice-1' SHA: sha256:d378b7b51c34ab32d6d64ee1a775e34d7432fef35d0298e682a1d84e10f68066
+Added 1/1 app layer(s)
+Reusing tarball for layer "buildpacksio/lifecycle:launcher" with SHA: sha256:d373db27547db95b4909f4b45875cee3d54309713185fb54b52b0ed36a6d71f8
+Reusing layer 'buildpacksio/lifecycle:launcher'
+Layer 'buildpacksio/lifecycle:launcher' SHA: sha256:d373db27547db95b4909f4b45875cee3d54309713185fb54b52b0ed36a6d71f8
+Reusing tarball for layer "buildpacksio/lifecycle:config" with SHA: sha256:df739f294d0d70c479bd6c03bf4a2edea19fab5625635fd8666264c86fa887d0
+Reusing layer 'buildpacksio/lifecycle:config'
+Layer 'buildpacksio/lifecycle:config' SHA: sha256:df739f294d0d70c479bd6c03bf4a2edea19fab5625635fd8666264c86fa887d0
+Reusing tarball for layer "buildpacksio/lifecycle:process-types" with SHA: sha256:83d85471d9f8a3834b4e27cf701e3f0aef220cc816d9c173c7d32cd73909a590
+Reusing layer 'buildpacksio/lifecycle:process-types'
+Layer 'buildpacksio/lifecycle:process-types' SHA: sha256:83d85471d9f8a3834b4e27cf701e3f0aef220cc816d9c173c7d32cd73909a590
+Adding label 'io.buildpacks.lifecycle.metadata'
+Adding label 'io.buildpacks.build.metadata'
+Adding label 'io.buildpacks.project.metadata'
+Setting CNB_LAYERS_DIR=/layers
+Setting CNB_APP_DIR=/workspace
+Setting CNB_PLATFORM_API=0.13
+Setting CNB_DEPRECATION_MODE=quiet
+Prepending /cnb/process and /cnb/lifecycle to PATH
+Setting WORKDIR: '/workspace'
+Setting default process type 'web'
+Setting ENTRYPOINT: '/cnb/process/web'
+Timer: Saving ghcr.io/jgnoguer/groups:latest... started at 2025-05-08T22:42:46Z
+Saving ghcr.io/jgnoguer/groups:latest...
+*** Images (e26ce531608e):
+      ghcr.io/jgnoguer/groups:latest
+
+*** Image ID: e26ce531608edb882f0e4c8fec9f9fe537acf02e8c08cce3b85097179237f7d8
+
+*** Manifest Size: 1504
+Timer: Saving ghcr.io/jgnoguer/groups:latest... ran for 226.335221ms and ended at 2025-05-08T22:42:46Z
+Timer: Exporter ran for 678.484846ms and ended at 2025-05-08T22:42:46Z
+Timer: Cache started at 2025-05-08T22:42:46Z
+Reading buildpack directory: /layers/paketo-buildpacks_go-dist
+Reading buildpack directory item: build.toml
+Reading buildpack directory item: go
+Reading buildpack directory item: go.sbom.cdx.json
+Reading buildpack directory item: go.sbom.spdx.json
+Reading buildpack directory item: go.sbom.syft.json
+Reading buildpack directory item: go.toml
+Reusing cache layer 'paketo-buildpacks/go-dist:go'
+Layer 'paketo-buildpacks/go-dist:go' SHA: sha256:b82378cf848d8b02d79b7c9855807e48f4f98a9190f4d73b832bcaa0ba702e51
+Adding cache layer 'paketo-buildpacks/go-dist:go'
+Layer 'paketo-buildpacks/go-dist:go' SHA: sha256:b82378cf848d8b02d79b7c9855807e48f4f98a9190f4d73b832bcaa0ba702e51
+Reading buildpack directory: /layers/dev.knative-extensions.go
+Reading buildpack directory item: app
+Reading buildpack directory item: app.toml
+Reading buildpack directory item: launch.toml
+Found SBOM of type cache for at /layers/sbom/cache
+Reusing tarball for layer "buildpacksio/lifecycle:cache.sbom" with SHA: sha256:b594fd4a0584777d823613a3e970f95249fe7c6bb92b4ab11805c2702f260898
+Reusing cache layer 'buildpacksio/lifecycle:cache.sbom'
+Layer 'buildpacksio/lifecycle:cache.sbom' SHA: sha256:b594fd4a0584777d823613a3e970f95249fe7c6bb92b4ab11805c2702f260898
+Adding cache layer 'buildpacksio/lifecycle:cache.sbom'
+Layer 'buildpacksio/lifecycle:cache.sbom' SHA: sha256:b594fd4a0584777d823613a3e970f95249fe7c6bb92b4ab11805c2702f260898
+Timer: Cache ran for 1.322550632s and ended at 2025-05-08T22:42:47Z
+Writing built image: 'ghcr.io/jgnoguer/groups:latest' at path: '/home/jgnoguer/uocWksp/uoc-tfg/knative/func/groups/.func/built-image'
